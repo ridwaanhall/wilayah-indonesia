@@ -2,6 +2,7 @@ from django.conf import settings
 from django.db.models import Count
 from django.shortcuts import get_object_or_404
 from rest_framework.generics import ListAPIView
+from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
 from rest_framework.views import APIView
@@ -24,6 +25,10 @@ def is_advanced():
     return getattr(settings, "API_ADVANCED_MODE", False)
 
 
+class WilayahPagination(PageNumberPagination):
+    page_size = 100
+
+
 class APIRootView(APIView):
     """Root endpoint showing available API resources."""
 
@@ -36,7 +41,9 @@ class APIRootView(APIView):
 class ProvinsiListView(ListAPIView):
     """List all provinces."""
 
-    pagination_class = None
+    @property
+    def pagination_class(self):
+        return WilayahPagination if is_advanced() else None
 
     def get_serializer_class(self):
         return ProvinsiAdvancedSerializer if is_advanced() else ProvinsiSimpleSerializer
@@ -51,7 +58,9 @@ class ProvinsiListView(ListAPIView):
 class KabupatenListView(ListAPIView):
     """List kabupaten/kota within a province."""
 
-    pagination_class = None
+    @property
+    def pagination_class(self):
+        return WilayahPagination if is_advanced() else None
 
     def get_serializer_class(self):
         return KabupatenAdvancedSerializer if is_advanced() else KabupatenSimpleSerializer
@@ -68,7 +77,9 @@ class KabupatenListView(ListAPIView):
 class KecamatanListView(ListAPIView):
     """List kecamatan within a kabupaten."""
 
-    pagination_class = None
+    @property
+    def pagination_class(self):
+        return WilayahPagination if is_advanced() else None
 
     def get_serializer_class(self):
         return KecamatanAdvancedSerializer if is_advanced() else KecamatanSimpleSerializer
@@ -85,7 +96,9 @@ class KecamatanListView(ListAPIView):
 class DesaListView(ListAPIView):
     """List desa/kelurahan within a kecamatan."""
 
-    pagination_class = None
+    @property
+    def pagination_class(self):
+        return WilayahPagination if is_advanced() else None
 
     def get_serializer_class(self):
         return DesaAdvancedSerializer if is_advanced() else DesaSimpleSerializer
