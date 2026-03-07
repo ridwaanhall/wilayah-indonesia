@@ -1,8 +1,7 @@
 from django.db import models
 
 class Provinsi(models.Model):
-    id = models.BigAutoField(primary_key=True)
-    kode = models.PositiveIntegerField(unique=True)
+    kode = models.PositiveIntegerField(primary_key=True)  # 2 digits
     nama = models.CharField(max_length=100)
     tingkat = models.PositiveSmallIntegerField(default=1)
 
@@ -16,8 +15,7 @@ class Provinsi(models.Model):
 
 
 class Kabupaten(models.Model):
-    id = models.BigAutoField(primary_key=True)
-    kode = models.PositiveIntegerField(unique=True)
+    kode = models.PositiveIntegerField(primary_key=True)  # 4 digits
     nama = models.CharField(max_length=100)
     provinsi = models.ForeignKey(Provinsi, on_delete=models.CASCADE, related_name="kabupaten")
     tingkat = models.PositiveSmallIntegerField(default=2)
@@ -32,8 +30,7 @@ class Kabupaten(models.Model):
 
 
 class Kecamatan(models.Model):
-    id = models.BigAutoField(primary_key=True)
-    kode = models.PositiveIntegerField(unique=True)
+    kode = models.PositiveIntegerField(primary_key=True)  # 6 digits
     nama = models.CharField(max_length=100)
     kabupaten = models.ForeignKey(Kabupaten, on_delete=models.CASCADE, related_name="kecamatan")
     tingkat = models.PositiveSmallIntegerField(default=3)
@@ -48,8 +45,7 @@ class Kecamatan(models.Model):
 
 
 class Desa(models.Model):
-    id = models.BigAutoField(primary_key=True)
-    kode = models.PositiveIntegerField(unique=True)
+    kode = models.PositiveIntegerField(primary_key=True)  # 10 digits
     nama = models.CharField(max_length=100)
     kecamatan = models.ForeignKey(Kecamatan, on_delete=models.CASCADE, related_name="desa")
     tingkat = models.PositiveSmallIntegerField(default=4)
