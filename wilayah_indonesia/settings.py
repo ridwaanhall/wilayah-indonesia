@@ -138,6 +138,7 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Django REST Framework
 API_LOGIN_REQUIRED = config('API_LOGIN_REQUIRED', default=False, cast=bool)
+API_ADVANCED_MODE = config('API_ADVANCED_MODE', default=True, cast=bool)
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [

@@ -1,5 +1,6 @@
-from django.shortcuts import get_object_or_404
+from django.conf import settings
 from django.db.models import Count
+from django.shortcuts import get_object_or_404
 from rest_framework.generics import ListAPIView
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
@@ -8,11 +9,19 @@ from rest_framework.views import APIView
 from apps.wilayah.models import Desa, Kabupaten, Kecamatan, Provinsi
 
 from .serializers import (
-    DesaSerializer,
-    KabupatenSerializer,
-    KecamatanSerializer,
-    ProvinsiSerializer,
+    DesaAdvancedSerializer,
+    DesaSimpleSerializer,
+    KabupatenAdvancedSerializer,
+    KabupatenSimpleSerializer,
+    KecamatanAdvancedSerializer,
+    KecamatanSimpleSerializer,
+    ProvinsiAdvancedSerializer,
+    ProvinsiSimpleSerializer,
 )
+
+
+def is_advanced():
+    return getattr(settings, "API_ADVANCED_MODE", False)
 
 
 class APIRootView(APIView):
@@ -25,63 +34,66 @@ class APIRootView(APIView):
 
 
 class ProvinsiListView(ListAPIView):
-    """List all provinces with kabupaten count."""
+    """List all provinces."""
 
-    serializer_class = ProvinsiSerializer
+    pagination_class = None
+
+    def get_serializer_class(self):
+        return ProvinsiAdvancedSerializer if is_advanced() else ProvinsiSimpleSerializer
 
     def get_queryset(self):
-        return (
-            Provinsi.objects
-            .annotate(jumlah_kabupaten=Count("kabupaten"))
-            .order_by("kode")
-        )
+        qs = Provinsi.objects.order_by("kode")
+        if is_advanced():
+            qs = qs.annotate(jumlah_kabupaten=Count("kabupaten"))
+        return qs
 
 
 class KabupatenListView(ListAPIView):
     """List kabupaten/kota within a province."""
 
-    serializer_class = KabupatenSerializer
+    pagination_class = None
+
+    def get_serializer_class(self):
+        return KabupatenAdvancedSerializer if is_advanced() else KabupatenSimpleSerializer
 
     def get_queryset(self):
         kode_provinsi = self.kwargs["kode_provinsi"]
         get_object_or_404(Provinsi, kode=kode_provinsi)
-        return (
-            Kabupaten.objects
-            .filter(provinsi__kode=kode_provinsi)
-            .select_related("provinsi")
-            .annotate(jumlah_kecamatan=Count("kecamatan"))
-            .order_by("kode")
-        )
+        qs = Kabupaten.objects.filter(provinsi__kode=kode_provinsi).order_by("kode")
+        if is_advanced():
+            qs = qs.select_related("provinsi").annotate(jumlah_kecamatan=Count("kecamatan"))
+        return qs
 
 
 class KecamatanListView(ListAPIView):
     """List kecamatan within a kabupaten."""
 
-    serializer_class = KecamatanSerializer
+    pagination_class = None
+
+    def get_serializer_class(self):
+        return KecamatanAdvancedSerializer if is_advanced() else KecamatanSimpleSerializer
 
     def get_queryset(self):
         kode_kabupaten = self.kwargs["kode_kabupaten"]
         get_object_or_404(Kabupaten, kode=kode_kabupaten)
-        return (
-            Kecamatan.objects
-            .filter(kabupaten__kode=kode_kabupaten)
-            .select_related("kabupaten")
-            .annotate(jumlah_desa=Count("desa"))
-            .order_by("kode")
-        )
+        qs = Kecamatan.objects.filter(kabupaten__kode=kode_kabupaten).order_by("kode")
+        if is_advanced():
+            qs = qs.select_related("kabupaten").annotate(jumlah_desa=Count("desa"))
+        return qs
 
 
 class DesaListView(ListAPIView):
     """List desa/kelurahan within a kecamatan."""
 
-    serializer_class = DesaSerializer
+    pagination_class = None
+
+    def get_serializer_class(self):
+        return DesaAdvancedSerializer if is_advanced() else DesaSimpleSerializer
 
     def get_queryset(self):
         kode_kecamatan = self.kwargs["kode_kecamatan"]
         get_object_or_404(Kecamatan, kode=kode_kecamatan)
-        return (
-            Desa.objects
-            .filter(kecamatan__kode=kode_kecamatan)
-            .select_related("kecamatan")
-            .order_by("kode")
-        )
+        qs = Desa.objects.filter(kecamatan__kode=kode_kecamatan).order_by("kode")
+        if is_advanced():
+            qs = qs.select_related("kecamatan")
+        return qs
