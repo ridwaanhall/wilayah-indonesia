@@ -11,7 +11,7 @@ class Provinsi(models.Model):
         ordering = ["kode"]
 
     def __str__(self):
-        return f"{self.kode} - {self.nama}"
+        return self.nama
 
 
 class Kabupaten(models.Model):
@@ -26,7 +26,7 @@ class Kabupaten(models.Model):
         ordering = ["kode"]
 
     def __str__(self):
-        return f"{self.kode} - {self.nama}"
+        return self.nama
 
 
 class Kecamatan(models.Model):
@@ -41,7 +41,7 @@ class Kecamatan(models.Model):
         ordering = ["kode"]
 
     def __str__(self):
-        return f"{self.kode} - {self.nama}"
+        return self.nama
 
 
 class Desa(models.Model):
@@ -56,4 +56,4 @@ class Desa(models.Model):
         ordering = ["kode"]
 
     def __str__(self):
-        return f"{self.kode} - {self.nama}"
+        return self.nama
