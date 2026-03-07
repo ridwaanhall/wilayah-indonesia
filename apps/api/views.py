@@ -26,7 +26,9 @@ def is_advanced():
 
 
 class WilayahPagination(PageNumberPagination):
-    page_size = 100
+    def get_page_size(self, request):
+        from django.conf import settings
+        return getattr(settings, 'REST_FRAMEWORK', {}).get('PAGE_SIZE', 100)
 
 
 class APIRootView(APIView):
