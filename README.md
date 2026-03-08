@@ -52,7 +52,7 @@ All endpoints return JSON by default. A browsable HTML interface is available wh
 
 ```bash
 # Clone and install
-git clone https://github.com/your-username/wilayah-indonesia.git
+git clone https://github.com/ridwaanhall/wilayah-indonesia.git
 cd wilayah-indonesia
 python -m venv .venv
 .venv/Scripts/activate  # Windows
@@ -76,16 +76,16 @@ The API is available at `http://localhost:8000/api/` in development mode.
 
 ## Management Commands
 
-| Command | Description |
-|---|---|
-| `add_province` | Import provinces from `ppwp/0.json` |
-| `add_regency` | Import regencies from `ppwp/<kode>.json` |
-| `add_district` | Import districts from `ppwp/<kode>/<kode>.json` |
-| `add_village` | Import villages from `ppwp/<kode>/<kode>/<kode>.json` |
-| `extract_province` | Export provinces to `apps/wilayah/data/provinsi.json` |
-| `extract_regency` | Export regencies to `apps/wilayah/data/kabupaten.json` |
-| `extract_district` | Export districts to `apps/wilayah/data/kecamatan.json` |
-| `extract_village` | Export villages to `apps/wilayah/data/desa.json` |
+| Command | Description | Is Public |
+|---|---|---|
+| `add_province` | Import provinces from `ppwp/0.json` | `False` |
+| `add_regency` | Import regencies from `ppwp/<kode>.json` | `False` |
+| `add_district` | Import districts from `ppwp/<kode>/<kode>.json` | `False` |
+| `add_village` | Import villages from `ppwp/<kode>/<kode>/<kode>.json` | `False` |
+| `extract_province` | Export provinces to `apps/wilayah/data/provinsi.json` | `True` |
+| `extract_regency` | Export regencies to `apps/wilayah/data/kabupaten.json` | `True` |
+| `extract_district` | Export districts to `apps/wilayah/data/kecamatan.json` | `True` |
+| `extract_village` | Export villages to `apps/wilayah/data/desa.json` | `True` |
 
 ## License
 
