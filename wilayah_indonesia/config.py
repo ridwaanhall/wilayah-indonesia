@@ -19,6 +19,7 @@ if DEBUG_MODE:
             'rest_framework.renderers.JSONRenderer',
             'rest_framework.renderers.BrowsableAPIRenderer',
         ],
+        'HTML_SELECT_CUTOFF': 0,
     }
 
     if API_ADVANCED_MODE:
@@ -33,4 +34,5 @@ else:
             'rest_framework.renderers.JSONRenderer',
             'rest_framework.renderers.BrowsableAPIRenderer',
         ],
+        'HTML_SELECT_CUTOFF': 0,
     }
