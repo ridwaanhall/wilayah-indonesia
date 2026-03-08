@@ -1,0 +1,192 @@
+[
+  {
+    "kode": 11,
+    "nama": "ACEH",
+    "tingkat": 1
+  },
+  {
+    "kode": 12,
+    "nama": "SUMATERA UTARA",
+    "tingkat": 1
+  },
+  {
+    "kode": 13,
+    "nama": "SUMATERA BARAT",
+    "tingkat": 1
+  },
+  {
+    "kode": 14,
+    "nama": "RIAU",
+    "tingkat": 1
+  },
+  {
+    "kode": 15,
+    "nama": "JAMBI",
+    "tingkat": 1
+  },
+  {
+    "kode": 16,
+    "nama": "SUMATERA SELATAN",
+    "tingkat": 1
+  },
+  {
+    "kode": 17,
+    "nama": "BENGKULU",
+    "tingkat": 1
+  },
+  {
+    "kode": 18,
+    "nama": "LAMPUNG",
+    "tingkat": 1
+  },
+  {
+    "kode": 19,
+    "nama": "KEPULAUAN BANGKA BELITUNG",
+    "tingkat": 1
+  },
+  {
+    "kode": 21,
+    "nama": "KEPULAUAN RIAU",
+    "tingkat": 1
+  },
+  {
+    "kode": 31,
+    "nama": "DKI JAKARTA",
+    "tingkat": 1
+  },
+  {
+    "kode": 32,
+    "nama": "JAWA BARAT",
+    "tingkat": 1
+  },
+  {
+    "kode": 33,
+    "nama": "JAWA TENGAH",
+    "tingkat": 1
+  },
+  {
+    "kode": 34,
+    "nama": "DAERAH ISTIMEWA YOGYAKARTA",
+    "tingkat": 1
+  },
+  {
+    "kode": 35,
+    "nama": "JAWA TIMUR",
+    "tingkat": 1
+  },
+  {
+    "kode": 36,
+    "nama": "BANTEN",
+    "tingkat": 1
+  },
+  {
+    "kode": 51,
+    "nama": "BALI",
+    "tingkat": 1
+  },
+  {
+    "kode": 52,
+    "nama": "NUSA TENGGARA BARAT",
+    "tingkat": 1
+  },
+  {
+    "kode": 53,
+    "nama": "NUSA TENGGARA TIMUR",
+    "tingkat": 1
+  },
+  {
+    "kode": 61,
+    "nama": "KALIMANTAN BARAT",
+    "tingkat": 1
+  },
+  {
+    "kode": 62,
+    "nama": "KALIMANTAN TENGAH",
+    "tingkat": 1
+  },
+  {
+    "kode": 63,
+    "nama": "KALIMANTAN SELATAN",
+    "tingkat": 1
+  },
+  {
+    "kode": 64,
+    "nama": "KALIMANTAN TIMUR",
+    "tingkat": 1
+  },
+  {
+    "kode": 65,
+    "nama": "KALIMANTAN UTARA",
+    "tingkat": 1
+  },
+  {
+    "kode": 71,
+    "nama": "SULAWESI UTARA",
+    "tingkat": 1
+  },
+  {
+    "kode": 72,
+    "nama": "SULAWESI TENGAH",
+    "tingkat": 1
+  },
+  {
+    "kode": 73,
+    "nama": "SULAWESI SELATAN",
+    "tingkat": 1
+  },
+  {
+    "kode": 74,
+    "nama": "SULAWESI TENGGARA",
+    "tingkat": 1
+  },
+  {
+    "kode": 75,
+    "nama": "GORONTALO",
+    "tingkat": 1
+  },
+  {
+    "kode": 76,
+    "nama": "SULAWESI BARAT",
+    "tingkat": 1
+  },
+  {
+    "kode": 81,
+    "nama": "MALUKU",
+    "tingkat": 1
+  },
+  {
+    "kode": 82,
+    "nama": "MALUKU UTARA",
+    "tingkat": 1
+  },
+  {
+    "kode": 91,
+    "nama": "P A P U A",
+    "tingkat": 1
+  },
+  {
+    "kode": 92,
+    "nama": "PAPUA BARAT",
+    "tingkat": 1
+  },
+  {
+    "kode": 93,
+    "nama": "PAPUA SELATAN",
+    "tingkat": 1
+  },
+  {
+    "kode": 94,
+    "nama": "PAPUA TENGAH",
+    "tingkat": 1
+  },
+  {
+    "kode": 95,
+    "nama": "PAPUA PEGUNUNGAN",
+    "tingkat": 1
+  },
+  {
+    "kode": 96,
+    "nama": "PAPUA BARAT DAYA",
+    "tingkat": 1
+  }
+]
