@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.db.models import Count
+from django.http import Http404
 from django.shortcuts import get_object_or_404
 from rest_framework.generics import ListAPIView
 from rest_framework.pagination import PageNumberPagination
@@ -25,9 +26,12 @@ def is_advanced():
     return getattr(settings, "API_ADVANCED_MODE", False)
 
 
+def is_debug():
+    return getattr(settings, "DEBUG", False)
+
+
 class WilayahPagination(PageNumberPagination):
     def get_page_size(self, request):
-        from django.conf import settings
         return getattr(settings, 'REST_FRAMEWORK', {}).get('PAGE_SIZE', 100)
 
 
@@ -39,6 +43,43 @@ class APIRootView(APIView):
             "list-provinsi": reverse("api:provinsi-list", request=request),
         })
 
+
+# ── Production JSON views (DEBUG=False) ──────────────────────────────────────
+
+class JSONProvinsiListView(APIView):
+    def get(self, request, *args, **kwargs):
+        from apps.wilayah.loader import get_provinsi_list
+        return Response(get_provinsi_list())
+
+
+class JSONKabupatenListView(APIView):
+    def get(self, request, *args, **kwargs):
+        from apps.wilayah.loader import get_kabupaten_by_provinsi, provinsi_exists
+        kode_provinsi = self.kwargs["kode_provinsi"]
+        if not provinsi_exists(kode_provinsi):
+            raise Http404
+        return Response(get_kabupaten_by_provinsi(kode_provinsi))
+
+
+class JSONKecamatanListView(APIView):
+    def get(self, request, *args, **kwargs):
+        from apps.wilayah.loader import get_kecamatan_by_kabupaten, kabupaten_exists
+        kode_kabupaten = self.kwargs["kode_kabupaten"]
+        if not kabupaten_exists(kode_kabupaten):
+            raise Http404
+        return Response(get_kecamatan_by_kabupaten(kode_kabupaten))
+
+
+class JSONDesaListView(APIView):
+    def get(self, request, *args, **kwargs):
+        from apps.wilayah.loader import get_desa_by_kecamatan, kecamatan_exists
+        kode_kecamatan = self.kwargs["kode_kecamatan"]
+        if not kecamatan_exists(kode_kecamatan):
+            raise Http404
+        return Response(get_desa_by_kecamatan(kode_kecamatan))
+
+
+# ── Development DB views (DEBUG=True) ────────────────────────────────────────
 
 class ProvinsiListView(ListAPIView):
     """List all provinces."""
