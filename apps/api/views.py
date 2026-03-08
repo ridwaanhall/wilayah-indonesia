@@ -36,23 +36,37 @@ class WilayahPagination(PageNumberPagination):
 
 
 class APIRootView(APIView):
-    """Root endpoint showing available API resources."""
+    """Endpoint utama yang menampilkan daftar sumber data API."""
 
     def get(self, request, *args, **kwargs):
         return Response({
-            "list-provinsi": reverse("api:provinsi-list", request=request),
+            "daftar-provinsi": reverse("api:provinsi-list", request=request),
         })
+
+    def get_renderer_context(self):
+        context = super().get_renderer_context()
+        context["page_title"] = "Beranda"
+        return context
 
 
 # ── Production JSON views (DEBUG=False) ──────────────────────────────────────
 
 class JSONProvinsiListView(APIView):
+    """Daftar seluruh provinsi di Indonesia."""
+
     def get(self, request, *args, **kwargs):
         from apps.wilayah.loader import get_provinsi_list
         return Response(get_provinsi_list())
 
+    def get_renderer_context(self):
+        context = super().get_renderer_context()
+        context["page_title"] = "Daftar Provinsi"
+        return context
+
 
 class JSONKabupatenListView(APIView):
+    """Daftar kabupaten/kota dalam suatu provinsi."""
+
     def get(self, request, *args, **kwargs):
         from apps.wilayah.loader import get_kabupaten_by_provinsi, provinsi_exists
         kode_provinsi = self.kwargs["kode_provinsi"]
@@ -60,8 +74,15 @@ class JSONKabupatenListView(APIView):
             raise Http404
         return Response(get_kabupaten_by_provinsi(kode_provinsi))
 
+    def get_renderer_context(self):
+        context = super().get_renderer_context()
+        context["page_title"] = "Daftar Kabupaten/Kota"
+        return context
+
 
 class JSONKecamatanListView(APIView):
+    """Daftar kecamatan dalam suatu kabupaten/kota."""
+
     def get(self, request, *args, **kwargs):
         from apps.wilayah.loader import get_kecamatan_by_kabupaten, kabupaten_exists
         kode_kabupaten = self.kwargs["kode_kabupaten"]
@@ -69,8 +90,15 @@ class JSONKecamatanListView(APIView):
             raise Http404
         return Response(get_kecamatan_by_kabupaten(kode_kabupaten))
 
+    def get_renderer_context(self):
+        context = super().get_renderer_context()
+        context["page_title"] = "Daftar Kecamatan"
+        return context
+
 
 class JSONDesaListView(APIView):
+    """Daftar desa/kelurahan dalam suatu kecamatan."""
+
     def get(self, request, *args, **kwargs):
         from apps.wilayah.loader import get_desa_by_kecamatan, kecamatan_exists
         kode_kecamatan = self.kwargs["kode_kecamatan"]
@@ -78,11 +106,16 @@ class JSONDesaListView(APIView):
             raise Http404
         return Response(get_desa_by_kecamatan(kode_kecamatan))
 
+    def get_renderer_context(self):
+        context = super().get_renderer_context()
+        context["page_title"] = "Daftar Desa/Kelurahan"
+        return context
+
 
 # ── Development DB views (DEBUG=True) ────────────────────────────────────────
 
 class ProvinsiListView(ListAPIView):
-    """List all provinces."""
+    """Daftar seluruh provinsi di Indonesia."""
 
     @property
     def pagination_class(self):
@@ -97,9 +130,14 @@ class ProvinsiListView(ListAPIView):
             qs = qs.annotate(jumlah_kabupaten=Count("kabupaten"))
         return qs
 
+    def get_renderer_context(self):
+        context = super().get_renderer_context()
+        context["page_title"] = "Daftar Provinsi"
+        return context
+
 
 class KabupatenListView(ListAPIView):
-    """List kabupaten/kota within a province."""
+    """Daftar kabupaten/kota dalam suatu provinsi."""
 
     @property
     def pagination_class(self):
@@ -116,9 +154,14 @@ class KabupatenListView(ListAPIView):
             qs = qs.select_related("provinsi").annotate(jumlah_kecamatan=Count("kecamatan"))
         return qs
 
+    def get_renderer_context(self):
+        context = super().get_renderer_context()
+        context["page_title"] = "Daftar Kabupaten/Kota"
+        return context
+
 
 class KecamatanListView(ListAPIView):
-    """List kecamatan within a kabupaten."""
+    """Daftar kecamatan dalam suatu kabupaten/kota."""
 
     @property
     def pagination_class(self):
@@ -135,9 +178,14 @@ class KecamatanListView(ListAPIView):
             qs = qs.select_related("kabupaten").annotate(jumlah_desa=Count("desa"))
         return qs
 
+    def get_renderer_context(self):
+        context = super().get_renderer_context()
+        context["page_title"] = "Daftar Kecamatan"
+        return context
+
 
 class DesaListView(ListAPIView):
-    """List desa/kelurahan within a kecamatan."""
+    """Daftar desa/kelurahan dalam suatu kecamatan."""
 
     @property
     def pagination_class(self):
@@ -153,3 +201,8 @@ class DesaListView(ListAPIView):
         if is_advanced():
             qs = qs.select_related("kecamatan")
         return qs
+
+    def get_renderer_context(self):
+        context = super().get_renderer_context()
+        context["page_title"] = "Daftar Desa/Kelurahan"
+        return context

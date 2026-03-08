@@ -4,30 +4,39 @@
 {% block head %}
   {{ block.super }}
 
+  {# ── Favicon ── #}
+  <link rel="apple-touch-icon" sizes="180x180" href="{% static 'apple-touch-icon.png' %}">
+  <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicon-32x32.png' %}">
+  <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicon-16x16.png' %}">
+  <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
+  <link rel="manifest" href="{% static 'site.webmanifest' %}">
+
   {# ── SEO Meta Tags ── #}
   <meta name="description" content="API Wilayah Indonesia — Data lengkap provinsi, kabupaten/kota, kecamatan, dan desa/kelurahan seluruh Indonesia. Open REST API.">
   <meta name="keywords" content="API, Wilayah, Indonesia, Provinsi, Kabupaten, Kota, Kecamatan, Desa, Kelurahan, REST API, Data Wilayah">
   <meta name="author" content="ridwaanhall">
   <meta name="robots" content="index, follow">
+  <link rel="canonical" href="{{ request.build_absolute_uri }}">
 
   {# ── Open Graph ── #}
-  <meta property="og:title" content="API Wilayah Indonesia">
+  <meta property="og:title" content="{{ page_title }} — API Wilayah Indonesia">
   <meta property="og:description" content="Data lengkap provinsi, kabupaten/kota, kecamatan, dan desa/kelurahan seluruh Indonesia.">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="id_ID">
+  <meta property="og:url" content="{{ request.build_absolute_uri }}">
 
   {# ── Twitter Card ── #}
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="API Wilayah Indonesia">
+  <meta name="twitter:title" content="{{ page_title }} — API Wilayah Indonesia">
   <meta name="twitter:description" content="Data lengkap provinsi, kabupaten/kota, kecamatan, dan desa/kelurahan seluruh Indonesia.">
 {% endblock %}
 
 {% block title %}
-  API Wilayah Indonesia
+  {{ page_title }} — API Wilayah Indonesia
 {% endblock %}
 
 {% block branding %}
-  <a class="navbar-brand" rel="nofollow" href="/">
+  <a class="navbar-brand" rel="nofollow" href="{% url 'api:api-root' %}">
     <strong>API Wilayah Indonesia</strong>
   </a>
 {% endblock %}
