@@ -55,3 +55,24 @@ def kabupaten_exists(kode_kabupaten):
 
 def kecamatan_exists(kode_kecamatan):
     return any(k["kode"] == kode_kecamatan for k in load_kecamatan())
+
+
+def get_provinsi_nama(kode_provinsi):
+    for p in load_provinsi():
+        if p["kode"] == kode_provinsi:
+            return p["nama"]
+    return ""
+
+
+def get_kabupaten_nama(kode_kabupaten):
+    for k in load_kabupaten():
+        if k["kode"] == kode_kabupaten:
+            return k["nama"]
+    return ""
+
+
+def get_kecamatan_nama(kode_kecamatan):
+    for k in load_kecamatan():
+        if k["kode"] == kode_kecamatan:
+            return k["nama"]
+    return ""

@@ -35,6 +35,10 @@ class WilayahPagination(PageNumberPagination):
         return getattr(settings, 'REST_FRAMEWORK', {}).get('PAGE_SIZE', 100)
 
 
+def _build_url(request, view_name, kwargs=None):
+    return reverse(view_name, kwargs=kwargs, request=request)
+
+
 class APIRootView(APIView):
     """Endpoint utama yang menampilkan daftar sumber data API."""
 
@@ -46,6 +50,10 @@ class APIRootView(APIView):
     def get_renderer_context(self):
         context = super().get_renderer_context()
         context["page_title"] = "Beranda"
+        request = context.get("request")
+        context["breadcrumbs"] = [
+            ("INDONESIA", _build_url(request, "api:api-root")),
+        ]
         return context
 
 
@@ -61,6 +69,11 @@ class JSONProvinsiListView(APIView):
     def get_renderer_context(self):
         context = super().get_renderer_context()
         context["page_title"] = "Daftar Provinsi"
+        request = context.get("request")
+        context["breadcrumbs"] = [
+            ("INDONESIA", _build_url(request, "api:api-root")),
+            ("Daftar Provinsi", _build_url(request, "api:provinsi-list")),
+        ]
         return context
 
 
@@ -76,7 +89,15 @@ class JSONKabupatenListView(APIView):
 
     def get_renderer_context(self):
         context = super().get_renderer_context()
-        context["page_title"] = "Daftar Kabupaten/Kota"
+        from apps.wilayah.loader import get_provinsi_nama
+        kode_provinsi = self.kwargs["kode_provinsi"]
+        nama_provinsi = get_provinsi_nama(kode_provinsi)
+        context["page_title"] = f"Daftar Kabupaten/Kota di {nama_provinsi}"
+        request = context.get("request")
+        context["breadcrumbs"] = [
+            ("INDONESIA", _build_url(request, "api:api-root")),
+            (nama_provinsi, _build_url(request, "api:kabupaten-list", {"kode_provinsi": kode_provinsi})),
+        ]
         return context
 
 
@@ -92,7 +113,18 @@ class JSONKecamatanListView(APIView):
 
     def get_renderer_context(self):
         context = super().get_renderer_context()
-        context["page_title"] = "Daftar Kecamatan"
+        from apps.wilayah.loader import get_kabupaten_nama, get_provinsi_nama
+        kode_provinsi = self.kwargs["kode_provinsi"]
+        kode_kabupaten = self.kwargs["kode_kabupaten"]
+        nama_provinsi = get_provinsi_nama(kode_provinsi)
+        nama_kabupaten = get_kabupaten_nama(kode_kabupaten)
+        context["page_title"] = f"Daftar Kecamatan di {nama_kabupaten}, {nama_provinsi}"
+        request = context.get("request")
+        context["breadcrumbs"] = [
+            ("INDONESIA", _build_url(request, "api:api-root")),
+            (nama_provinsi, _build_url(request, "api:kabupaten-list", {"kode_provinsi": kode_provinsi})),
+            (nama_kabupaten, _build_url(request, "api:kecamatan-list", {"kode_provinsi": kode_provinsi, "kode_kabupaten": kode_kabupaten})),
+        ]
         return context
 
 
@@ -108,7 +140,21 @@ class JSONDesaListView(APIView):
 
     def get_renderer_context(self):
         context = super().get_renderer_context()
-        context["page_title"] = "Daftar Desa/Kelurahan"
+        from apps.wilayah.loader import get_kabupaten_nama, get_kecamatan_nama, get_provinsi_nama
+        kode_provinsi = self.kwargs["kode_provinsi"]
+        kode_kabupaten = self.kwargs["kode_kabupaten"]
+        kode_kecamatan = self.kwargs["kode_kecamatan"]
+        nama_provinsi = get_provinsi_nama(kode_provinsi)
+        nama_kabupaten = get_kabupaten_nama(kode_kabupaten)
+        nama_kecamatan = get_kecamatan_nama(kode_kecamatan)
+        context["page_title"] = f"Daftar Desa/Kelurahan di {nama_kecamatan}, {nama_kabupaten}, {nama_provinsi}"
+        request = context.get("request")
+        context["breadcrumbs"] = [
+            ("INDONESIA", _build_url(request, "api:api-root")),
+            (nama_provinsi, _build_url(request, "api:kabupaten-list", {"kode_provinsi": kode_provinsi})),
+            (nama_kabupaten, _build_url(request, "api:kecamatan-list", {"kode_provinsi": kode_provinsi, "kode_kabupaten": kode_kabupaten})),
+            (nama_kecamatan, _build_url(request, "api:desa-list", {"kode_provinsi": kode_provinsi, "kode_kabupaten": kode_kabupaten, "kode_kecamatan": kode_kecamatan})),
+        ]
         return context
 
 
@@ -133,6 +179,11 @@ class ProvinsiListView(ListAPIView):
     def get_renderer_context(self):
         context = super().get_renderer_context()
         context["page_title"] = "Daftar Provinsi"
+        request = context.get("request")
+        context["breadcrumbs"] = [
+            ("INDONESIA", _build_url(request, "api:api-root")),
+            ("Daftar Provinsi", _build_url(request, "api:provinsi-list")),
+        ]
         return context
 
 
@@ -156,7 +207,14 @@ class KabupatenListView(ListAPIView):
 
     def get_renderer_context(self):
         context = super().get_renderer_context()
-        context["page_title"] = "Daftar Kabupaten/Kota"
+        kode_provinsi = self.kwargs["kode_provinsi"]
+        nama_provinsi = Provinsi.objects.filter(kode=kode_provinsi).values_list("nama", flat=True).first() or ""
+        context["page_title"] = f"Daftar Kabupaten/Kota di {nama_provinsi}"
+        request = context.get("request")
+        context["breadcrumbs"] = [
+            ("INDONESIA", _build_url(request, "api:api-root")),
+            (nama_provinsi, _build_url(request, "api:kabupaten-list", {"kode_provinsi": kode_provinsi})),
+        ]
         return context
 
 
@@ -180,7 +238,17 @@ class KecamatanListView(ListAPIView):
 
     def get_renderer_context(self):
         context = super().get_renderer_context()
-        context["page_title"] = "Daftar Kecamatan"
+        kode_provinsi = self.kwargs["kode_provinsi"]
+        kode_kabupaten = self.kwargs["kode_kabupaten"]
+        nama_provinsi = Provinsi.objects.filter(kode=kode_provinsi).values_list("nama", flat=True).first() or ""
+        nama_kabupaten = Kabupaten.objects.filter(kode=kode_kabupaten).values_list("nama", flat=True).first() or ""
+        context["page_title"] = f"Daftar Kecamatan di {nama_kabupaten}, {nama_provinsi}"
+        request = context.get("request")
+        context["breadcrumbs"] = [
+            ("INDONESIA", _build_url(request, "api:api-root")),
+            (nama_provinsi, _build_url(request, "api:kabupaten-list", {"kode_provinsi": kode_provinsi})),
+            (nama_kabupaten, _build_url(request, "api:kecamatan-list", {"kode_provinsi": kode_provinsi, "kode_kabupaten": kode_kabupaten})),
+        ]
         return context
 
 
@@ -204,5 +272,18 @@ class DesaListView(ListAPIView):
 
     def get_renderer_context(self):
         context = super().get_renderer_context()
-        context["page_title"] = "Daftar Desa/Kelurahan"
+        kode_provinsi = self.kwargs["kode_provinsi"]
+        kode_kabupaten = self.kwargs["kode_kabupaten"]
+        kode_kecamatan = self.kwargs["kode_kecamatan"]
+        nama_provinsi = Provinsi.objects.filter(kode=kode_provinsi).values_list("nama", flat=True).first() or ""
+        nama_kabupaten = Kabupaten.objects.filter(kode=kode_kabupaten).values_list("nama", flat=True).first() or ""
+        nama_kecamatan = Kecamatan.objects.filter(kode=kode_kecamatan).values_list("nama", flat=True).first() or ""
+        context["page_title"] = f"Daftar Desa/Kelurahan di {nama_kecamatan}, {nama_kabupaten}, {nama_provinsi}"
+        request = context.get("request")
+        context["breadcrumbs"] = [
+            ("INDONESIA", _build_url(request, "api:api-root")),
+            (nama_provinsi, _build_url(request, "api:kabupaten-list", {"kode_provinsi": kode_provinsi})),
+            (nama_kabupaten, _build_url(request, "api:kecamatan-list", {"kode_provinsi": kode_provinsi, "kode_kabupaten": kode_kabupaten})),
+            (nama_kecamatan, _build_url(request, "api:desa-list", {"kode_provinsi": kode_provinsi, "kode_kabupaten": kode_kabupaten, "kode_kecamatan": kode_kecamatan})),
+        ]
         return context
