@@ -17,7 +17,7 @@ if DEBUG_MODE:
         ],
         'DEFAULT_RENDERER_CLASSES': [
             'rest_framework.renderers.JSONRenderer',
-            'rest_framework.renderers.BrowsableAPIRenderer',
+            'apps.api.renderers.WilayahBrowsableAPIRenderer',
         ],
         'HTML_SELECT_CUTOFF': 0,
     }
@@ -32,7 +32,7 @@ else:
         ],
         'DEFAULT_RENDERER_CLASSES': [
             'rest_framework.renderers.JSONRenderer',
-            'rest_framework.renderers.BrowsableAPIRenderer',
+            'apps.api.renderers.WilayahBrowsableAPIRenderer',
         ],
         'HTML_SELECT_CUTOFF': 0,
     }
