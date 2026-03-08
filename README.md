@@ -72,7 +72,7 @@ python manage.py add_village
 python manage.py runserver
 ```
 
-The API is available at `http://localhost:8000/api/` in development mode.
+The API is available at `http://localhost:8000/api/` and `http://127.0.0.1:8000/` in development mode.
 
 ## Management Commands
 
