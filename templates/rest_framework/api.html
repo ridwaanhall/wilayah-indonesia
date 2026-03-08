@@ -1,6 +1,8 @@
 {% extends "rest_framework/base.html" %}
 {% load static %}
 
+{% block title %}{{ page_title }} — API Wilayah Indonesia{% endblock %}
+
 {% block head %}
   {{ block.super }}
 
@@ -29,10 +31,6 @@
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="{{ page_title }} — API Wilayah Indonesia">
   <meta name="twitter:description" content="Data lengkap provinsi, kabupaten/kota, kecamatan, dan desa/kelurahan seluruh Indonesia.">
-{% endblock %}
-
-{% block title %}
-  {{ page_title }} — API Wilayah Indonesia
 {% endblock %}
 
 {% block branding %}
