@@ -17,13 +17,14 @@ Including another URLconf
 from django.conf import settings
 from django.urls import include, path
 
-urlpatterns = [
-    path('api/', include('apps.api.urls')),
-]
-
 if settings.DEBUG:
     from django.contrib import admin
-    urlpatterns += [
+    urlpatterns = [
+        path('api/', include('apps.api.urls')),
         path('admin/', admin.site.urls),
         path('auth/', include('rest_framework.urls', namespace='rest_framework')),
+    ]
+else:
+    urlpatterns = [
+        path('', include('apps.api.urls')),
     ]
