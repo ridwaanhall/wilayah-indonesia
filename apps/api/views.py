@@ -36,7 +36,7 @@ class APIRootView(APIView):
 
     def get(self, request, *args, **kwargs):
         return Response({
-            "provinsi": reverse("api:provinsi-list", request=request),
+            "list-provinsi": reverse("api:provinsi-list", request=request),
         })
 
 
