@@ -7,10 +7,10 @@ A public REST API serving complete Indonesian administrative region data — pro
 | Endpoint | Description | Example |
 |---|---|---|
 | `/` | API root | |
-| `/0/` | List all provinces | |
-| `/{kode_provinsi}/` | List regencies/cities in a province | `/11/` (Aceh) |
-| `/{kode_provinsi}/{kode_kabupaten}/` | List districts in a regency/city | `/11/1101/` |
-| `/{kode_provinsi}/{kode_kabupaten}/{kode_kecamatan}/` | List villages in a district | `/11/1101/110101/` |
+| `/0` | List all provinces | |
+| `/{kode_provinsi}` | List regencies/cities in a province | `/11` (Aceh) |
+| `/{kode_provinsi}/{kode_kabupaten}` | List districts in a regency/city | `/11/1101` |
+| `/{kode_provinsi}/{kode_kabupaten}/{kode_kecamatan}` | List villages in a district | `/11/1101/110101` |
 
 ## Response Format
 
@@ -64,7 +64,7 @@ uvicorn api.main:app --reload
 
 The API is available at `http://127.0.0.1:8000/`.
 
-Set `DEBUG=true` in `.env` to enable `/docs` (Swagger UI) and `/redoc`.
+Interactive docs available at `/docs` (Swagger UI) and `/redoc` (ReDoc).
 
 ## Project Structure
 
