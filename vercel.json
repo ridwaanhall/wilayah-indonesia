@@ -1,7 +1,7 @@
 {
   "builds": [
     {
-      "src": "wilayah_indonesia/wsgi.py",
+      "src": "api/main.py",
       "use": "@vercel/python",
       "config": {
         "maxLambdaSize": "50mb"
@@ -11,7 +11,7 @@
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "wilayah_indonesia/wsgi.py"
+      "dest": "api/main.py"
     }
   ]
 }

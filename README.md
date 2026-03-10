@@ -1,6 +1,6 @@
 # API Wilayah Indonesia
 
-A public REST API serving complete Indonesian administrative region data — provinces, regencies/cities, districts, and villages — built with Django REST Framework.
+A public REST API serving complete Indonesian administrative region data — provinces, regencies/cities, districts, and villages — built with FastAPI.
 
 ## Endpoints
 
@@ -14,7 +14,7 @@ A public REST API serving complete Indonesian administrative region data — pro
 
 ## Response Format
 
-All endpoints return JSON by default. A browsable HTML interface is available when accessed from a browser.
+All endpoints return JSON.
 
 ```json
 [
@@ -42,10 +42,10 @@ All endpoints return JSON by default. A browsable HTML interface is available wh
 
 ## Tech Stack
 
-- Python 3.13
-- Django 6.0
-- Django REST Framework 3.16
-- WhiteNoise (static files)
+- Python 3.14
+- FastAPI
+- Uvicorn
+- Pydantic
 - Vercel (deployment)
 
 ## Local Development
@@ -58,34 +58,30 @@ python -m venv .venv
 .venv/Scripts/activate  # Windows
 pip install -r requirements.txt
 
-# Set DEBUG=True in .env
-echo DEBUG=True > .env
-
-# Run migrations and load data
-python manage.py migrate
-python manage.py add_province
-python manage.py add_regency
-python manage.py add_district
-python manage.py add_village
-
 # Start server
-python manage.py runserver
+uvicorn api.main:app --reload
 ```
 
-The API is available at `http://localhost:8000/api/` and `http://127.0.0.1:8000/` in development mode.
+The API is available at `http://127.0.0.1:8000/`.
 
-## Management Commands
+Set `DEBUG=true` in `.env` to enable `/docs` (Swagger UI) and `/redoc`.
 
-| Command | Description | Is Public |
-|---|---|---|
-| `add_province` | Import provinces from `ppwp/0.json` | `False` |
-| `add_regency` | Import regencies from `ppwp/<kode>.json` | `False` |
-| `add_district` | Import districts from `ppwp/<kode>/<kode>.json` | `False` |
-| `add_village` | Import villages from `ppwp/<kode>/<kode>/<kode>.json` | `False` |
-| `extract_province` | Export provinces to `apps/wilayah/data/provinsi.json` | `True` |
-| `extract_regency` | Export regencies to `apps/wilayah/data/kabupaten.json` | `True` |
-| `extract_district` | Export districts to `apps/wilayah/data/kecamatan.json` | `True` |
-| `extract_village` | Export villages to `apps/wilayah/data/desa.json` | `True` |
+## Project Structure
+
+```
+api/
+  __init__.py
+  main.py       # FastAPI app, middleware, error handlers
+  config.py     # Settings from environment variables
+  loader.py     # JSON data loader with singleton pattern
+  routes.py     # API endpoint handlers
+  schemas.py    # Pydantic response models
+data/
+  provinsi.json
+  kabupaten.json
+  kecamatan.json
+  desa.json
+```
 
 ## License
 
