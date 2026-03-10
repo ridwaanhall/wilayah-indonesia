@@ -1,5 +1,4 @@
 """Tests for DataLoader class."""
-import pytest
 
 from api.loader import DataLoader, get_loader
 
