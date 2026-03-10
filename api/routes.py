@@ -1,11 +1,13 @@
 from typing import Annotated
 
-from fastapi import APIRouter, HTTPException, Path, Request
+from fastapi import APIRouter, Depends, HTTPException, Path, Request
 
-from .loader import loader
+from .loader import DataLoader, get_loader
 from .schemas import Desa, ErrorDetail, Kabupaten, Kecamatan, Provinsi
 
 router = APIRouter()
+
+LoaderDep = Annotated[DataLoader, Depends(get_loader)]
 
 
 @router.get(
@@ -24,7 +26,7 @@ def api_root(request: Request) -> dict[str, str]:
     description="Daftar seluruh provinsi di Indonesia.",
     response_model=list[Provinsi],
 )
-def list_provinsi() -> list[dict]:
+def list_provinsi(loader: LoaderDep) -> list[dict]:
     return loader.provinsi_list
 
 
@@ -37,6 +39,7 @@ def list_provinsi() -> list[dict]:
 )
 def list_kabupaten(
     kode_provinsi: Annotated[int, Path(gt=0, description="Kode provinsi")],
+    loader: LoaderDep,
 ) -> list[dict]:
     result: list[dict] | None = loader.kabupaten_by_provinsi(kode_provinsi)
     if result is None:
@@ -54,6 +57,7 @@ def list_kabupaten(
 def list_kecamatan(
     kode_provinsi: Annotated[int, Path(gt=0, description="Kode provinsi")],
     kode_kabupaten: Annotated[int, Path(gt=0, description="Kode kabupaten/kota")],
+    loader: LoaderDep,
 ) -> list[dict]:
     if not loader.provinsi_exists(kode_provinsi):
         raise HTTPException(status_code=404, detail="Provinsi tidak ditemukan.")
@@ -73,6 +77,7 @@ def list_desa(
     kode_provinsi: Annotated[int, Path(gt=0, description="Kode provinsi")],
     kode_kabupaten: Annotated[int, Path(gt=0, description="Kode kabupaten/kota")],
     kode_kecamatan: Annotated[int, Path(gt=0, description="Kode kecamatan")],
+    loader: LoaderDep,
 ) -> list[dict]:
     if not loader.provinsi_exists(kode_provinsi):
         raise HTTPException(status_code=404, detail="Provinsi tidak ditemukan.")
