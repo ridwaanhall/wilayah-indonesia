@@ -76,6 +76,20 @@ class DataLoader:
             return None
         return self._desa_by_kec.get(kode, [])
 
+    def provinsi_exists(self, kode: int) -> bool:
+        """Return ``True`` if *kode* is a known province code."""
+        return kode in self._provinsi_idx
+
+    def kabupaten_in_provinsi(self, kode_kabupaten: int, kode_provinsi: int) -> bool:
+        """Return ``True`` if *kode_kabupaten* exists and belongs to *kode_provinsi*."""
+        entry = self._kabupaten_idx.get(kode_kabupaten)
+        return entry is not None and entry["provinsi"] == kode_provinsi
+
+    def kecamatan_in_kabupaten(self, kode_kecamatan: int, kode_kabupaten: int) -> bool:
+        """Return ``True`` if *kode_kecamatan* exists and belongs to *kode_kabupaten*."""
+        entry = self._kecamatan_idx.get(kode_kecamatan)
+        return entry is not None and entry["kabupaten"] == kode_kabupaten
+
 
 @lru_cache(maxsize=None)
 def get_loader() -> DataLoader:
