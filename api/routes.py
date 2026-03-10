@@ -19,7 +19,7 @@ def api_root(request: Request) -> dict[str, str | dict[str, str]]:
     base_url: str = str(request.base_url).rstrip("/")
     return {
         "message": "Wilayah Indonesia API",
-        "version": "2.0.0",
+        "version": request.app.version,
         "docs": f"{base_url}/docs",
         "endpoints": {
             "provinsi": f"{base_url}/0",
