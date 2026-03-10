@@ -1,4 +1,5 @@
 import json
+from functools import lru_cache
 from pathlib import Path
 
 DATA_DIR: Path = Path(__file__).resolve().parent.parent / "data"
@@ -76,4 +77,14 @@ class DataLoader:
         return self._desa_by_kec.get(kode, [])
 
 
-loader = DataLoader()
+@lru_cache(maxsize=None)
+def get_loader() -> DataLoader:
+    """Return the singleton :class:`DataLoader`, creating it on first call.
+
+    Defers file I/O until the first request so that importing this module
+    does not eagerly read all JSON datasets (including the large
+    ``desa.json``), reducing cold-start time and memory usage on
+    serverless platforms such as Vercel.  Thread safety is provided by
+    :func:`functools.lru_cache`.
+    """
+    return DataLoader()
