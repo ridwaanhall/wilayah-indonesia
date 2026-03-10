@@ -3,7 +3,7 @@ from typing import Annotated, Any
 from fastapi import APIRouter, Depends, HTTPException, Path, Request
 
 from .loader import DataLoader, get_loader
-from .schemas import Desa, ErrorDetail, Kabupaten, Kecamatan, Provinsi, WilayahBase
+from .schemas import Desa, ErrorDetail, Kabupaten, Kecamatan, Provinsi
 
 router: APIRouter = APIRouter()
 
