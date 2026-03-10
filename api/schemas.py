@@ -12,23 +12,23 @@ class WilayahBase(BaseModel):
 
 
 class Provinsi(WilayahBase):
-    """Province – administrative level 1."""
+    """Province - administrative level 1."""
 
 
 class Kabupaten(WilayahBase):
-    """Regency / city – administrative level 2."""
+    """Regency / city - administrative level 2."""
 
     provinsi: int
 
 
 class Kecamatan(WilayahBase):
-    """District – administrative level 3."""
+    """District - administrative level 3."""
 
     kabupaten: int
 
 
 class Desa(WilayahBase):
-    """Village / sub-district – administrative level 4."""
+    """Village / sub-district - administrative level 4."""
 
     kecamatan: int
 

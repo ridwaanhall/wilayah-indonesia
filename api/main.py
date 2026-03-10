@@ -17,9 +17,7 @@ app = FastAPI(
         "Provinsi, Kabupaten/Kota, Kecamatan, dan Desa/Kelurahan."
     ),
     version="2.0.0",
-    docs_url="/docs" if settings.debug else None,
-    redoc_url="/redoc" if settings.debug else None,
-    openapi_url="/openapi.json" if settings.debug else None,
+    redirect_slashes=False,
 )
 
 if settings.allowed_origins:
@@ -42,13 +40,26 @@ async def security_headers(
     response.headers["X-Frame-Options"] = "DENY"
     response.headers["Referrer-Policy"] = "strict-origin-when-cross-origin"
     response.headers["Permissions-Policy"] = "interest-cohort=()"
-    response.headers["Cache-Control"] = "public, max-age=86400, s-maxage=86400"
     response.headers["Strict-Transport-Security"] = (
         "max-age=31536000; includeSubDomains; preload"
     )
-    response.headers["Content-Security-Policy"] = (
-        "default-src 'none'; frame-ancestors 'none'"
-    )
+
+    path: str = request.url.path
+    if path in ("/docs", "/redoc", "/openapi.json"):
+        response.headers["Cache-Control"] = "no-store"
+        response.headers["Content-Security-Policy"] = (
+            "default-src 'self'; "
+            "script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; "
+            "style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; "
+            "img-src 'self' https://fastapi.tiangolo.com data:; "
+            "font-src 'self' https://cdn.jsdelivr.net; "
+            "frame-ancestors 'none'"
+        )
+    else:
+        response.headers["Cache-Control"] = "public, max-age=86400, s-maxage=86400"
+        response.headers["Content-Security-Policy"] = (
+            "default-src 'none'; frame-ancestors 'none'"
+        )
     return response
 
 

@@ -15,11 +15,11 @@ router = APIRouter()
 )
 def api_root(request: Request) -> dict[str, str]:
     base_url: str = str(request.base_url).rstrip("/")
-    return {"daftar-provinsi": f"{base_url}/0/"}
+    return {"daftar-provinsi": f"{base_url}/0"}
 
 
 @router.get(
-    "/0/",
+    "/0",
     summary="Daftar Provinsi",
     description="Daftar seluruh provinsi di Indonesia.",
     response_model=list[Provinsi],
@@ -29,7 +29,7 @@ def list_provinsi() -> list[dict]:
 
 
 @router.get(
-    "/{kode_provinsi}/",
+    "/{kode_provinsi}",
     summary="Daftar Kabupaten/Kota",
     description="Daftar kabupaten/kota dalam suatu provinsi.",
     response_model=list[Kabupaten],
@@ -45,7 +45,7 @@ def list_kabupaten(
 
 
 @router.get(
-    "/{kode_provinsi}/{kode_kabupaten}/",
+    "/{kode_provinsi}/{kode_kabupaten}",
     summary="Daftar Kecamatan",
     description="Daftar kecamatan dalam suatu kabupaten/kota.",
     response_model=list[Kecamatan],
@@ -62,7 +62,7 @@ def list_kecamatan(
 
 
 @router.get(
-    "/{kode_provinsi}/{kode_kabupaten}/{kode_kecamatan}/",
+    "/{kode_provinsi}/{kode_kabupaten}/{kode_kecamatan}",
     summary="Daftar Desa/Kelurahan",
     description="Daftar desa/kelurahan dalam suatu kecamatan.",
     response_model=list[Desa],
