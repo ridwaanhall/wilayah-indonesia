@@ -55,7 +55,9 @@ def list_kecamatan(
     kode_provinsi: Annotated[int, Path(gt=0, description="Kode provinsi")],
     kode_kabupaten: Annotated[int, Path(gt=0, description="Kode kabupaten/kota")],
 ) -> list[dict]:
-    result: list[dict] | None = loader.kecamatan_by_kabupaten(kode_kabupaten)
+    result: list[dict] | None = loader.kecamatan_by_kabupaten(
+        kode_kabupaten, kode_provinsi
+    )
     if result is None:
         raise HTTPException(status_code=404, detail="Kabupaten/Kota tidak ditemukan.")
     return result
@@ -73,7 +75,9 @@ def list_desa(
     kode_kabupaten: Annotated[int, Path(gt=0, description="Kode kabupaten/kota")],
     kode_kecamatan: Annotated[int, Path(gt=0, description="Kode kecamatan")],
 ) -> list[dict]:
-    result: list[dict] | None = loader.desa_by_kecamatan(kode_kecamatan)
+    if loader.kecamatan_by_kabupaten(kode_kabupaten, kode_provinsi) is None:
+        raise HTTPException(status_code=404, detail="Kabupaten/Kota tidak ditemukan.")
+    result: list[dict] | None = loader.desa_by_kecamatan(kode_kecamatan, kode_kabupaten)
     if result is None:
         raise HTTPException(status_code=404, detail="Kecamatan tidak ditemukan.")
     return result

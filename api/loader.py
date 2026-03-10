@@ -63,15 +63,33 @@ class DataLoader:
             return None
         return self._kabupaten_by_prov.get(kode, [])
 
-    def kecamatan_by_kabupaten(self, kode: int) -> list[dict] | None:
-        """Return districts for *kode* regency, or ``None`` if unknown."""
-        if kode not in self._kabupaten_idx:
+    def kecamatan_by_kabupaten(
+        self, kode: int, kode_provinsi: int | None = None
+    ) -> list[dict] | None:
+        """Return districts for *kode* regency, or ``None`` if unknown.
+
+        If *kode_provinsi* is provided, also validates that *kode* belongs to
+        that province; returns ``None`` when the hierarchy does not match.
+        """
+        item = self._kabupaten_idx.get(kode)
+        if item is None:
+            return None
+        if kode_provinsi is not None and item["provinsi"] != kode_provinsi:
             return None
         return self._kecamatan_by_kab.get(kode, [])
 
-    def desa_by_kecamatan(self, kode: int) -> list[dict] | None:
-        """Return villages for *kode* district, or ``None`` if unknown."""
-        if kode not in self._kecamatan_idx:
+    def desa_by_kecamatan(
+        self, kode: int, kode_kabupaten: int | None = None
+    ) -> list[dict] | None:
+        """Return villages for *kode* district, or ``None`` if unknown.
+
+        If *kode_kabupaten* is provided, also validates that *kode* belongs to
+        that regency; returns ``None`` when the hierarchy does not match.
+        """
+        item = self._kecamatan_idx.get(kode)
+        if item is None:
+            return None
+        if kode_kabupaten is not None and item["kabupaten"] != kode_kabupaten:
             return None
         return self._desa_by_kec.get(kode, [])
 
