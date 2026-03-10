@@ -1,4 +1,5 @@
 import json
+from functools import lru_cache
 from pathlib import Path
 
 DATA_DIR: Path = Path(__file__).resolve().parent.parent / "data"
@@ -93,5 +94,29 @@ class DataLoader:
             return None
         return self._desa_by_kec.get(kode, [])
 
+    def provinsi_exists(self, kode: int) -> bool:
+        """Return ``True`` if *kode* is a known province code."""
+        return kode in self._provinsi_idx
 
-loader = DataLoader()
+    def kabupaten_in_provinsi(self, kode_kabupaten: int, kode_provinsi: int) -> bool:
+        """Return ``True`` if *kode_kabupaten* exists and belongs to *kode_provinsi*."""
+        entry = self._kabupaten_idx.get(kode_kabupaten)
+        return entry is not None and entry["provinsi"] == kode_provinsi
+
+    def kecamatan_in_kabupaten(self, kode_kecamatan: int, kode_kabupaten: int) -> bool:
+        """Return ``True`` if *kode_kecamatan* exists and belongs to *kode_kabupaten*."""
+        entry = self._kecamatan_idx.get(kode_kecamatan)
+        return entry is not None and entry["kabupaten"] == kode_kabupaten
+
+
+@lru_cache(maxsize=None)
+def get_loader() -> DataLoader:
+    """Return the singleton :class:`DataLoader`, creating it on first call.
+
+    Defers file I/O until the first request so that importing this module
+    does not eagerly read all JSON datasets (including the large
+    ``desa.json``), reducing cold-start time and memory usage on
+    serverless platforms such as Vercel.  Thread safety is provided by
+    :func:`functools.lru_cache`.
+    """
+    return DataLoader()
