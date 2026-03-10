@@ -3,3084 +3,5140 @@
     "kode": 1101,
     "nama": "ACEH SELATAN",
     "tingkat": 2,
-    "provinsi": 11
+    "parent": {
+      "kode": 11,
+      "nama": "ACEH",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1102,
     "nama": "ACEH TENGGARA",
     "tingkat": 2,
-    "provinsi": 11
+    "parent": {
+      "kode": 11,
+      "nama": "ACEH",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1103,
     "nama": "ACEH TIMUR",
     "tingkat": 2,
-    "provinsi": 11
+    "parent": {
+      "kode": 11,
+      "nama": "ACEH",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1104,
     "nama": "ACEH TENGAH",
     "tingkat": 2,
-    "provinsi": 11
+    "parent": {
+      "kode": 11,
+      "nama": "ACEH",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1105,
     "nama": "ACEH BARAT",
     "tingkat": 2,
-    "provinsi": 11
+    "parent": {
+      "kode": 11,
+      "nama": "ACEH",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1106,
     "nama": "ACEH BESAR",
     "tingkat": 2,
-    "provinsi": 11
+    "parent": {
+      "kode": 11,
+      "nama": "ACEH",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1107,
     "nama": "PIDIE",
     "tingkat": 2,
-    "provinsi": 11
+    "parent": {
+      "kode": 11,
+      "nama": "ACEH",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1108,
     "nama": "ACEH UTARA",
     "tingkat": 2,
-    "provinsi": 11
+    "parent": {
+      "kode": 11,
+      "nama": "ACEH",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1109,
     "nama": "SIMEULUE",
     "tingkat": 2,
-    "provinsi": 11
+    "parent": {
+      "kode": 11,
+      "nama": "ACEH",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1110,
     "nama": "ACEH SINGKIL",
     "tingkat": 2,
-    "provinsi": 11
+    "parent": {
+      "kode": 11,
+      "nama": "ACEH",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1111,
     "nama": "BIREUEN",
     "tingkat": 2,
-    "provinsi": 11
+    "parent": {
+      "kode": 11,
+      "nama": "ACEH",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1112,
     "nama": "ACEH BARAT DAYA",
     "tingkat": 2,
-    "provinsi": 11
+    "parent": {
+      "kode": 11,
+      "nama": "ACEH",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1113,
     "nama": "GAYO LUES",
     "tingkat": 2,
-    "provinsi": 11
+    "parent": {
+      "kode": 11,
+      "nama": "ACEH",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1114,
     "nama": "ACEH JAYA",
     "tingkat": 2,
-    "provinsi": 11
+    "parent": {
+      "kode": 11,
+      "nama": "ACEH",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1115,
     "nama": "NAGAN RAYA",
     "tingkat": 2,
-    "provinsi": 11
+    "parent": {
+      "kode": 11,
+      "nama": "ACEH",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1116,
     "nama": "ACEH TAMIANG",
     "tingkat": 2,
-    "provinsi": 11
+    "parent": {
+      "kode": 11,
+      "nama": "ACEH",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1117,
     "nama": "BENER MERIAH",
     "tingkat": 2,
-    "provinsi": 11
+    "parent": {
+      "kode": 11,
+      "nama": "ACEH",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1118,
     "nama": "PIDIE JAYA",
     "tingkat": 2,
-    "provinsi": 11
+    "parent": {
+      "kode": 11,
+      "nama": "ACEH",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1171,
     "nama": "KOTA BANDA ACEH",
     "tingkat": 2,
-    "provinsi": 11
+    "parent": {
+      "kode": 11,
+      "nama": "ACEH",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1172,
     "nama": "KOTA SABANG",
     "tingkat": 2,
-    "provinsi": 11
+    "parent": {
+      "kode": 11,
+      "nama": "ACEH",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1173,
     "nama": "KOTA LHOKSEUMAWE",
     "tingkat": 2,
-    "provinsi": 11
+    "parent": {
+      "kode": 11,
+      "nama": "ACEH",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1174,
     "nama": "KOTA LANGSA",
     "tingkat": 2,
-    "provinsi": 11
+    "parent": {
+      "kode": 11,
+      "nama": "ACEH",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1175,
     "nama": "KOTA SUBULUSSALAM",
     "tingkat": 2,
-    "provinsi": 11
+    "parent": {
+      "kode": 11,
+      "nama": "ACEH",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1201,
     "nama": "TAPANULI TENGAH",
     "tingkat": 2,
-    "provinsi": 12
+    "parent": {
+      "kode": 12,
+      "nama": "SUMATERA UTARA",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1202,
     "nama": "TAPANULI UTARA",
     "tingkat": 2,
-    "provinsi": 12
+    "parent": {
+      "kode": 12,
+      "nama": "SUMATERA UTARA",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1203,
     "nama": "TAPANULI SELATAN",
     "tingkat": 2,
-    "provinsi": 12
+    "parent": {
+      "kode": 12,
+      "nama": "SUMATERA UTARA",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1204,
     "nama": "NIAS",
     "tingkat": 2,
-    "provinsi": 12
+    "parent": {
+      "kode": 12,
+      "nama": "SUMATERA UTARA",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1205,
     "nama": "LANGKAT",
     "tingkat": 2,
-    "provinsi": 12
+    "parent": {
+      "kode": 12,
+      "nama": "SUMATERA UTARA",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1206,
     "nama": "KARO",
     "tingkat": 2,
-    "provinsi": 12
+    "parent": {
+      "kode": 12,
+      "nama": "SUMATERA UTARA",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1207,
     "nama": "DELI SERDANG",
     "tingkat": 2,
-    "provinsi": 12
+    "parent": {
+      "kode": 12,
+      "nama": "SUMATERA UTARA",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1208,
     "nama": "SIMALUNGUN",
     "tingkat": 2,
-    "provinsi": 12
+    "parent": {
+      "kode": 12,
+      "nama": "SUMATERA UTARA",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1209,
     "nama": "ASAHAN",
     "tingkat": 2,
-    "provinsi": 12
+    "parent": {
+      "kode": 12,
+      "nama": "SUMATERA UTARA",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1210,
     "nama": "LABUHANBATU",
     "tingkat": 2,
-    "provinsi": 12
+    "parent": {
+      "kode": 12,
+      "nama": "SUMATERA UTARA",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1211,
     "nama": "DAIRI",
     "tingkat": 2,
-    "provinsi": 12
+    "parent": {
+      "kode": 12,
+      "nama": "SUMATERA UTARA",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1212,
     "nama": "TOBA",
     "tingkat": 2,
-    "provinsi": 12
+    "parent": {
+      "kode": 12,
+      "nama": "SUMATERA UTARA",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1213,
     "nama": "MANDAILING NATAL",
     "tingkat": 2,
-    "provinsi": 12
+    "parent": {
+      "kode": 12,
+      "nama": "SUMATERA UTARA",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1214,
     "nama": "NIAS SELATAN",
     "tingkat": 2,
-    "provinsi": 12
+    "parent": {
+      "kode": 12,
+      "nama": "SUMATERA UTARA",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1215,
     "nama": "PAKPAK BHARAT",
     "tingkat": 2,
-    "provinsi": 12
+    "parent": {
+      "kode": 12,
+      "nama": "SUMATERA UTARA",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1216,
     "nama": "HUMBANG HASUNDUTAN",
     "tingkat": 2,
-    "provinsi": 12
+    "parent": {
+      "kode": 12,
+      "nama": "SUMATERA UTARA",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1217,
     "nama": "SAMOSIR",
     "tingkat": 2,
-    "provinsi": 12
+    "parent": {
+      "kode": 12,
+      "nama": "SUMATERA UTARA",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1218,
     "nama": "SERDANG BEDAGAI",
     "tingkat": 2,
-    "provinsi": 12
+    "parent": {
+      "kode": 12,
+      "nama": "SUMATERA UTARA",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1219,
     "nama": "BATU BARA",
     "tingkat": 2,
-    "provinsi": 12
+    "parent": {
+      "kode": 12,
+      "nama": "SUMATERA UTARA",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1220,
     "nama": "PADANG LAWAS UTARA",
     "tingkat": 2,
-    "provinsi": 12
+    "parent": {
+      "kode": 12,
+      "nama": "SUMATERA UTARA",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1221,
     "nama": "PADANG LAWAS",
     "tingkat": 2,
-    "provinsi": 12
+    "parent": {
+      "kode": 12,
+      "nama": "SUMATERA UTARA",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1222,
     "nama": "LABUHANBATU SELATAN",
     "tingkat": 2,
-    "provinsi": 12
+    "parent": {
+      "kode": 12,
+      "nama": "SUMATERA UTARA",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1223,
     "nama": "LABUHANBATU UTARA",
     "tingkat": 2,
-    "provinsi": 12
+    "parent": {
+      "kode": 12,
+      "nama": "SUMATERA UTARA",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1224,
     "nama": "NIAS UTARA",
     "tingkat": 2,
-    "provinsi": 12
+    "parent": {
+      "kode": 12,
+      "nama": "SUMATERA UTARA",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1225,
     "nama": "NIAS BARAT",
     "tingkat": 2,
-    "provinsi": 12
+    "parent": {
+      "kode": 12,
+      "nama": "SUMATERA UTARA",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1271,
     "nama": "KOTA MEDAN",
     "tingkat": 2,
-    "provinsi": 12
+    "parent": {
+      "kode": 12,
+      "nama": "SUMATERA UTARA",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1272,
     "nama": "KOTA PEMATANGSIANTAR",
     "tingkat": 2,
-    "provinsi": 12
+    "parent": {
+      "kode": 12,
+      "nama": "SUMATERA UTARA",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1273,
     "nama": "KOTA SIBOLGA",
     "tingkat": 2,
-    "provinsi": 12
+    "parent": {
+      "kode": 12,
+      "nama": "SUMATERA UTARA",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1274,
     "nama": "KOTA TANJUNG BALAI",
     "tingkat": 2,
-    "provinsi": 12
+    "parent": {
+      "kode": 12,
+      "nama": "SUMATERA UTARA",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1275,
     "nama": "KOTA BINJAI",
     "tingkat": 2,
-    "provinsi": 12
+    "parent": {
+      "kode": 12,
+      "nama": "SUMATERA UTARA",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1276,
     "nama": "KOTA TEBING TINGGI",
     "tingkat": 2,
-    "provinsi": 12
+    "parent": {
+      "kode": 12,
+      "nama": "SUMATERA UTARA",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1277,
     "nama": "KOTA PADANG SIDEMPUAN",
     "tingkat": 2,
-    "provinsi": 12
+    "parent": {
+      "kode": 12,
+      "nama": "SUMATERA UTARA",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1278,
     "nama": "KOTA GUNUNGSITOLI",
     "tingkat": 2,
-    "provinsi": 12
+    "parent": {
+      "kode": 12,
+      "nama": "SUMATERA UTARA",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1301,
     "nama": "PESISIR SELATAN",
     "tingkat": 2,
-    "provinsi": 13
+    "parent": {
+      "kode": 13,
+      "nama": "SUMATERA BARAT",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1302,
     "nama": "SOLOK",
     "tingkat": 2,
-    "provinsi": 13
+    "parent": {
+      "kode": 13,
+      "nama": "SUMATERA BARAT",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1303,
     "nama": "SIJUNJUNG",
     "tingkat": 2,
-    "provinsi": 13
+    "parent": {
+      "kode": 13,
+      "nama": "SUMATERA BARAT",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1304,
     "nama": "TANAH DATAR",
     "tingkat": 2,
-    "provinsi": 13
+    "parent": {
+      "kode": 13,
+      "nama": "SUMATERA BARAT",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1305,
     "nama": "PADANG PARIAMAN",
     "tingkat": 2,
-    "provinsi": 13
+    "parent": {
+      "kode": 13,
+      "nama": "SUMATERA BARAT",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1306,
     "nama": "AGAM",
     "tingkat": 2,
-    "provinsi": 13
+    "parent": {
+      "kode": 13,
+      "nama": "SUMATERA BARAT",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1307,
     "nama": "LIMA PULUH KOTA",
     "tingkat": 2,
-    "provinsi": 13
+    "parent": {
+      "kode": 13,
+      "nama": "SUMATERA BARAT",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1308,
     "nama": "PASAMAN",
     "tingkat": 2,
-    "provinsi": 13
+    "parent": {
+      "kode": 13,
+      "nama": "SUMATERA BARAT",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1309,
     "nama": "KEPULAUAN MENTAWAI",
     "tingkat": 2,
-    "provinsi": 13
+    "parent": {
+      "kode": 13,
+      "nama": "SUMATERA BARAT",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1310,
     "nama": "DHARMASRAYA",
     "tingkat": 2,
-    "provinsi": 13
+    "parent": {
+      "kode": 13,
+      "nama": "SUMATERA BARAT",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1311,
     "nama": "SOLOK SELATAN",
     "tingkat": 2,
-    "provinsi": 13
+    "parent": {
+      "kode": 13,
+      "nama": "SUMATERA BARAT",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1312,
     "nama": "PASAMAN BARAT",
     "tingkat": 2,
-    "provinsi": 13
+    "parent": {
+      "kode": 13,
+      "nama": "SUMATERA BARAT",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1371,
     "nama": "KOTA PADANG",
     "tingkat": 2,
-    "provinsi": 13
+    "parent": {
+      "kode": 13,
+      "nama": "SUMATERA BARAT",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1372,
     "nama": "KOTA SOLOK",
     "tingkat": 2,
-    "provinsi": 13
+    "parent": {
+      "kode": 13,
+      "nama": "SUMATERA BARAT",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1373,
     "nama": "KOTA SAWAHLUNTO",
     "tingkat": 2,
-    "provinsi": 13
+    "parent": {
+      "kode": 13,
+      "nama": "SUMATERA BARAT",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1374,
     "nama": "KOTA PADANG PANJANG",
     "tingkat": 2,
-    "provinsi": 13
+    "parent": {
+      "kode": 13,
+      "nama": "SUMATERA BARAT",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1375,
     "nama": "KOTA BUKITTINGGI",
     "tingkat": 2,
-    "provinsi": 13
+    "parent": {
+      "kode": 13,
+      "nama": "SUMATERA BARAT",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1376,
     "nama": "KOTA PAYAKUMBUH",
     "tingkat": 2,
-    "provinsi": 13
+    "parent": {
+      "kode": 13,
+      "nama": "SUMATERA BARAT",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1377,
     "nama": "KOTA PARIAMAN",
     "tingkat": 2,
-    "provinsi": 13
+    "parent": {
+      "kode": 13,
+      "nama": "SUMATERA BARAT",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1401,
     "nama": "KAMPAR",
     "tingkat": 2,
-    "provinsi": 14
+    "parent": {
+      "kode": 14,
+      "nama": "RIAU",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1402,
     "nama": "INDRAGIRI HULU",
     "tingkat": 2,
-    "provinsi": 14
+    "parent": {
+      "kode": 14,
+      "nama": "RIAU",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1403,
     "nama": "BENGKALIS",
     "tingkat": 2,
-    "provinsi": 14
+    "parent": {
+      "kode": 14,
+      "nama": "RIAU",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1404,
     "nama": "INDRAGIRI HILIR",
     "tingkat": 2,
-    "provinsi": 14
+    "parent": {
+      "kode": 14,
+      "nama": "RIAU",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1405,
     "nama": " PELALAWAN",
     "tingkat": 2,
-    "provinsi": 14
+    "parent": {
+      "kode": 14,
+      "nama": "RIAU",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1406,
     "nama": " ROKAN HULU",
     "tingkat": 2,
-    "provinsi": 14
+    "parent": {
+      "kode": 14,
+      "nama": "RIAU",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1407,
     "nama": " ROKAN HILIR",
     "tingkat": 2,
-    "provinsi": 14
+    "parent": {
+      "kode": 14,
+      "nama": "RIAU",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1408,
     "nama": "SIAK",
     "tingkat": 2,
-    "provinsi": 14
+    "parent": {
+      "kode": 14,
+      "nama": "RIAU",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1409,
     "nama": "KUANTAN SINGINGI",
     "tingkat": 2,
-    "provinsi": 14
+    "parent": {
+      "kode": 14,
+      "nama": "RIAU",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1410,
     "nama": "KEPULAUAN MERANTI",
     "tingkat": 2,
-    "provinsi": 14
+    "parent": {
+      "kode": 14,
+      "nama": "RIAU",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1471,
     "nama": "KOTA PEKANBARU",
     "tingkat": 2,
-    "provinsi": 14
+    "parent": {
+      "kode": 14,
+      "nama": "RIAU",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1472,
     "nama": "KOTA DUMAI",
     "tingkat": 2,
-    "provinsi": 14
+    "parent": {
+      "kode": 14,
+      "nama": "RIAU",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1501,
     "nama": " KERINCI",
     "tingkat": 2,
-    "provinsi": 15
+    "parent": {
+      "kode": 15,
+      "nama": "JAMBI",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1502,
     "nama": " MERANGIN",
     "tingkat": 2,
-    "provinsi": 15
+    "parent": {
+      "kode": 15,
+      "nama": "JAMBI",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1503,
     "nama": "SAROLANGUN",
     "tingkat": 2,
-    "provinsi": 15
+    "parent": {
+      "kode": 15,
+      "nama": "JAMBI",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1504,
     "nama": "BATANGHARI",
     "tingkat": 2,
-    "provinsi": 15
+    "parent": {
+      "kode": 15,
+      "nama": "JAMBI",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1505,
     "nama": " MUARO JAMBI",
     "tingkat": 2,
-    "provinsi": 15
+    "parent": {
+      "kode": 15,
+      "nama": "JAMBI",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1506,
     "nama": "TANJUNG JABUNG BARAT",
     "tingkat": 2,
-    "provinsi": 15
+    "parent": {
+      "kode": 15,
+      "nama": "JAMBI",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1507,
     "nama": "TANJUNG JABUNG TIMUR",
     "tingkat": 2,
-    "provinsi": 15
+    "parent": {
+      "kode": 15,
+      "nama": "JAMBI",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1508,
     "nama": "BUNGO",
     "tingkat": 2,
-    "provinsi": 15
+    "parent": {
+      "kode": 15,
+      "nama": "JAMBI",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1509,
     "nama": "TEBO",
     "tingkat": 2,
-    "provinsi": 15
+    "parent": {
+      "kode": 15,
+      "nama": "JAMBI",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1571,
     "nama": "KOTA JAMBI",
     "tingkat": 2,
-    "provinsi": 15
+    "parent": {
+      "kode": 15,
+      "nama": "JAMBI",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1572,
     "nama": "KOTA SUNGAI PENUH",
     "tingkat": 2,
-    "provinsi": 15
+    "parent": {
+      "kode": 15,
+      "nama": "JAMBI",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1601,
     "nama": "OGAN KOMERING ULU",
     "tingkat": 2,
-    "provinsi": 16
+    "parent": {
+      "kode": 16,
+      "nama": "SUMATERA SELATAN",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1602,
     "nama": "OGAN KOMERING ILIR",
     "tingkat": 2,
-    "provinsi": 16
+    "parent": {
+      "kode": 16,
+      "nama": "SUMATERA SELATAN",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1603,
     "nama": "MUARA ENIM",
     "tingkat": 2,
-    "provinsi": 16
+    "parent": {
+      "kode": 16,
+      "nama": "SUMATERA SELATAN",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1604,
     "nama": "LAHAT",
     "tingkat": 2,
-    "provinsi": 16
+    "parent": {
+      "kode": 16,
+      "nama": "SUMATERA SELATAN",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1605,
     "nama": "MUSI RAWAS",
     "tingkat": 2,
-    "provinsi": 16
+    "parent": {
+      "kode": 16,
+      "nama": "SUMATERA SELATAN",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1606,
     "nama": "MUSI BANYUASIN",
     "tingkat": 2,
-    "provinsi": 16
+    "parent": {
+      "kode": 16,
+      "nama": "SUMATERA SELATAN",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1607,
     "nama": "BANYUASIN",
     "tingkat": 2,
-    "provinsi": 16
+    "parent": {
+      "kode": 16,
+      "nama": "SUMATERA SELATAN",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1608,
     "nama": "OGAN KOMERING ULU TIMUR",
     "tingkat": 2,
-    "provinsi": 16
+    "parent": {
+      "kode": 16,
+      "nama": "SUMATERA SELATAN",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1609,
     "nama": "OGAN KOMERING ULU SELATAN",
     "tingkat": 2,
-    "provinsi": 16
+    "parent": {
+      "kode": 16,
+      "nama": "SUMATERA SELATAN",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1610,
     "nama": "OGAN ILIR",
     "tingkat": 2,
-    "provinsi": 16
+    "parent": {
+      "kode": 16,
+      "nama": "SUMATERA SELATAN",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1611,
     "nama": "EMPAT LAWANG",
     "tingkat": 2,
-    "provinsi": 16
+    "parent": {
+      "kode": 16,
+      "nama": "SUMATERA SELATAN",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1612,
     "nama": "PENUKAL ABAB LEMATANG ILIR",
     "tingkat": 2,
-    "provinsi": 16
+    "parent": {
+      "kode": 16,
+      "nama": "SUMATERA SELATAN",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1613,
     "nama": "MUSI RAWAS UTARA",
     "tingkat": 2,
-    "provinsi": 16
+    "parent": {
+      "kode": 16,
+      "nama": "SUMATERA SELATAN",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1671,
     "nama": "KOTA PALEMBANG",
     "tingkat": 2,
-    "provinsi": 16
+    "parent": {
+      "kode": 16,
+      "nama": "SUMATERA SELATAN",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1672,
     "nama": "KOTA PAGAR ALAM",
     "tingkat": 2,
-    "provinsi": 16
+    "parent": {
+      "kode": 16,
+      "nama": "SUMATERA SELATAN",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1673,
     "nama": "KOTA LUBUK LINGGAU",
     "tingkat": 2,
-    "provinsi": 16
+    "parent": {
+      "kode": 16,
+      "nama": "SUMATERA SELATAN",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1674,
     "nama": "KOTA PRABUMULIH",
     "tingkat": 2,
-    "provinsi": 16
+    "parent": {
+      "kode": 16,
+      "nama": "SUMATERA SELATAN",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1701,
     "nama": "BENGKULU SELATAN",
     "tingkat": 2,
-    "provinsi": 17
+    "parent": {
+      "kode": 17,
+      "nama": "BENGKULU",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1702,
     "nama": "REJANG LEBONG",
     "tingkat": 2,
-    "provinsi": 17
+    "parent": {
+      "kode": 17,
+      "nama": "BENGKULU",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1703,
     "nama": "BENGKULU UTARA",
     "tingkat": 2,
-    "provinsi": 17
+    "parent": {
+      "kode": 17,
+      "nama": "BENGKULU",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1704,
     "nama": "KAUR",
     "tingkat": 2,
-    "provinsi": 17
+    "parent": {
+      "kode": 17,
+      "nama": "BENGKULU",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1705,
     "nama": "SELUMA",
     "tingkat": 2,
-    "provinsi": 17
+    "parent": {
+      "kode": 17,
+      "nama": "BENGKULU",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1706,
     "nama": "MUKO MUKO",
     "tingkat": 2,
-    "provinsi": 17
+    "parent": {
+      "kode": 17,
+      "nama": "BENGKULU",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1707,
     "nama": "LEBONG",
     "tingkat": 2,
-    "provinsi": 17
+    "parent": {
+      "kode": 17,
+      "nama": "BENGKULU",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1708,
     "nama": "KEPAHIANG",
     "tingkat": 2,
-    "provinsi": 17
+    "parent": {
+      "kode": 17,
+      "nama": "BENGKULU",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1709,
     "nama": "BENGKULU TENGAH",
     "tingkat": 2,
-    "provinsi": 17
+    "parent": {
+      "kode": 17,
+      "nama": "BENGKULU",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1771,
     "nama": "KOTA BENGKULU",
     "tingkat": 2,
-    "provinsi": 17
+    "parent": {
+      "kode": 17,
+      "nama": "BENGKULU",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1801,
     "nama": "LAMPUNG SELATAN",
     "tingkat": 2,
-    "provinsi": 18
+    "parent": {
+      "kode": 18,
+      "nama": "LAMPUNG",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1802,
     "nama": "LAMPUNG TENGAH",
     "tingkat": 2,
-    "provinsi": 18
+    "parent": {
+      "kode": 18,
+      "nama": "LAMPUNG",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1803,
     "nama": "LAMPUNG UTARA",
     "tingkat": 2,
-    "provinsi": 18
+    "parent": {
+      "kode": 18,
+      "nama": "LAMPUNG",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1804,
     "nama": "LAMPUNG BARAT",
     "tingkat": 2,
-    "provinsi": 18
+    "parent": {
+      "kode": 18,
+      "nama": "LAMPUNG",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1805,
     "nama": "TULANG BAWANG",
     "tingkat": 2,
-    "provinsi": 18
+    "parent": {
+      "kode": 18,
+      "nama": "LAMPUNG",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1806,
     "nama": "TANGGAMUS",
     "tingkat": 2,
-    "provinsi": 18
+    "parent": {
+      "kode": 18,
+      "nama": "LAMPUNG",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1807,
     "nama": "LAMPUNG TIMUR",
     "tingkat": 2,
-    "provinsi": 18
+    "parent": {
+      "kode": 18,
+      "nama": "LAMPUNG",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1808,
     "nama": "WAY KANAN",
     "tingkat": 2,
-    "provinsi": 18
+    "parent": {
+      "kode": 18,
+      "nama": "LAMPUNG",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1809,
     "nama": "PESAWARAN",
     "tingkat": 2,
-    "provinsi": 18
+    "parent": {
+      "kode": 18,
+      "nama": "LAMPUNG",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1810,
     "nama": "PRINGSEWU",
     "tingkat": 2,
-    "provinsi": 18
+    "parent": {
+      "kode": 18,
+      "nama": "LAMPUNG",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1811,
     "nama": "MESUJI",
     "tingkat": 2,
-    "provinsi": 18
+    "parent": {
+      "kode": 18,
+      "nama": "LAMPUNG",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1812,
     "nama": "TULANG BAWANG BARAT",
     "tingkat": 2,
-    "provinsi": 18
+    "parent": {
+      "kode": 18,
+      "nama": "LAMPUNG",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1813,
     "nama": "PESISIR BARAT",
     "tingkat": 2,
-    "provinsi": 18
+    "parent": {
+      "kode": 18,
+      "nama": "LAMPUNG",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1871,
     "nama": "KOTA BANDAR LAMPUNG",
     "tingkat": 2,
-    "provinsi": 18
+    "parent": {
+      "kode": 18,
+      "nama": "LAMPUNG",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1872,
     "nama": "KOTA METRO",
     "tingkat": 2,
-    "provinsi": 18
+    "parent": {
+      "kode": 18,
+      "nama": "LAMPUNG",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1901,
     "nama": "BANGKA",
     "tingkat": 2,
-    "provinsi": 19
+    "parent": {
+      "kode": 19,
+      "nama": "KEPULAUAN BANGKA BELITUNG",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1902,
     "nama": "BELITUNG",
     "tingkat": 2,
-    "provinsi": 19
+    "parent": {
+      "kode": 19,
+      "nama": "KEPULAUAN BANGKA BELITUNG",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1903,
     "nama": "BANGKA SELATAN",
     "tingkat": 2,
-    "provinsi": 19
+    "parent": {
+      "kode": 19,
+      "nama": "KEPULAUAN BANGKA BELITUNG",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1904,
     "nama": "BANGKA TENGAH",
     "tingkat": 2,
-    "provinsi": 19
+    "parent": {
+      "kode": 19,
+      "nama": "KEPULAUAN BANGKA BELITUNG",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1905,
     "nama": "BANGKA BARAT",
     "tingkat": 2,
-    "provinsi": 19
+    "parent": {
+      "kode": 19,
+      "nama": "KEPULAUAN BANGKA BELITUNG",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1906,
     "nama": "BELITUNG TIMUR",
     "tingkat": 2,
-    "provinsi": 19
+    "parent": {
+      "kode": 19,
+      "nama": "KEPULAUAN BANGKA BELITUNG",
+      "tingkat": 1
+    }
   },
   {
     "kode": 1971,
     "nama": "KOTA PANGKAL PINANG",
     "tingkat": 2,
-    "provinsi": 19
+    "parent": {
+      "kode": 19,
+      "nama": "KEPULAUAN BANGKA BELITUNG",
+      "tingkat": 1
+    }
   },
   {
     "kode": 2101,
     "nama": "BINTAN",
     "tingkat": 2,
-    "provinsi": 21
+    "parent": {
+      "kode": 21,
+      "nama": "KEPULAUAN RIAU",
+      "tingkat": 1
+    }
   },
   {
     "kode": 2102,
     "nama": "KARIMUN",
     "tingkat": 2,
-    "provinsi": 21
+    "parent": {
+      "kode": 21,
+      "nama": "KEPULAUAN RIAU",
+      "tingkat": 1
+    }
   },
   {
     "kode": 2103,
     "nama": "NATUNA",
     "tingkat": 2,
-    "provinsi": 21
+    "parent": {
+      "kode": 21,
+      "nama": "KEPULAUAN RIAU",
+      "tingkat": 1
+    }
   },
   {
     "kode": 2104,
     "nama": "LINGGA",
     "tingkat": 2,
-    "provinsi": 21
+    "parent": {
+      "kode": 21,
+      "nama": "KEPULAUAN RIAU",
+      "tingkat": 1
+    }
   },
   {
     "kode": 2105,
     "nama": "KEPULAUAN ANAMBAS",
     "tingkat": 2,
-    "provinsi": 21
+    "parent": {
+      "kode": 21,
+      "nama": "KEPULAUAN RIAU",
+      "tingkat": 1
+    }
   },
   {
     "kode": 2171,
     "nama": "KOTA BATAM",
     "tingkat": 2,
-    "provinsi": 21
+    "parent": {
+      "kode": 21,
+      "nama": "KEPULAUAN RIAU",
+      "tingkat": 1
+    }
   },
   {
     "kode": 2172,
     "nama": "KOTA TANJUNG PINANG",
     "tingkat": 2,
-    "provinsi": 21
+    "parent": {
+      "kode": 21,
+      "nama": "KEPULAUAN RIAU",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3101,
     "nama": "ADM. KEP. SERIBU",
     "tingkat": 2,
-    "provinsi": 31
+    "parent": {
+      "kode": 31,
+      "nama": "DKI JAKARTA",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3171,
     "nama": "KOTA ADM. JAKARTA PUSAT",
     "tingkat": 2,
-    "provinsi": 31
+    "parent": {
+      "kode": 31,
+      "nama": "DKI JAKARTA",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3172,
     "nama": "KOTA ADM. JAKARTA UTARA",
     "tingkat": 2,
-    "provinsi": 31
+    "parent": {
+      "kode": 31,
+      "nama": "DKI JAKARTA",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3173,
     "nama": "KOTA ADM. JAKARTA BARAT",
     "tingkat": 2,
-    "provinsi": 31
+    "parent": {
+      "kode": 31,
+      "nama": "DKI JAKARTA",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3174,
     "nama": "KOTA ADM. JAKARTA SELATAN",
     "tingkat": 2,
-    "provinsi": 31
+    "parent": {
+      "kode": 31,
+      "nama": "DKI JAKARTA",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3175,
     "nama": "KOTA ADM. JAKARTA TIMUR",
     "tingkat": 2,
-    "provinsi": 31
+    "parent": {
+      "kode": 31,
+      "nama": "DKI JAKARTA",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3201,
     "nama": "BOGOR",
     "tingkat": 2,
-    "provinsi": 32
+    "parent": {
+      "kode": 32,
+      "nama": "JAWA BARAT",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3202,
     "nama": "SUKABUMI",
     "tingkat": 2,
-    "provinsi": 32
+    "parent": {
+      "kode": 32,
+      "nama": "JAWA BARAT",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3203,
     "nama": "CIANJUR",
     "tingkat": 2,
-    "provinsi": 32
+    "parent": {
+      "kode": 32,
+      "nama": "JAWA BARAT",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3204,
     "nama": "BANDUNG",
     "tingkat": 2,
-    "provinsi": 32
+    "parent": {
+      "kode": 32,
+      "nama": "JAWA BARAT",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3205,
     "nama": "GARUT",
     "tingkat": 2,
-    "provinsi": 32
+    "parent": {
+      "kode": 32,
+      "nama": "JAWA BARAT",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3206,
     "nama": "TASIKMALAYA",
     "tingkat": 2,
-    "provinsi": 32
+    "parent": {
+      "kode": 32,
+      "nama": "JAWA BARAT",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3207,
     "nama": "CIAMIS",
     "tingkat": 2,
-    "provinsi": 32
+    "parent": {
+      "kode": 32,
+      "nama": "JAWA BARAT",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3208,
     "nama": "KUNINGAN",
     "tingkat": 2,
-    "provinsi": 32
+    "parent": {
+      "kode": 32,
+      "nama": "JAWA BARAT",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3209,
     "nama": "CIREBON",
     "tingkat": 2,
-    "provinsi": 32
+    "parent": {
+      "kode": 32,
+      "nama": "JAWA BARAT",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3210,
     "nama": "MAJALENGKA",
     "tingkat": 2,
-    "provinsi": 32
+    "parent": {
+      "kode": 32,
+      "nama": "JAWA BARAT",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3211,
     "nama": "SUMEDANG",
     "tingkat": 2,
-    "provinsi": 32
+    "parent": {
+      "kode": 32,
+      "nama": "JAWA BARAT",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3212,
     "nama": "INDRAMAYU",
     "tingkat": 2,
-    "provinsi": 32
+    "parent": {
+      "kode": 32,
+      "nama": "JAWA BARAT",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3213,
     "nama": "SUBANG",
     "tingkat": 2,
-    "provinsi": 32
+    "parent": {
+      "kode": 32,
+      "nama": "JAWA BARAT",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3214,
     "nama": "PURWAKARTA",
     "tingkat": 2,
-    "provinsi": 32
+    "parent": {
+      "kode": 32,
+      "nama": "JAWA BARAT",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3215,
     "nama": "KARAWANG",
     "tingkat": 2,
-    "provinsi": 32
+    "parent": {
+      "kode": 32,
+      "nama": "JAWA BARAT",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3216,
     "nama": "BEKASI",
     "tingkat": 2,
-    "provinsi": 32
+    "parent": {
+      "kode": 32,
+      "nama": "JAWA BARAT",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3217,
     "nama": "BANDUNG BARAT",
     "tingkat": 2,
-    "provinsi": 32
+    "parent": {
+      "kode": 32,
+      "nama": "JAWA BARAT",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3218,
     "nama": "PANGANDARAN",
     "tingkat": 2,
-    "provinsi": 32
+    "parent": {
+      "kode": 32,
+      "nama": "JAWA BARAT",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3271,
     "nama": "KOTA BOGOR",
     "tingkat": 2,
-    "provinsi": 32
+    "parent": {
+      "kode": 32,
+      "nama": "JAWA BARAT",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3272,
     "nama": "KOTA SUKABUMI",
     "tingkat": 2,
-    "provinsi": 32
+    "parent": {
+      "kode": 32,
+      "nama": "JAWA BARAT",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3273,
     "nama": "KOTA BANDUNG",
     "tingkat": 2,
-    "provinsi": 32
+    "parent": {
+      "kode": 32,
+      "nama": "JAWA BARAT",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3274,
     "nama": "KOTA CIREBON",
     "tingkat": 2,
-    "provinsi": 32
+    "parent": {
+      "kode": 32,
+      "nama": "JAWA BARAT",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3275,
     "nama": "KOTA BEKASI",
     "tingkat": 2,
-    "provinsi": 32
+    "parent": {
+      "kode": 32,
+      "nama": "JAWA BARAT",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3276,
     "nama": "KOTA DEPOK",
     "tingkat": 2,
-    "provinsi": 32
+    "parent": {
+      "kode": 32,
+      "nama": "JAWA BARAT",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3277,
     "nama": "KOTA CIMAHI",
     "tingkat": 2,
-    "provinsi": 32
+    "parent": {
+      "kode": 32,
+      "nama": "JAWA BARAT",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3278,
     "nama": "KOTA TASIKMALAYA",
     "tingkat": 2,
-    "provinsi": 32
+    "parent": {
+      "kode": 32,
+      "nama": "JAWA BARAT",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3279,
     "nama": "KOTA BANJAR",
     "tingkat": 2,
-    "provinsi": 32
+    "parent": {
+      "kode": 32,
+      "nama": "JAWA BARAT",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3301,
     "nama": "CILACAP",
     "tingkat": 2,
-    "provinsi": 33
+    "parent": {
+      "kode": 33,
+      "nama": "JAWA TENGAH",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3302,
     "nama": "BANYUMAS",
     "tingkat": 2,
-    "provinsi": 33
+    "parent": {
+      "kode": 33,
+      "nama": "JAWA TENGAH",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3303,
     "nama": "PURBALINGGA",
     "tingkat": 2,
-    "provinsi": 33
+    "parent": {
+      "kode": 33,
+      "nama": "JAWA TENGAH",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3304,
     "nama": "BANJARNEGARA",
     "tingkat": 2,
-    "provinsi": 33
+    "parent": {
+      "kode": 33,
+      "nama": "JAWA TENGAH",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3305,
     "nama": "KEBUMEN",
     "tingkat": 2,
-    "provinsi": 33
+    "parent": {
+      "kode": 33,
+      "nama": "JAWA TENGAH",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3306,
     "nama": "PURWOREJO",
     "tingkat": 2,
-    "provinsi": 33
+    "parent": {
+      "kode": 33,
+      "nama": "JAWA TENGAH",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3307,
     "nama": "WONOSOBO",
     "tingkat": 2,
-    "provinsi": 33
+    "parent": {
+      "kode": 33,
+      "nama": "JAWA TENGAH",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3308,
     "nama": "MAGELANG",
     "tingkat": 2,
-    "provinsi": 33
+    "parent": {
+      "kode": 33,
+      "nama": "JAWA TENGAH",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3309,
     "nama": "BOYOLALI",
     "tingkat": 2,
-    "provinsi": 33
+    "parent": {
+      "kode": 33,
+      "nama": "JAWA TENGAH",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3310,
     "nama": "KLATEN",
     "tingkat": 2,
-    "provinsi": 33
+    "parent": {
+      "kode": 33,
+      "nama": "JAWA TENGAH",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3311,
     "nama": "SUKOHARJO",
     "tingkat": 2,
-    "provinsi": 33
+    "parent": {
+      "kode": 33,
+      "nama": "JAWA TENGAH",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3312,
     "nama": "WONOGIRI",
     "tingkat": 2,
-    "provinsi": 33
+    "parent": {
+      "kode": 33,
+      "nama": "JAWA TENGAH",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3313,
     "nama": "KARANGANYAR",
     "tingkat": 2,
-    "provinsi": 33
+    "parent": {
+      "kode": 33,
+      "nama": "JAWA TENGAH",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3314,
     "nama": "SRAGEN",
     "tingkat": 2,
-    "provinsi": 33
+    "parent": {
+      "kode": 33,
+      "nama": "JAWA TENGAH",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3315,
     "nama": "GROBOGAN",
     "tingkat": 2,
-    "provinsi": 33
+    "parent": {
+      "kode": 33,
+      "nama": "JAWA TENGAH",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3316,
     "nama": "BLORA",
     "tingkat": 2,
-    "provinsi": 33
+    "parent": {
+      "kode": 33,
+      "nama": "JAWA TENGAH",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3317,
     "nama": "REMBANG",
     "tingkat": 2,
-    "provinsi": 33
+    "parent": {
+      "kode": 33,
+      "nama": "JAWA TENGAH",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3318,
     "nama": "PATI",
     "tingkat": 2,
-    "provinsi": 33
+    "parent": {
+      "kode": 33,
+      "nama": "JAWA TENGAH",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3319,
     "nama": "KUDUS",
     "tingkat": 2,
-    "provinsi": 33
+    "parent": {
+      "kode": 33,
+      "nama": "JAWA TENGAH",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3320,
     "nama": "JEPARA",
     "tingkat": 2,
-    "provinsi": 33
+    "parent": {
+      "kode": 33,
+      "nama": "JAWA TENGAH",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3321,
     "nama": "DEMAK",
     "tingkat": 2,
-    "provinsi": 33
+    "parent": {
+      "kode": 33,
+      "nama": "JAWA TENGAH",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3322,
     "nama": "SEMARANG",
     "tingkat": 2,
-    "provinsi": 33
+    "parent": {
+      "kode": 33,
+      "nama": "JAWA TENGAH",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3323,
     "nama": "TEMANGGUNG",
     "tingkat": 2,
-    "provinsi": 33
+    "parent": {
+      "kode": 33,
+      "nama": "JAWA TENGAH",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3324,
     "nama": "KENDAL",
     "tingkat": 2,
-    "provinsi": 33
+    "parent": {
+      "kode": 33,
+      "nama": "JAWA TENGAH",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3325,
     "nama": "BATANG",
     "tingkat": 2,
-    "provinsi": 33
+    "parent": {
+      "kode": 33,
+      "nama": "JAWA TENGAH",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3326,
     "nama": "PEKALONGAN",
     "tingkat": 2,
-    "provinsi": 33
+    "parent": {
+      "kode": 33,
+      "nama": "JAWA TENGAH",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3327,
     "nama": "PEMALANG",
     "tingkat": 2,
-    "provinsi": 33
+    "parent": {
+      "kode": 33,
+      "nama": "JAWA TENGAH",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3328,
     "nama": "TEGAL",
     "tingkat": 2,
-    "provinsi": 33
+    "parent": {
+      "kode": 33,
+      "nama": "JAWA TENGAH",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3329,
     "nama": "BREBES",
     "tingkat": 2,
-    "provinsi": 33
+    "parent": {
+      "kode": 33,
+      "nama": "JAWA TENGAH",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3371,
     "nama": "KOTA MAGELANG",
     "tingkat": 2,
-    "provinsi": 33
+    "parent": {
+      "kode": 33,
+      "nama": "JAWA TENGAH",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3372,
     "nama": "KOTA SURAKARTA",
     "tingkat": 2,
-    "provinsi": 33
+    "parent": {
+      "kode": 33,
+      "nama": "JAWA TENGAH",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3373,
     "nama": "KOTA SALATIGA",
     "tingkat": 2,
-    "provinsi": 33
+    "parent": {
+      "kode": 33,
+      "nama": "JAWA TENGAH",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3374,
     "nama": "KOTA SEMARANG",
     "tingkat": 2,
-    "provinsi": 33
+    "parent": {
+      "kode": 33,
+      "nama": "JAWA TENGAH",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3375,
     "nama": "KOTA PEKALONGAN",
     "tingkat": 2,
-    "provinsi": 33
+    "parent": {
+      "kode": 33,
+      "nama": "JAWA TENGAH",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3376,
     "nama": "KOTA TEGAL",
     "tingkat": 2,
-    "provinsi": 33
+    "parent": {
+      "kode": 33,
+      "nama": "JAWA TENGAH",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3401,
     "nama": "KULON PROGO",
     "tingkat": 2,
-    "provinsi": 34
+    "parent": {
+      "kode": 34,
+      "nama": "DAERAH ISTIMEWA YOGYAKARTA",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3402,
     "nama": "BANTUL",
     "tingkat": 2,
-    "provinsi": 34
+    "parent": {
+      "kode": 34,
+      "nama": "DAERAH ISTIMEWA YOGYAKARTA",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3403,
     "nama": "GUNUNGKIDUL",
     "tingkat": 2,
-    "provinsi": 34
+    "parent": {
+      "kode": 34,
+      "nama": "DAERAH ISTIMEWA YOGYAKARTA",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3404,
     "nama": "SLEMAN",
     "tingkat": 2,
-    "provinsi": 34
+    "parent": {
+      "kode": 34,
+      "nama": "DAERAH ISTIMEWA YOGYAKARTA",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3471,
     "nama": "KOTA YOGYAKARTA",
     "tingkat": 2,
-    "provinsi": 34
+    "parent": {
+      "kode": 34,
+      "nama": "DAERAH ISTIMEWA YOGYAKARTA",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3501,
     "nama": "PACITAN",
     "tingkat": 2,
-    "provinsi": 35
+    "parent": {
+      "kode": 35,
+      "nama": "JAWA TIMUR",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3502,
     "nama": "PONOROGO",
     "tingkat": 2,
-    "provinsi": 35
+    "parent": {
+      "kode": 35,
+      "nama": "JAWA TIMUR",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3503,
     "nama": "TRENGGALEK",
     "tingkat": 2,
-    "provinsi": 35
+    "parent": {
+      "kode": 35,
+      "nama": "JAWA TIMUR",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3504,
     "nama": "TULUNGAGUNG",
     "tingkat": 2,
-    "provinsi": 35
+    "parent": {
+      "kode": 35,
+      "nama": "JAWA TIMUR",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3505,
     "nama": "BLITAR",
     "tingkat": 2,
-    "provinsi": 35
+    "parent": {
+      "kode": 35,
+      "nama": "JAWA TIMUR",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3506,
     "nama": "KEDIRI",
     "tingkat": 2,
-    "provinsi": 35
+    "parent": {
+      "kode": 35,
+      "nama": "JAWA TIMUR",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3507,
     "nama": "MALANG",
     "tingkat": 2,
-    "provinsi": 35
+    "parent": {
+      "kode": 35,
+      "nama": "JAWA TIMUR",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3508,
     "nama": "LUMAJANG",
     "tingkat": 2,
-    "provinsi": 35
+    "parent": {
+      "kode": 35,
+      "nama": "JAWA TIMUR",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3509,
     "nama": "JEMBER",
     "tingkat": 2,
-    "provinsi": 35
+    "parent": {
+      "kode": 35,
+      "nama": "JAWA TIMUR",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3510,
     "nama": "BANYUWANGI",
     "tingkat": 2,
-    "provinsi": 35
+    "parent": {
+      "kode": 35,
+      "nama": "JAWA TIMUR",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3511,
     "nama": "BONDOWOSO",
     "tingkat": 2,
-    "provinsi": 35
+    "parent": {
+      "kode": 35,
+      "nama": "JAWA TIMUR",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3512,
     "nama": "SITUBONDO",
     "tingkat": 2,
-    "provinsi": 35
+    "parent": {
+      "kode": 35,
+      "nama": "JAWA TIMUR",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3513,
     "nama": "PROBOLINGGO",
     "tingkat": 2,
-    "provinsi": 35
+    "parent": {
+      "kode": 35,
+      "nama": "JAWA TIMUR",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3514,
     "nama": "PASURUAN",
     "tingkat": 2,
-    "provinsi": 35
+    "parent": {
+      "kode": 35,
+      "nama": "JAWA TIMUR",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3515,
     "nama": "SIDOARJO",
     "tingkat": 2,
-    "provinsi": 35
+    "parent": {
+      "kode": 35,
+      "nama": "JAWA TIMUR",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3516,
     "nama": "MOJOKERTO",
     "tingkat": 2,
-    "provinsi": 35
+    "parent": {
+      "kode": 35,
+      "nama": "JAWA TIMUR",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3517,
     "nama": "JOMBANG",
     "tingkat": 2,
-    "provinsi": 35
+    "parent": {
+      "kode": 35,
+      "nama": "JAWA TIMUR",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3518,
     "nama": "NGANJUK",
     "tingkat": 2,
-    "provinsi": 35
+    "parent": {
+      "kode": 35,
+      "nama": "JAWA TIMUR",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3519,
     "nama": "MADIUN",
     "tingkat": 2,
-    "provinsi": 35
+    "parent": {
+      "kode": 35,
+      "nama": "JAWA TIMUR",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3520,
     "nama": "MAGETAN",
     "tingkat": 2,
-    "provinsi": 35
+    "parent": {
+      "kode": 35,
+      "nama": "JAWA TIMUR",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3521,
     "nama": "NGAWI",
     "tingkat": 2,
-    "provinsi": 35
+    "parent": {
+      "kode": 35,
+      "nama": "JAWA TIMUR",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3522,
     "nama": "BOJONEGORO",
     "tingkat": 2,
-    "provinsi": 35
+    "parent": {
+      "kode": 35,
+      "nama": "JAWA TIMUR",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3523,
     "nama": "TUBAN",
     "tingkat": 2,
-    "provinsi": 35
+    "parent": {
+      "kode": 35,
+      "nama": "JAWA TIMUR",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3524,
     "nama": "LAMONGAN",
     "tingkat": 2,
-    "provinsi": 35
+    "parent": {
+      "kode": 35,
+      "nama": "JAWA TIMUR",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3525,
     "nama": "GRESIK",
     "tingkat": 2,
-    "provinsi": 35
+    "parent": {
+      "kode": 35,
+      "nama": "JAWA TIMUR",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3526,
     "nama": "BANGKALAN",
     "tingkat": 2,
-    "provinsi": 35
+    "parent": {
+      "kode": 35,
+      "nama": "JAWA TIMUR",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3527,
     "nama": "SAMPANG",
     "tingkat": 2,
-    "provinsi": 35
+    "parent": {
+      "kode": 35,
+      "nama": "JAWA TIMUR",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3528,
     "nama": "PAMEKASAN",
     "tingkat": 2,
-    "provinsi": 35
+    "parent": {
+      "kode": 35,
+      "nama": "JAWA TIMUR",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3529,
     "nama": "SUMENEP",
     "tingkat": 2,
-    "provinsi": 35
+    "parent": {
+      "kode": 35,
+      "nama": "JAWA TIMUR",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3571,
     "nama": "KOTA KEDIRI",
     "tingkat": 2,
-    "provinsi": 35
+    "parent": {
+      "kode": 35,
+      "nama": "JAWA TIMUR",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3572,
     "nama": "KOTA BLITAR",
     "tingkat": 2,
-    "provinsi": 35
+    "parent": {
+      "kode": 35,
+      "nama": "JAWA TIMUR",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3573,
     "nama": "KOTA MALANG",
     "tingkat": 2,
-    "provinsi": 35
+    "parent": {
+      "kode": 35,
+      "nama": "JAWA TIMUR",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3574,
     "nama": "KOTA PROBOLINGGO",
     "tingkat": 2,
-    "provinsi": 35
+    "parent": {
+      "kode": 35,
+      "nama": "JAWA TIMUR",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3575,
     "nama": "KOTA PASURUAN",
     "tingkat": 2,
-    "provinsi": 35
+    "parent": {
+      "kode": 35,
+      "nama": "JAWA TIMUR",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3576,
     "nama": "KOTA MOJOKERTO",
     "tingkat": 2,
-    "provinsi": 35
+    "parent": {
+      "kode": 35,
+      "nama": "JAWA TIMUR",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3577,
     "nama": "KOTA MADIUN",
     "tingkat": 2,
-    "provinsi": 35
+    "parent": {
+      "kode": 35,
+      "nama": "JAWA TIMUR",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3578,
     "nama": "KOTA SURABAYA",
     "tingkat": 2,
-    "provinsi": 35
+    "parent": {
+      "kode": 35,
+      "nama": "JAWA TIMUR",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3579,
     "nama": "KOTA BATU",
     "tingkat": 2,
-    "provinsi": 35
+    "parent": {
+      "kode": 35,
+      "nama": "JAWA TIMUR",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3601,
     "nama": "PANDEGLANG",
     "tingkat": 2,
-    "provinsi": 36
+    "parent": {
+      "kode": 36,
+      "nama": "BANTEN",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3602,
     "nama": "LEBAK",
     "tingkat": 2,
-    "provinsi": 36
+    "parent": {
+      "kode": 36,
+      "nama": "BANTEN",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3603,
     "nama": "TANGERANG",
     "tingkat": 2,
-    "provinsi": 36
+    "parent": {
+      "kode": 36,
+      "nama": "BANTEN",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3604,
     "nama": "SERANG",
     "tingkat": 2,
-    "provinsi": 36
+    "parent": {
+      "kode": 36,
+      "nama": "BANTEN",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3671,
     "nama": "KOTA TANGERANG",
     "tingkat": 2,
-    "provinsi": 36
+    "parent": {
+      "kode": 36,
+      "nama": "BANTEN",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3672,
     "nama": "KOTA CILEGON",
     "tingkat": 2,
-    "provinsi": 36
+    "parent": {
+      "kode": 36,
+      "nama": "BANTEN",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3673,
     "nama": "KOTA SERANG",
     "tingkat": 2,
-    "provinsi": 36
+    "parent": {
+      "kode": 36,
+      "nama": "BANTEN",
+      "tingkat": 1
+    }
   },
   {
     "kode": 3674,
     "nama": "KOTA TANGERANG SELATAN",
     "tingkat": 2,
-    "provinsi": 36
+    "parent": {
+      "kode": 36,
+      "nama": "BANTEN",
+      "tingkat": 1
+    }
   },
   {
     "kode": 5101,
     "nama": "JEMBRANA",
     "tingkat": 2,
-    "provinsi": 51
+    "parent": {
+      "kode": 51,
+      "nama": "BALI",
+      "tingkat": 1
+    }
   },
   {
     "kode": 5102,
     "nama": "TABANAN",
     "tingkat": 2,
-    "provinsi": 51
+    "parent": {
+      "kode": 51,
+      "nama": "BALI",
+      "tingkat": 1
+    }
   },
   {
     "kode": 5103,
     "nama": "BADUNG",
     "tingkat": 2,
-    "provinsi": 51
+    "parent": {
+      "kode": 51,
+      "nama": "BALI",
+      "tingkat": 1
+    }
   },
   {
     "kode": 5104,
     "nama": "GIANYAR",
     "tingkat": 2,
-    "provinsi": 51
+    "parent": {
+      "kode": 51,
+      "nama": "BALI",
+      "tingkat": 1
+    }
   },
   {
     "kode": 5105,
     "nama": "KLUNGKUNG",
     "tingkat": 2,
-    "provinsi": 51
+    "parent": {
+      "kode": 51,
+      "nama": "BALI",
+      "tingkat": 1
+    }
   },
   {
     "kode": 5106,
     "nama": "BANGLI",
     "tingkat": 2,
-    "provinsi": 51
+    "parent": {
+      "kode": 51,
+      "nama": "BALI",
+      "tingkat": 1
+    }
   },
   {
     "kode": 5107,
     "nama": "KARANGASEM",
     "tingkat": 2,
-    "provinsi": 51
+    "parent": {
+      "kode": 51,
+      "nama": "BALI",
+      "tingkat": 1
+    }
   },
   {
     "kode": 5108,
     "nama": "BULELENG",
     "tingkat": 2,
-    "provinsi": 51
+    "parent": {
+      "kode": 51,
+      "nama": "BALI",
+      "tingkat": 1
+    }
   },
   {
     "kode": 5171,
     "nama": "KOTA DENPASAR",
     "tingkat": 2,
-    "provinsi": 51
+    "parent": {
+      "kode": 51,
+      "nama": "BALI",
+      "tingkat": 1
+    }
   },
   {
     "kode": 5201,
     "nama": "LOMBOK BARAT",
     "tingkat": 2,
-    "provinsi": 52
+    "parent": {
+      "kode": 52,
+      "nama": "NUSA TENGGARA BARAT",
+      "tingkat": 1
+    }
   },
   {
     "kode": 5202,
     "nama": "LOMBOK TENGAH",
     "tingkat": 2,
-    "provinsi": 52
+    "parent": {
+      "kode": 52,
+      "nama": "NUSA TENGGARA BARAT",
+      "tingkat": 1
+    }
   },
   {
     "kode": 5203,
     "nama": "LOMBOK TIMUR",
     "tingkat": 2,
-    "provinsi": 52
+    "parent": {
+      "kode": 52,
+      "nama": "NUSA TENGGARA BARAT",
+      "tingkat": 1
+    }
   },
   {
     "kode": 5204,
     "nama": "SUMBAWA",
     "tingkat": 2,
-    "provinsi": 52
+    "parent": {
+      "kode": 52,
+      "nama": "NUSA TENGGARA BARAT",
+      "tingkat": 1
+    }
   },
   {
     "kode": 5205,
     "nama": "DOMPU",
     "tingkat": 2,
-    "provinsi": 52
+    "parent": {
+      "kode": 52,
+      "nama": "NUSA TENGGARA BARAT",
+      "tingkat": 1
+    }
   },
   {
     "kode": 5206,
     "nama": "BIMA",
     "tingkat": 2,
-    "provinsi": 52
+    "parent": {
+      "kode": 52,
+      "nama": "NUSA TENGGARA BARAT",
+      "tingkat": 1
+    }
   },
   {
     "kode": 5207,
     "nama": "SUMBAWA BARAT",
     "tingkat": 2,
-    "provinsi": 52
+    "parent": {
+      "kode": 52,
+      "nama": "NUSA TENGGARA BARAT",
+      "tingkat": 1
+    }
   },
   {
     "kode": 5208,
     "nama": "LOMBOK UTARA",
     "tingkat": 2,
-    "provinsi": 52
+    "parent": {
+      "kode": 52,
+      "nama": "NUSA TENGGARA BARAT",
+      "tingkat": 1
+    }
   },
   {
     "kode": 5271,
     "nama": "KOTA MATARAM",
     "tingkat": 2,
-    "provinsi": 52
+    "parent": {
+      "kode": 52,
+      "nama": "NUSA TENGGARA BARAT",
+      "tingkat": 1
+    }
   },
   {
     "kode": 5272,
     "nama": "KOTA BIMA",
     "tingkat": 2,
-    "provinsi": 52
+    "parent": {
+      "kode": 52,
+      "nama": "NUSA TENGGARA BARAT",
+      "tingkat": 1
+    }
   },
   {
     "kode": 5301,
     "nama": "KUPANG",
     "tingkat": 2,
-    "provinsi": 53
+    "parent": {
+      "kode": 53,
+      "nama": "NUSA TENGGARA TIMUR",
+      "tingkat": 1
+    }
   },
   {
     "kode": 5302,
     "nama": "KAB TIMOR TENGAH SELATAN",
     "tingkat": 2,
-    "provinsi": 53
+    "parent": {
+      "kode": 53,
+      "nama": "NUSA TENGGARA TIMUR",
+      "tingkat": 1
+    }
   },
   {
     "kode": 5303,
     "nama": "TIMOR TENGAH UTARA",
     "tingkat": 2,
-    "provinsi": 53
+    "parent": {
+      "kode": 53,
+      "nama": "NUSA TENGGARA TIMUR",
+      "tingkat": 1
+    }
   },
   {
     "kode": 5304,
     "nama": "BELU",
     "tingkat": 2,
-    "provinsi": 53
+    "parent": {
+      "kode": 53,
+      "nama": "NUSA TENGGARA TIMUR",
+      "tingkat": 1
+    }
   },
   {
     "kode": 5305,
     "nama": "ALOR",
     "tingkat": 2,
-    "provinsi": 53
+    "parent": {
+      "kode": 53,
+      "nama": "NUSA TENGGARA TIMUR",
+      "tingkat": 1
+    }
   },
   {
     "kode": 5306,
     "nama": "FLORES TIMUR",
     "tingkat": 2,
-    "provinsi": 53
+    "parent": {
+      "kode": 53,
+      "nama": "NUSA TENGGARA TIMUR",
+      "tingkat": 1
+    }
   },
   {
     "kode": 5307,
     "nama": "SIKKA",
     "tingkat": 2,
-    "provinsi": 53
+    "parent": {
+      "kode": 53,
+      "nama": "NUSA TENGGARA TIMUR",
+      "tingkat": 1
+    }
   },
   {
     "kode": 5308,
     "nama": "ENDE",
     "tingkat": 2,
-    "provinsi": 53
+    "parent": {
+      "kode": 53,
+      "nama": "NUSA TENGGARA TIMUR",
+      "tingkat": 1
+    }
   },
   {
     "kode": 5309,
     "nama": "NGADA",
     "tingkat": 2,
-    "provinsi": 53
+    "parent": {
+      "kode": 53,
+      "nama": "NUSA TENGGARA TIMUR",
+      "tingkat": 1
+    }
   },
   {
     "kode": 5310,
     "nama": "MANGGARAI",
     "tingkat": 2,
-    "provinsi": 53
+    "parent": {
+      "kode": 53,
+      "nama": "NUSA TENGGARA TIMUR",
+      "tingkat": 1
+    }
   },
   {
     "kode": 5311,
     "nama": "SUMBA TIMUR",
     "tingkat": 2,
-    "provinsi": 53
+    "parent": {
+      "kode": 53,
+      "nama": "NUSA TENGGARA TIMUR",
+      "tingkat": 1
+    }
   },
   {
     "kode": 5312,
     "nama": "SUMBA BARAT",
     "tingkat": 2,
-    "provinsi": 53
+    "parent": {
+      "kode": 53,
+      "nama": "NUSA TENGGARA TIMUR",
+      "tingkat": 1
+    }
   },
   {
     "kode": 5313,
     "nama": "LEMBATA",
     "tingkat": 2,
-    "provinsi": 53
+    "parent": {
+      "kode": 53,
+      "nama": "NUSA TENGGARA TIMUR",
+      "tingkat": 1
+    }
   },
   {
     "kode": 5314,
     "nama": "ROTE NDAO",
     "tingkat": 2,
-    "provinsi": 53
+    "parent": {
+      "kode": 53,
+      "nama": "NUSA TENGGARA TIMUR",
+      "tingkat": 1
+    }
   },
   {
     "kode": 5315,
     "nama": "MANGGARAI BARAT",
     "tingkat": 2,
-    "provinsi": 53
+    "parent": {
+      "kode": 53,
+      "nama": "NUSA TENGGARA TIMUR",
+      "tingkat": 1
+    }
   },
   {
     "kode": 5316,
     "nama": "NAGEKEO",
     "tingkat": 2,
-    "provinsi": 53
+    "parent": {
+      "kode": 53,
+      "nama": "NUSA TENGGARA TIMUR",
+      "tingkat": 1
+    }
   },
   {
     "kode": 5317,
     "nama": "SUMBA TENGAH",
     "tingkat": 2,
-    "provinsi": 53
+    "parent": {
+      "kode": 53,
+      "nama": "NUSA TENGGARA TIMUR",
+      "tingkat": 1
+    }
   },
   {
     "kode": 5318,
     "nama": "SUMBA BARAT DAYA",
     "tingkat": 2,
-    "provinsi": 53
+    "parent": {
+      "kode": 53,
+      "nama": "NUSA TENGGARA TIMUR",
+      "tingkat": 1
+    }
   },
   {
     "kode": 5319,
     "nama": "MANGGARAI TIMUR",
     "tingkat": 2,
-    "provinsi": 53
+    "parent": {
+      "kode": 53,
+      "nama": "NUSA TENGGARA TIMUR",
+      "tingkat": 1
+    }
   },
   {
     "kode": 5320,
     "nama": "SABU RAIJUA",
     "tingkat": 2,
-    "provinsi": 53
+    "parent": {
+      "kode": 53,
+      "nama": "NUSA TENGGARA TIMUR",
+      "tingkat": 1
+    }
   },
   {
     "kode": 5321,
     "nama": "MALAKA",
     "tingkat": 2,
-    "provinsi": 53
+    "parent": {
+      "kode": 53,
+      "nama": "NUSA TENGGARA TIMUR",
+      "tingkat": 1
+    }
   },
   {
     "kode": 5371,
     "nama": "KOTA KUPANG",
     "tingkat": 2,
-    "provinsi": 53
+    "parent": {
+      "kode": 53,
+      "nama": "NUSA TENGGARA TIMUR",
+      "tingkat": 1
+    }
   },
   {
     "kode": 6101,
     "nama": "SAMBAS",
     "tingkat": 2,
-    "provinsi": 61
+    "parent": {
+      "kode": 61,
+      "nama": "KALIMANTAN BARAT",
+      "tingkat": 1
+    }
   },
   {
     "kode": 6102,
     "nama": "MEMPAWAH",
     "tingkat": 2,
-    "provinsi": 61
+    "parent": {
+      "kode": 61,
+      "nama": "KALIMANTAN BARAT",
+      "tingkat": 1
+    }
   },
   {
     "kode": 6103,
     "nama": "SANGGAU",
     "tingkat": 2,
-    "provinsi": 61
+    "parent": {
+      "kode": 61,
+      "nama": "KALIMANTAN BARAT",
+      "tingkat": 1
+    }
   },
   {
     "kode": 6104,
     "nama": "KETAPANG",
     "tingkat": 2,
-    "provinsi": 61
+    "parent": {
+      "kode": 61,
+      "nama": "KALIMANTAN BARAT",
+      "tingkat": 1
+    }
   },
   {
     "kode": 6105,
     "nama": "SINTANG",
     "tingkat": 2,
-    "provinsi": 61
+    "parent": {
+      "kode": 61,
+      "nama": "KALIMANTAN BARAT",
+      "tingkat": 1
+    }
   },
   {
     "kode": 6106,
     "nama": "KAPUAS HULU",
     "tingkat": 2,
-    "provinsi": 61
+    "parent": {
+      "kode": 61,
+      "nama": "KALIMANTAN BARAT",
+      "tingkat": 1
+    }
   },
   {
     "kode": 6107,
     "nama": "BENGKAYANG",
     "tingkat": 2,
-    "provinsi": 61
+    "parent": {
+      "kode": 61,
+      "nama": "KALIMANTAN BARAT",
+      "tingkat": 1
+    }
   },
   {
     "kode": 6108,
     "nama": "LANDAK",
     "tingkat": 2,
-    "provinsi": 61
+    "parent": {
+      "kode": 61,
+      "nama": "KALIMANTAN BARAT",
+      "tingkat": 1
+    }
   },
   {
     "kode": 6109,
     "nama": "SEKADAU",
     "tingkat": 2,
-    "provinsi": 61
+    "parent": {
+      "kode": 61,
+      "nama": "KALIMANTAN BARAT",
+      "tingkat": 1
+    }
   },
   {
     "kode": 6110,
     "nama": "MELAWI",
     "tingkat": 2,
-    "provinsi": 61
+    "parent": {
+      "kode": 61,
+      "nama": "KALIMANTAN BARAT",
+      "tingkat": 1
+    }
   },
   {
     "kode": 6111,
     "nama": "KAYONG UTARA",
     "tingkat": 2,
-    "provinsi": 61
+    "parent": {
+      "kode": 61,
+      "nama": "KALIMANTAN BARAT",
+      "tingkat": 1
+    }
   },
   {
     "kode": 6112,
     "nama": "KUBU RAYA",
     "tingkat": 2,
-    "provinsi": 61
+    "parent": {
+      "kode": 61,
+      "nama": "KALIMANTAN BARAT",
+      "tingkat": 1
+    }
   },
   {
     "kode": 6171,
     "nama": "KOTA PONTIANAK",
     "tingkat": 2,
-    "provinsi": 61
+    "parent": {
+      "kode": 61,
+      "nama": "KALIMANTAN BARAT",
+      "tingkat": 1
+    }
   },
   {
     "kode": 6172,
     "nama": "KOTA SINGKAWANG",
     "tingkat": 2,
-    "provinsi": 61
+    "parent": {
+      "kode": 61,
+      "nama": "KALIMANTAN BARAT",
+      "tingkat": 1
+    }
   },
   {
     "kode": 6201,
     "nama": "KOTAWARINGIN BARAT",
     "tingkat": 2,
-    "provinsi": 62
+    "parent": {
+      "kode": 62,
+      "nama": "KALIMANTAN TENGAH",
+      "tingkat": 1
+    }
   },
   {
     "kode": 6202,
     "nama": "KOTAWARINGIN TIMUR",
     "tingkat": 2,
-    "provinsi": 62
+    "parent": {
+      "kode": 62,
+      "nama": "KALIMANTAN TENGAH",
+      "tingkat": 1
+    }
   },
   {
     "kode": 6203,
     "nama": "KAPUAS",
     "tingkat": 2,
-    "provinsi": 62
+    "parent": {
+      "kode": 62,
+      "nama": "KALIMANTAN TENGAH",
+      "tingkat": 1
+    }
   },
   {
     "kode": 6204,
     "nama": "BARITO SELATAN",
     "tingkat": 2,
-    "provinsi": 62
+    "parent": {
+      "kode": 62,
+      "nama": "KALIMANTAN TENGAH",
+      "tingkat": 1
+    }
   },
   {
     "kode": 6205,
     "nama": "BARITO UTARA",
     "tingkat": 2,
-    "provinsi": 62
+    "parent": {
+      "kode": 62,
+      "nama": "KALIMANTAN TENGAH",
+      "tingkat": 1
+    }
   },
   {
     "kode": 6206,
     "nama": "KATINGAN",
     "tingkat": 2,
-    "provinsi": 62
+    "parent": {
+      "kode": 62,
+      "nama": "KALIMANTAN TENGAH",
+      "tingkat": 1
+    }
   },
   {
     "kode": 6207,
     "nama": "SERUYAN",
     "tingkat": 2,
-    "provinsi": 62
+    "parent": {
+      "kode": 62,
+      "nama": "KALIMANTAN TENGAH",
+      "tingkat": 1
+    }
   },
   {
     "kode": 6208,
     "nama": "SUKAMARA",
     "tingkat": 2,
-    "provinsi": 62
+    "parent": {
+      "kode": 62,
+      "nama": "KALIMANTAN TENGAH",
+      "tingkat": 1
+    }
   },
   {
     "kode": 6209,
     "nama": "LAMANDAU",
     "tingkat": 2,
-    "provinsi": 62
+    "parent": {
+      "kode": 62,
+      "nama": "KALIMANTAN TENGAH",
+      "tingkat": 1
+    }
   },
   {
     "kode": 6210,
     "nama": "GUNUNG MAS",
     "tingkat": 2,
-    "provinsi": 62
+    "parent": {
+      "kode": 62,
+      "nama": "KALIMANTAN TENGAH",
+      "tingkat": 1
+    }
   },
   {
     "kode": 6211,
     "nama": "PULANG PISAU",
     "tingkat": 2,
-    "provinsi": 62
+    "parent": {
+      "kode": 62,
+      "nama": "KALIMANTAN TENGAH",
+      "tingkat": 1
+    }
   },
   {
     "kode": 6212,
     "nama": "MURUNG RAYA",
     "tingkat": 2,
-    "provinsi": 62
+    "parent": {
+      "kode": 62,
+      "nama": "KALIMANTAN TENGAH",
+      "tingkat": 1
+    }
   },
   {
     "kode": 6213,
     "nama": "BARITO TIMUR",
     "tingkat": 2,
-    "provinsi": 62
+    "parent": {
+      "kode": 62,
+      "nama": "KALIMANTAN TENGAH",
+      "tingkat": 1
+    }
   },
   {
     "kode": 6271,
     "nama": "KOTA PALANGKARAYA",
     "tingkat": 2,
-    "provinsi": 62
+    "parent": {
+      "kode": 62,
+      "nama": "KALIMANTAN TENGAH",
+      "tingkat": 1
+    }
   },
   {
     "kode": 6301,
     "nama": "TANAH LAUT",
     "tingkat": 2,
-    "provinsi": 63
+    "parent": {
+      "kode": 63,
+      "nama": "KALIMANTAN SELATAN",
+      "tingkat": 1
+    }
   },
   {
     "kode": 6302,
     "nama": "KOTABARU",
     "tingkat": 2,
-    "provinsi": 63
+    "parent": {
+      "kode": 63,
+      "nama": "KALIMANTAN SELATAN",
+      "tingkat": 1
+    }
   },
   {
     "kode": 6303,
     "nama": "BANJAR",
     "tingkat": 2,
-    "provinsi": 63
+    "parent": {
+      "kode": 63,
+      "nama": "KALIMANTAN SELATAN",
+      "tingkat": 1
+    }
   },
   {
     "kode": 6304,
     "nama": "BARITO KUALA",
     "tingkat": 2,
-    "provinsi": 63
+    "parent": {
+      "kode": 63,
+      "nama": "KALIMANTAN SELATAN",
+      "tingkat": 1
+    }
   },
   {
     "kode": 6305,
     "nama": "TAPIN",
     "tingkat": 2,
-    "provinsi": 63
+    "parent": {
+      "kode": 63,
+      "nama": "KALIMANTAN SELATAN",
+      "tingkat": 1
+    }
   },
   {
     "kode": 6306,
     "nama": "HULU SUNGAI SELATAN",
     "tingkat": 2,
-    "provinsi": 63
+    "parent": {
+      "kode": 63,
+      "nama": "KALIMANTAN SELATAN",
+      "tingkat": 1
+    }
   },
   {
     "kode": 6307,
     "nama": "HULU SUNGAI TENGAH",
     "tingkat": 2,
-    "provinsi": 63
+    "parent": {
+      "kode": 63,
+      "nama": "KALIMANTAN SELATAN",
+      "tingkat": 1
+    }
   },
   {
     "kode": 6308,
     "nama": "HULU SUNGAI UTARA",
     "tingkat": 2,
-    "provinsi": 63
+    "parent": {
+      "kode": 63,
+      "nama": "KALIMANTAN SELATAN",
+      "tingkat": 1
+    }
   },
   {
     "kode": 6309,
     "nama": "TABALONG",
     "tingkat": 2,
-    "provinsi": 63
+    "parent": {
+      "kode": 63,
+      "nama": "KALIMANTAN SELATAN",
+      "tingkat": 1
+    }
   },
   {
     "kode": 6310,
     "nama": "TANAH BUMBU",
     "tingkat": 2,
-    "provinsi": 63
+    "parent": {
+      "kode": 63,
+      "nama": "KALIMANTAN SELATAN",
+      "tingkat": 1
+    }
   },
   {
     "kode": 6311,
     "nama": "BALANGAN",
     "tingkat": 2,
-    "provinsi": 63
+    "parent": {
+      "kode": 63,
+      "nama": "KALIMANTAN SELATAN",
+      "tingkat": 1
+    }
   },
   {
     "kode": 6371,
     "nama": "KOTA BANJARMASIN",
     "tingkat": 2,
-    "provinsi": 63
+    "parent": {
+      "kode": 63,
+      "nama": "KALIMANTAN SELATAN",
+      "tingkat": 1
+    }
   },
   {
     "kode": 6372,
     "nama": "KOTA BANJARBARU",
     "tingkat": 2,
-    "provinsi": 63
+    "parent": {
+      "kode": 63,
+      "nama": "KALIMANTAN SELATAN",
+      "tingkat": 1
+    }
   },
   {
     "kode": 6401,
     "nama": "PASER",
     "tingkat": 2,
-    "provinsi": 64
+    "parent": {
+      "kode": 64,
+      "nama": "KALIMANTAN TIMUR",
+      "tingkat": 1
+    }
   },
   {
     "kode": 6402,
     "nama": "KUTAI KARTANEGARA",
     "tingkat": 2,
-    "provinsi": 64
+    "parent": {
+      "kode": 64,
+      "nama": "KALIMANTAN TIMUR",
+      "tingkat": 1
+    }
   },
   {
     "kode": 6403,
     "nama": "BERAU",
     "tingkat": 2,
-    "provinsi": 64
+    "parent": {
+      "kode": 64,
+      "nama": "KALIMANTAN TIMUR",
+      "tingkat": 1
+    }
   },
   {
     "kode": 6407,
     "nama": "KUTAI BARAT",
     "tingkat": 2,
-    "provinsi": 64
+    "parent": {
+      "kode": 64,
+      "nama": "KALIMANTAN TIMUR",
+      "tingkat": 1
+    }
   },
   {
     "kode": 6408,
     "nama": "KUTAI TIMUR",
     "tingkat": 2,
-    "provinsi": 64
+    "parent": {
+      "kode": 64,
+      "nama": "KALIMANTAN TIMUR",
+      "tingkat": 1
+    }
   },
   {
     "kode": 6409,
     "nama": "PENAJAM PASER UTARA",
     "tingkat": 2,
-    "provinsi": 64
+    "parent": {
+      "kode": 64,
+      "nama": "KALIMANTAN TIMUR",
+      "tingkat": 1
+    }
   },
   {
     "kode": 6411,
     "nama": "MAHAKAM ULU",
     "tingkat": 2,
-    "provinsi": 64
+    "parent": {
+      "kode": 64,
+      "nama": "KALIMANTAN TIMUR",
+      "tingkat": 1
+    }
   },
   {
     "kode": 6471,
     "nama": "KOTA BALIKPAPAN",
     "tingkat": 2,
-    "provinsi": 64
+    "parent": {
+      "kode": 64,
+      "nama": "KALIMANTAN TIMUR",
+      "tingkat": 1
+    }
   },
   {
     "kode": 6472,
     "nama": "KOTA SAMARINDA",
     "tingkat": 2,
-    "provinsi": 64
+    "parent": {
+      "kode": 64,
+      "nama": "KALIMANTAN TIMUR",
+      "tingkat": 1
+    }
   },
   {
     "kode": 6474,
     "nama": "KOTA BONTANG",
     "tingkat": 2,
-    "provinsi": 64
+    "parent": {
+      "kode": 64,
+      "nama": "KALIMANTAN TIMUR",
+      "tingkat": 1
+    }
   },
   {
     "kode": 6501,
     "nama": "BULUNGAN",
     "tingkat": 2,
-    "provinsi": 65
+    "parent": {
+      "kode": 65,
+      "nama": "KALIMANTAN UTARA",
+      "tingkat": 1
+    }
   },
   {
     "kode": 6502,
     "nama": "MALINAU",
     "tingkat": 2,
-    "provinsi": 65
+    "parent": {
+      "kode": 65,
+      "nama": "KALIMANTAN UTARA",
+      "tingkat": 1
+    }
   },
   {
     "kode": 6503,
     "nama": "NUNUKAN",
     "tingkat": 2,
-    "provinsi": 65
+    "parent": {
+      "kode": 65,
+      "nama": "KALIMANTAN UTARA",
+      "tingkat": 1
+    }
   },
   {
     "kode": 6504,
     "nama": "TANA TIDUNG",
     "tingkat": 2,
-    "provinsi": 65
+    "parent": {
+      "kode": 65,
+      "nama": "KALIMANTAN UTARA",
+      "tingkat": 1
+    }
   },
   {
     "kode": 6571,
     "nama": "KOTA TARAKAN",
     "tingkat": 2,
-    "provinsi": 65
+    "parent": {
+      "kode": 65,
+      "nama": "KALIMANTAN UTARA",
+      "tingkat": 1
+    }
   },
   {
     "kode": 7101,
     "nama": "BOLAANG MONGONDOW",
     "tingkat": 2,
-    "provinsi": 71
+    "parent": {
+      "kode": 71,
+      "nama": "SULAWESI UTARA",
+      "tingkat": 1
+    }
   },
   {
     "kode": 7102,
     "nama": "MINAHASA",
     "tingkat": 2,
-    "provinsi": 71
+    "parent": {
+      "kode": 71,
+      "nama": "SULAWESI UTARA",
+      "tingkat": 1
+    }
   },
   {
     "kode": 7103,
     "nama": "KEPULAUAN SANGIHE",
     "tingkat": 2,
-    "provinsi": 71
+    "parent": {
+      "kode": 71,
+      "nama": "SULAWESI UTARA",
+      "tingkat": 1
+    }
   },
   {
     "kode": 7104,
     "nama": "KEPULAUAN TALAUD",
     "tingkat": 2,
-    "provinsi": 71
+    "parent": {
+      "kode": 71,
+      "nama": "SULAWESI UTARA",
+      "tingkat": 1
+    }
   },
   {
     "kode": 7105,
     "nama": "MINAHASA SELATAN",
     "tingkat": 2,
-    "provinsi": 71
+    "parent": {
+      "kode": 71,
+      "nama": "SULAWESI UTARA",
+      "tingkat": 1
+    }
   },
   {
     "kode": 7106,
     "nama": "MINAHASA UTARA",
     "tingkat": 2,
-    "provinsi": 71
+    "parent": {
+      "kode": 71,
+      "nama": "SULAWESI UTARA",
+      "tingkat": 1
+    }
   },
   {
     "kode": 7107,
     "nama": "MINAHASA TENGGARA",
     "tingkat": 2,
-    "provinsi": 71
+    "parent": {
+      "kode": 71,
+      "nama": "SULAWESI UTARA",
+      "tingkat": 1
+    }
   },
   {
     "kode": 7108,
     "nama": "BOLAANG MONGONDOW UTARA",
     "tingkat": 2,
-    "provinsi": 71
+    "parent": {
+      "kode": 71,
+      "nama": "SULAWESI UTARA",
+      "tingkat": 1
+    }
   },
   {
     "kode": 7109,
     "nama": "KEP. SIAU TAGULANDANG BIARO",
     "tingkat": 2,
-    "provinsi": 71
+    "parent": {
+      "kode": 71,
+      "nama": "SULAWESI UTARA",
+      "tingkat": 1
+    }
   },
   {
     "kode": 7110,
     "nama": "BOLAANG MONGONDOW TIMUR",
     "tingkat": 2,
-    "provinsi": 71
+    "parent": {
+      "kode": 71,
+      "nama": "SULAWESI UTARA",
+      "tingkat": 1
+    }
   },
   {
     "kode": 7111,
     "nama": "BOLAANG MONGONDOW SELATAN",
     "tingkat": 2,
-    "provinsi": 71
+    "parent": {
+      "kode": 71,
+      "nama": "SULAWESI UTARA",
+      "tingkat": 1
+    }
   },
   {
     "kode": 7171,
     "nama": "KOTA MANADO",
     "tingkat": 2,
-    "provinsi": 71
+    "parent": {
+      "kode": 71,
+      "nama": "SULAWESI UTARA",
+      "tingkat": 1
+    }
   },
   {
     "kode": 7172,
     "nama": "KOTA BITUNG",
     "tingkat": 2,
-    "provinsi": 71
+    "parent": {
+      "kode": 71,
+      "nama": "SULAWESI UTARA",
+      "tingkat": 1
+    }
   },
   {
     "kode": 7173,
     "nama": "KOTA TOMOHON",
     "tingkat": 2,
-    "provinsi": 71
+    "parent": {
+      "kode": 71,
+      "nama": "SULAWESI UTARA",
+      "tingkat": 1
+    }
   },
   {
     "kode": 7174,
     "nama": "KOTA KOTAMOBAGU",
     "tingkat": 2,
-    "provinsi": 71
+    "parent": {
+      "kode": 71,
+      "nama": "SULAWESI UTARA",
+      "tingkat": 1
+    }
   },
   {
     "kode": 7201,
     "nama": "BANGGAI",
     "tingkat": 2,
-    "provinsi": 72
+    "parent": {
+      "kode": 72,
+      "nama": "SULAWESI TENGAH",
+      "tingkat": 1
+    }
   },
   {
     "kode": 7202,
     "nama": "POSO",
     "tingkat": 2,
-    "provinsi": 72
+    "parent": {
+      "kode": 72,
+      "nama": "SULAWESI TENGAH",
+      "tingkat": 1
+    }
   },
   {
     "kode": 7203,
     "nama": "DONGGALA",
     "tingkat": 2,
-    "provinsi": 72
+    "parent": {
+      "kode": 72,
+      "nama": "SULAWESI TENGAH",
+      "tingkat": 1
+    }
   },
   {
     "kode": 7204,
     "nama": "TOLI TOLI",
     "tingkat": 2,
-    "provinsi": 72
+    "parent": {
+      "kode": 72,
+      "nama": "SULAWESI TENGAH",
+      "tingkat": 1
+    }
   },
   {
     "kode": 7205,
     "nama": "BUOL",
     "tingkat": 2,
-    "provinsi": 72
+    "parent": {
+      "kode": 72,
+      "nama": "SULAWESI TENGAH",
+      "tingkat": 1
+    }
   },
   {
     "kode": 7206,
     "nama": "MOROWALI",
     "tingkat": 2,
-    "provinsi": 72
+    "parent": {
+      "kode": 72,
+      "nama": "SULAWESI TENGAH",
+      "tingkat": 1
+    }
   },
   {
     "kode": 7207,
     "nama": "BANGGAI KEPULAUAN",
     "tingkat": 2,
-    "provinsi": 72
+    "parent": {
+      "kode": 72,
+      "nama": "SULAWESI TENGAH",
+      "tingkat": 1
+    }
   },
   {
     "kode": 7208,
     "nama": "PARIGI MOUTONG",
     "tingkat": 2,
-    "provinsi": 72
+    "parent": {
+      "kode": 72,
+      "nama": "SULAWESI TENGAH",
+      "tingkat": 1
+    }
   },
   {
     "kode": 7209,
     "nama": "TOJO UNA UNA",
     "tingkat": 2,
-    "provinsi": 72
+    "parent": {
+      "kode": 72,
+      "nama": "SULAWESI TENGAH",
+      "tingkat": 1
+    }
   },
   {
     "kode": 7210,
     "nama": "SIGI",
     "tingkat": 2,
-    "provinsi": 72
+    "parent": {
+      "kode": 72,
+      "nama": "SULAWESI TENGAH",
+      "tingkat": 1
+    }
   },
   {
     "kode": 7211,
     "nama": "BANGGAI LAUT",
     "tingkat": 2,
-    "provinsi": 72
+    "parent": {
+      "kode": 72,
+      "nama": "SULAWESI TENGAH",
+      "tingkat": 1
+    }
   },
   {
     "kode": 7212,
     "nama": "MOROWALI UTARA",
     "tingkat": 2,
-    "provinsi": 72
+    "parent": {
+      "kode": 72,
+      "nama": "SULAWESI TENGAH",
+      "tingkat": 1
+    }
   },
   {
     "kode": 7271,
     "nama": "KOTA PALU",
     "tingkat": 2,
-    "provinsi": 72
+    "parent": {
+      "kode": 72,
+      "nama": "SULAWESI TENGAH",
+      "tingkat": 1
+    }
   },
   {
     "kode": 7301,
     "nama": "KEPULAUAN SELAYAR",
     "tingkat": 2,
-    "provinsi": 73
+    "parent": {
+      "kode": 73,
+      "nama": "SULAWESI SELATAN",
+      "tingkat": 1
+    }
   },
   {
     "kode": 7302,
     "nama": "BULUKUMBA",
     "tingkat": 2,
-    "provinsi": 73
+    "parent": {
+      "kode": 73,
+      "nama": "SULAWESI SELATAN",
+      "tingkat": 1
+    }
   },
   {
     "kode": 7303,
     "nama": "BANTAENG",
     "tingkat": 2,
-    "provinsi": 73
+    "parent": {
+      "kode": 73,
+      "nama": "SULAWESI SELATAN",
+      "tingkat": 1
+    }
   },
   {
     "kode": 7304,
     "nama": "JENEPONTO",
     "tingkat": 2,
-    "provinsi": 73
+    "parent": {
+      "kode": 73,
+      "nama": "SULAWESI SELATAN",
+      "tingkat": 1
+    }
   },
   {
     "kode": 7305,
     "nama": "TAKALAR",
     "tingkat": 2,
-    "provinsi": 73
+    "parent": {
+      "kode": 73,
+      "nama": "SULAWESI SELATAN",
+      "tingkat": 1
+    }
   },
   {
     "kode": 7306,
     "nama": "GOWA",
     "tingkat": 2,
-    "provinsi": 73
+    "parent": {
+      "kode": 73,
+      "nama": "SULAWESI SELATAN",
+      "tingkat": 1
+    }
   },
   {
     "kode": 7307,
     "nama": "SINJAI",
     "tingkat": 2,
-    "provinsi": 73
+    "parent": {
+      "kode": 73,
+      "nama": "SULAWESI SELATAN",
+      "tingkat": 1
+    }
   },
   {
     "kode": 7308,
     "nama": "BONE",
     "tingkat": 2,
-    "provinsi": 73
+    "parent": {
+      "kode": 73,
+      "nama": "SULAWESI SELATAN",
+      "tingkat": 1
+    }
   },
   {
     "kode": 7309,
     "nama": "MAROS",
     "tingkat": 2,
-    "provinsi": 73
+    "parent": {
+      "kode": 73,
+      "nama": "SULAWESI SELATAN",
+      "tingkat": 1
+    }
   },
   {
     "kode": 7310,
     "nama": "PANGKAJENE DAN KEPULAUAN",
     "tingkat": 2,
-    "provinsi": 73
+    "parent": {
+      "kode": 73,
+      "nama": "SULAWESI SELATAN",
+      "tingkat": 1
+    }
   },
   {
     "kode": 7311,
     "nama": "BARRU",
     "tingkat": 2,
-    "provinsi": 73
+    "parent": {
+      "kode": 73,
+      "nama": "SULAWESI SELATAN",
+      "tingkat": 1
+    }
   },
   {
     "kode": 7312,
     "nama": "SOPPENG",
     "tingkat": 2,
-    "provinsi": 73
+    "parent": {
+      "kode": 73,
+      "nama": "SULAWESI SELATAN",
+      "tingkat": 1
+    }
   },
   {
     "kode": 7313,
     "nama": "WAJO",
     "tingkat": 2,
-    "provinsi": 73
+    "parent": {
+      "kode": 73,
+      "nama": "SULAWESI SELATAN",
+      "tingkat": 1
+    }
   },
   {
     "kode": 7314,
     "nama": "SIDENRENG RAPPANG",
     "tingkat": 2,
-    "provinsi": 73
+    "parent": {
+      "kode": 73,
+      "nama": "SULAWESI SELATAN",
+      "tingkat": 1
+    }
   },
   {
     "kode": 7315,
     "nama": "PINRANG",
     "tingkat": 2,
-    "provinsi": 73
+    "parent": {
+      "kode": 73,
+      "nama": "SULAWESI SELATAN",
+      "tingkat": 1
+    }
   },
   {
     "kode": 7316,
     "nama": "ENREKANG",
     "tingkat": 2,
-    "provinsi": 73
+    "parent": {
+      "kode": 73,
+      "nama": "SULAWESI SELATAN",
+      "tingkat": 1
+    }
   },
   {
     "kode": 7317,
     "nama": "LUWU",
     "tingkat": 2,
-    "provinsi": 73
+    "parent": {
+      "kode": 73,
+      "nama": "SULAWESI SELATAN",
+      "tingkat": 1
+    }
   },
   {
     "kode": 7318,
     "nama": "TANA TORAJA",
     "tingkat": 2,
-    "provinsi": 73
+    "parent": {
+      "kode": 73,
+      "nama": "SULAWESI SELATAN",
+      "tingkat": 1
+    }
   },
   {
     "kode": 7322,
     "nama": "LUWU UTARA",
     "tingkat": 2,
-    "provinsi": 73
+    "parent": {
+      "kode": 73,
+      "nama": "SULAWESI SELATAN",
+      "tingkat": 1
+    }
   },
   {
     "kode": 7324,
     "nama": "LUWU TIMUR",
     "tingkat": 2,
-    "provinsi": 73
+    "parent": {
+      "kode": 73,
+      "nama": "SULAWESI SELATAN",
+      "tingkat": 1
+    }
   },
   {
     "kode": 7326,
     "nama": "TORAJA UTARA",
     "tingkat": 2,
-    "provinsi": 73
+    "parent": {
+      "kode": 73,
+      "nama": "SULAWESI SELATAN",
+      "tingkat": 1
+    }
   },
   {
     "kode": 7371,
     "nama": "KOTA MAKASSAR",
     "tingkat": 2,
-    "provinsi": 73
+    "parent": {
+      "kode": 73,
+      "nama": "SULAWESI SELATAN",
+      "tingkat": 1
+    }
   },
   {
     "kode": 7372,
     "nama": "KOTA PAREPARE",
     "tingkat": 2,
-    "provinsi": 73
+    "parent": {
+      "kode": 73,
+      "nama": "SULAWESI SELATAN",
+      "tingkat": 1
+    }
   },
   {
     "kode": 7373,
     "nama": "KOTA PALOPO",
     "tingkat": 2,
-    "provinsi": 73
+    "parent": {
+      "kode": 73,
+      "nama": "SULAWESI SELATAN",
+      "tingkat": 1
+    }
   },
   {
     "kode": 7401,
     "nama": "KOLAKA",
     "tingkat": 2,
-    "provinsi": 74
+    "parent": {
+      "kode": 74,
+      "nama": "SULAWESI TENGGARA",
+      "tingkat": 1
+    }
   },
   {
     "kode": 7402,
     "nama": "KONAWE",
     "tingkat": 2,
-    "provinsi": 74
+    "parent": {
+      "kode": 74,
+      "nama": "SULAWESI TENGGARA",
+      "tingkat": 1
+    }
   },
   {
     "kode": 7403,
     "nama": "MUNA",
     "tingkat": 2,
-    "provinsi": 74
+    "parent": {
+      "kode": 74,
+      "nama": "SULAWESI TENGGARA",
+      "tingkat": 1
+    }
   },
   {
     "kode": 7404,
     "nama": "BUTON",
     "tingkat": 2,
-    "provinsi": 74
+    "parent": {
+      "kode": 74,
+      "nama": "SULAWESI TENGGARA",
+      "tingkat": 1
+    }
   },
   {
     "kode": 7405,
     "nama": "KONAWE SELATAN",
     "tingkat": 2,
-    "provinsi": 74
+    "parent": {
+      "kode": 74,
+      "nama": "SULAWESI TENGGARA",
+      "tingkat": 1
+    }
   },
   {
     "kode": 7406,
     "nama": "BOMBANA",
     "tingkat": 2,
-    "provinsi": 74
+    "parent": {
+      "kode": 74,
+      "nama": "SULAWESI TENGGARA",
+      "tingkat": 1
+    }
   },
   {
     "kode": 7407,
     "nama": "WAKATOBI",
     "tingkat": 2,
-    "provinsi": 74
+    "parent": {
+      "kode": 74,
+      "nama": "SULAWESI TENGGARA",
+      "tingkat": 1
+    }
   },
   {
     "kode": 7408,
     "nama": "KOLAKA UTARA",
     "tingkat": 2,
-    "provinsi": 74
+    "parent": {
+      "kode": 74,
+      "nama": "SULAWESI TENGGARA",
+      "tingkat": 1
+    }
   },
   {
     "kode": 7409,
     "nama": "KONAWE UTARA",
     "tingkat": 2,
-    "provinsi": 74
+    "parent": {
+      "kode": 74,
+      "nama": "SULAWESI TENGGARA",
+      "tingkat": 1
+    }
   },
   {
     "kode": 7410,
     "nama": "BUTON UTARA",
     "tingkat": 2,
-    "provinsi": 74
+    "parent": {
+      "kode": 74,
+      "nama": "SULAWESI TENGGARA",
+      "tingkat": 1
+    }
   },
   {
     "kode": 7411,
     "nama": "KOLAKA TIMUR",
     "tingkat": 2,
-    "provinsi": 74
+    "parent": {
+      "kode": 74,
+      "nama": "SULAWESI TENGGARA",
+      "tingkat": 1
+    }
   },
   {
     "kode": 7412,
     "nama": "KONAWE KEPULAUAN",
     "tingkat": 2,
-    "provinsi": 74
+    "parent": {
+      "kode": 74,
+      "nama": "SULAWESI TENGGARA",
+      "tingkat": 1
+    }
   },
   {
     "kode": 7413,
     "nama": "MUNA BARAT",
     "tingkat": 2,
-    "provinsi": 74
+    "parent": {
+      "kode": 74,
+      "nama": "SULAWESI TENGGARA",
+      "tingkat": 1
+    }
   },
   {
     "kode": 7414,
     "nama": "BUTON TENGAH",
     "tingkat": 2,
-    "provinsi": 74
+    "parent": {
+      "kode": 74,
+      "nama": "SULAWESI TENGGARA",
+      "tingkat": 1
+    }
   },
   {
     "kode": 7415,
     "nama": "BUTON SELATAN",
     "tingkat": 2,
-    "provinsi": 74
+    "parent": {
+      "kode": 74,
+      "nama": "SULAWESI TENGGARA",
+      "tingkat": 1
+    }
   },
   {
     "kode": 7471,
     "nama": "KOTA KENDARI",
     "tingkat": 2,
-    "provinsi": 74
+    "parent": {
+      "kode": 74,
+      "nama": "SULAWESI TENGGARA",
+      "tingkat": 1
+    }
   },
   {
     "kode": 7472,
     "nama": "KOTA BAU BAU",
     "tingkat": 2,
-    "provinsi": 74
+    "parent": {
+      "kode": 74,
+      "nama": "SULAWESI TENGGARA",
+      "tingkat": 1
+    }
   },
   {
     "kode": 7501,
     "nama": "GORONTALO",
     "tingkat": 2,
-    "provinsi": 75
+    "parent": {
+      "kode": 75,
+      "nama": "GORONTALO",
+      "tingkat": 1
+    }
   },
   {
     "kode": 7502,
     "nama": "BOALEMO",
     "tingkat": 2,
-    "provinsi": 75
+    "parent": {
+      "kode": 75,
+      "nama": "GORONTALO",
+      "tingkat": 1
+    }
   },
   {
     "kode": 7503,
     "nama": "BONE BOLANGO",
     "tingkat": 2,
-    "provinsi": 75
+    "parent": {
+      "kode": 75,
+      "nama": "GORONTALO",
+      "tingkat": 1
+    }
   },
   {
     "kode": 7504,
     "nama": "POHUWATO",
     "tingkat": 2,
-    "provinsi": 75
+    "parent": {
+      "kode": 75,
+      "nama": "GORONTALO",
+      "tingkat": 1
+    }
   },
   {
     "kode": 7505,
     "nama": "GORONTALO UTARA",
     "tingkat": 2,
-    "provinsi": 75
+    "parent": {
+      "kode": 75,
+      "nama": "GORONTALO",
+      "tingkat": 1
+    }
   },
   {
     "kode": 7571,
     "nama": "KOTA GORONTALO",
     "tingkat": 2,
-    "provinsi": 75
+    "parent": {
+      "kode": 75,
+      "nama": "GORONTALO",
+      "tingkat": 1
+    }
   },
   {
     "kode": 7601,
     "nama": "PASANGKAYU",
     "tingkat": 2,
-    "provinsi": 76
+    "parent": {
+      "kode": 76,
+      "nama": "SULAWESI BARAT",
+      "tingkat": 1
+    }
   },
   {
     "kode": 7602,
     "nama": "MAMUJU",
     "tingkat": 2,
-    "provinsi": 76
+    "parent": {
+      "kode": 76,
+      "nama": "SULAWESI BARAT",
+      "tingkat": 1
+    }
   },
   {
     "kode": 7603,
     "nama": "MAMASA",
     "tingkat": 2,
-    "provinsi": 76
+    "parent": {
+      "kode": 76,
+      "nama": "SULAWESI BARAT",
+      "tingkat": 1
+    }
   },
   {
     "kode": 7604,
     "nama": "POLEWALI MANDAR",
     "tingkat": 2,
-    "provinsi": 76
+    "parent": {
+      "kode": 76,
+      "nama": "SULAWESI BARAT",
+      "tingkat": 1
+    }
   },
   {
     "kode": 7605,
     "nama": "MAJENE",
     "tingkat": 2,
-    "provinsi": 76
+    "parent": {
+      "kode": 76,
+      "nama": "SULAWESI BARAT",
+      "tingkat": 1
+    }
   },
   {
     "kode": 7606,
     "nama": "MAMUJU TENGAH",
     "tingkat": 2,
-    "provinsi": 76
+    "parent": {
+      "kode": 76,
+      "nama": "SULAWESI BARAT",
+      "tingkat": 1
+    }
   },
   {
     "kode": 8101,
     "nama": "MALUKU TENGAH",
     "tingkat": 2,
-    "provinsi": 81
+    "parent": {
+      "kode": 81,
+      "nama": "MALUKU",
+      "tingkat": 1
+    }
   },
   {
     "kode": 8102,
     "nama": "MALUKU TENGGARA",
     "tingkat": 2,
-    "provinsi": 81
+    "parent": {
+      "kode": 81,
+      "nama": "MALUKU",
+      "tingkat": 1
+    }
   },
   {
     "kode": 8103,
     "nama": "KEPULAUAN TANIMBAR",
     "tingkat": 2,
-    "provinsi": 81
+    "parent": {
+      "kode": 81,
+      "nama": "MALUKU",
+      "tingkat": 1
+    }
   },
   {
     "kode": 8104,
     "nama": "BURU",
     "tingkat": 2,
-    "provinsi": 81
+    "parent": {
+      "kode": 81,
+      "nama": "MALUKU",
+      "tingkat": 1
+    }
   },
   {
     "kode": 8105,
     "nama": "SERAM BAGIAN TIMUR",
     "tingkat": 2,
-    "provinsi": 81
+    "parent": {
+      "kode": 81,
+      "nama": "MALUKU",
+      "tingkat": 1
+    }
   },
   {
     "kode": 8106,
     "nama": "SERAM BAGIAN BARAT",
     "tingkat": 2,
-    "provinsi": 81
+    "parent": {
+      "kode": 81,
+      "nama": "MALUKU",
+      "tingkat": 1
+    }
   },
   {
     "kode": 8107,
     "nama": "KEPULAUAN ARU",
     "tingkat": 2,
-    "provinsi": 81
+    "parent": {
+      "kode": 81,
+      "nama": "MALUKU",
+      "tingkat": 1
+    }
   },
   {
     "kode": 8108,
     "nama": "MALUKU BARAT DAYA",
     "tingkat": 2,
-    "provinsi": 81
+    "parent": {
+      "kode": 81,
+      "nama": "MALUKU",
+      "tingkat": 1
+    }
   },
   {
     "kode": 8109,
     "nama": "BURU SELATAN",
     "tingkat": 2,
-    "provinsi": 81
+    "parent": {
+      "kode": 81,
+      "nama": "MALUKU",
+      "tingkat": 1
+    }
   },
   {
     "kode": 8171,
     "nama": "KOTA AMBON",
     "tingkat": 2,
-    "provinsi": 81
+    "parent": {
+      "kode": 81,
+      "nama": "MALUKU",
+      "tingkat": 1
+    }
   },
   {
     "kode": 8172,
     "nama": "KOTA TUAL",
     "tingkat": 2,
-    "provinsi": 81
+    "parent": {
+      "kode": 81,
+      "nama": "MALUKU",
+      "tingkat": 1
+    }
   },
   {
     "kode": 8201,
     "nama": "HALMAHERA BARAT",
     "tingkat": 2,
-    "provinsi": 82
+    "parent": {
+      "kode": 82,
+      "nama": "MALUKU UTARA",
+      "tingkat": 1
+    }
   },
   {
     "kode": 8202,
     "nama": "HALMAHERA TENGAH",
     "tingkat": 2,
-    "provinsi": 82
+    "parent": {
+      "kode": 82,
+      "nama": "MALUKU UTARA",
+      "tingkat": 1
+    }
   },
   {
     "kode": 8203,
     "nama": "HALMAHERA UTARA",
     "tingkat": 2,
-    "provinsi": 82
+    "parent": {
+      "kode": 82,
+      "nama": "MALUKU UTARA",
+      "tingkat": 1
+    }
   },
   {
     "kode": 8204,
     "nama": "HALMAHERA SELATAN",
     "tingkat": 2,
-    "provinsi": 82
+    "parent": {
+      "kode": 82,
+      "nama": "MALUKU UTARA",
+      "tingkat": 1
+    }
   },
   {
     "kode": 8205,
     "nama": "KEPULAUAN SULA",
     "tingkat": 2,
-    "provinsi": 82
+    "parent": {
+      "kode": 82,
+      "nama": "MALUKU UTARA",
+      "tingkat": 1
+    }
   },
   {
     "kode": 8206,
     "nama": "HALMAHERA TIMUR",
     "tingkat": 2,
-    "provinsi": 82
+    "parent": {
+      "kode": 82,
+      "nama": "MALUKU UTARA",
+      "tingkat": 1
+    }
   },
   {
     "kode": 8207,
     "nama": "PULAU MOROTAI",
     "tingkat": 2,
-    "provinsi": 82
+    "parent": {
+      "kode": 82,
+      "nama": "MALUKU UTARA",
+      "tingkat": 1
+    }
   },
   {
     "kode": 8208,
     "nama": "PULAU TALIABU",
     "tingkat": 2,
-    "provinsi": 82
+    "parent": {
+      "kode": 82,
+      "nama": "MALUKU UTARA",
+      "tingkat": 1
+    }
   },
   {
     "kode": 8271,
     "nama": "KOTA TERNATE",
     "tingkat": 2,
-    "provinsi": 82
+    "parent": {
+      "kode": 82,
+      "nama": "MALUKU UTARA",
+      "tingkat": 1
+    }
   },
   {
     "kode": 8272,
     "nama": "KOTA TIDORE KEPULAUAN",
     "tingkat": 2,
-    "provinsi": 82
+    "parent": {
+      "kode": 82,
+      "nama": "MALUKU UTARA",
+      "tingkat": 1
+    }
   },
   {
     "kode": 9103,
     "nama": "JAYAPURA",
     "tingkat": 2,
-    "provinsi": 91
+    "parent": {
+      "kode": 91,
+      "nama": "P A P U A",
+      "tingkat": 1
+    }
   },
   {
     "kode": 9105,
     "nama": "KEPULAUAN YAPEN",
     "tingkat": 2,
-    "provinsi": 91
+    "parent": {
+      "kode": 91,
+      "nama": "P A P U A",
+      "tingkat": 1
+    }
   },
   {
     "kode": 9106,
     "nama": "BIAK NUMFOR",
     "tingkat": 2,
-    "provinsi": 91
+    "parent": {
+      "kode": 91,
+      "nama": "P A P U A",
+      "tingkat": 1
+    }
   },
   {
     "kode": 9110,
     "nama": "SARMI",
     "tingkat": 2,
-    "provinsi": 91
+    "parent": {
+      "kode": 91,
+      "nama": "P A P U A",
+      "tingkat": 1
+    }
   },
   {
     "kode": 9111,
     "nama": "KEEROM",
     "tingkat": 2,
-    "provinsi": 91
+    "parent": {
+      "kode": 91,
+      "nama": "P A P U A",
+      "tingkat": 1
+    }
   },
   {
     "kode": 9115,
     "nama": "WAROPEN",
     "tingkat": 2,
-    "provinsi": 91
+    "parent": {
+      "kode": 91,
+      "nama": "P A P U A",
+      "tingkat": 1
+    }
   },
   {
     "kode": 9119,
     "nama": "SUPIORI",
     "tingkat": 2,
-    "provinsi": 91
+    "parent": {
+      "kode": 91,
+      "nama": "P A P U A",
+      "tingkat": 1
+    }
   },
   {
     "kode": 9120,
     "nama": "MAMBERAMO RAYA",
     "tingkat": 2,
-    "provinsi": 91
+    "parent": {
+      "kode": 91,
+      "nama": "P A P U A",
+      "tingkat": 1
+    }
   },
   {
     "kode": 9171,
     "nama": "KOTA JAYAPURA",
     "tingkat": 2,
-    "provinsi": 91
+    "parent": {
+      "kode": 91,
+      "nama": "P A P U A",
+      "tingkat": 1
+    }
   },
   {
     "kode": 9202,
     "nama": "MANOKWARI",
     "tingkat": 2,
-    "provinsi": 92
+    "parent": {
+      "kode": 92,
+      "nama": "PAPUA BARAT",
+      "tingkat": 1
+    }
   },
   {
     "kode": 9203,
     "nama": "FAK FAK",
     "tingkat": 2,
-    "provinsi": 92
+    "parent": {
+      "kode": 92,
+      "nama": "PAPUA BARAT",
+      "tingkat": 1
+    }
   },
   {
     "kode": 9206,
     "nama": "TELUK BINTUNI",
     "tingkat": 2,
-    "provinsi": 92
+    "parent": {
+      "kode": 92,
+      "nama": "PAPUA BARAT",
+      "tingkat": 1
+    }
   },
   {
     "kode": 9207,
     "nama": "TELUK WONDAMA",
     "tingkat": 2,
-    "provinsi": 92
+    "parent": {
+      "kode": 92,
+      "nama": "PAPUA BARAT",
+      "tingkat": 1
+    }
   },
   {
     "kode": 9208,
     "nama": "KAIMANA",
     "tingkat": 2,
-    "provinsi": 92
+    "parent": {
+      "kode": 92,
+      "nama": "PAPUA BARAT",
+      "tingkat": 1
+    }
   },
   {
     "kode": 9211,
     "nama": "MANOKWARI SELATAN",
     "tingkat": 2,
-    "provinsi": 92
+    "parent": {
+      "kode": 92,
+      "nama": "PAPUA BARAT",
+      "tingkat": 1
+    }
   },
   {
     "kode": 9212,
     "nama": "PEGUNUNGAN ARFAK",
     "tingkat": 2,
-    "provinsi": 92
+    "parent": {
+      "kode": 92,
+      "nama": "PAPUA BARAT",
+      "tingkat": 1
+    }
   },
   {
     "kode": 9301,
     "nama": "MERAUKE",
     "tingkat": 2,
-    "provinsi": 93
+    "parent": {
+      "kode": 93,
+      "nama": "PAPUA SELATAN",
+      "tingkat": 1
+    }
   },
   {
     "kode": 9302,
     "nama": "BOVEN DIGOEL",
     "tingkat": 2,
-    "provinsi": 93
+    "parent": {
+      "kode": 93,
+      "nama": "PAPUA SELATAN",
+      "tingkat": 1
+    }
   },
   {
     "kode": 9303,
     "nama": "MAPPI",
     "tingkat": 2,
-    "provinsi": 93
+    "parent": {
+      "kode": 93,
+      "nama": "PAPUA SELATAN",
+      "tingkat": 1
+    }
   },
   {
     "kode": 9304,
     "nama": "ASMAT",
     "tingkat": 2,
-    "provinsi": 93
+    "parent": {
+      "kode": 93,
+      "nama": "PAPUA SELATAN",
+      "tingkat": 1
+    }
   },
   {
     "kode": 9401,
     "nama": "NABIRE",
     "tingkat": 2,
-    "provinsi": 94
+    "parent": {
+      "kode": 94,
+      "nama": "PAPUA TENGAH",
+      "tingkat": 1
+    }
   },
   {
     "kode": 9402,
     "nama": "PUNCAK JAYA",
     "tingkat": 2,
-    "provinsi": 94
+    "parent": {
+      "kode": 94,
+      "nama": "PAPUA TENGAH",
+      "tingkat": 1
+    }
   },
   {
     "kode": 9403,
     "nama": "PANIAI",
     "tingkat": 2,
-    "provinsi": 94
+    "parent": {
+      "kode": 94,
+      "nama": "PAPUA TENGAH",
+      "tingkat": 1
+    }
   },
   {
     "kode": 9404,
     "nama": "MIMIKA",
     "tingkat": 2,
-    "provinsi": 94
+    "parent": {
+      "kode": 94,
+      "nama": "PAPUA TENGAH",
+      "tingkat": 1
+    }
   },
   {
     "kode": 9405,
     "nama": "PUNCAK",
     "tingkat": 2,
-    "provinsi": 94
+    "parent": {
+      "kode": 94,
+      "nama": "PAPUA TENGAH",
+      "tingkat": 1
+    }
   },
   {
     "kode": 9406,
     "nama": "DOGIYAI",
     "tingkat": 2,
-    "provinsi": 94
+    "parent": {
+      "kode": 94,
+      "nama": "PAPUA TENGAH",
+      "tingkat": 1
+    }
   },
   {
     "kode": 9407,
     "nama": "INTAN JAYA",
     "tingkat": 2,
-    "provinsi": 94
+    "parent": {
+      "kode": 94,
+      "nama": "PAPUA TENGAH",
+      "tingkat": 1
+    }
   },
   {
     "kode": 9408,
     "nama": "DEIYAI",
     "tingkat": 2,
-    "provinsi": 94
+    "parent": {
+      "kode": 94,
+      "nama": "PAPUA TENGAH",
+      "tingkat": 1
+    }
   },
   {
     "kode": 9501,
     "nama": "JAYAWIJAYA",
     "tingkat": 2,
-    "provinsi": 95
+    "parent": {
+      "kode": 95,
+      "nama": "PAPUA PEGUNUNGAN",
+      "tingkat": 1
+    }
   },
   {
     "kode": 9502,
     "nama": "KAB PEGUNUNGAN BINTANG",
     "tingkat": 2,
-    "provinsi": 95
+    "parent": {
+      "kode": 95,
+      "nama": "PAPUA PEGUNUNGAN",
+      "tingkat": 1
+    }
   },
   {
     "kode": 9503,
     "nama": "YAHUKIMO",
     "tingkat": 2,
-    "provinsi": 95
+    "parent": {
+      "kode": 95,
+      "nama": "PAPUA PEGUNUNGAN",
+      "tingkat": 1
+    }
   },
   {
     "kode": 9504,
     "nama": "TOLIKARA",
     "tingkat": 2,
-    "provinsi": 95
+    "parent": {
+      "kode": 95,
+      "nama": "PAPUA PEGUNUNGAN",
+      "tingkat": 1
+    }
   },
   {
     "kode": 9505,
     "nama": "MAMBERAMO TENGAH",
     "tingkat": 2,
-    "provinsi": 95
+    "parent": {
+      "kode": 95,
+      "nama": "PAPUA PEGUNUNGAN",
+      "tingkat": 1
+    }
   },
   {
     "kode": 9506,
     "nama": "YALIMO",
     "tingkat": 2,
-    "provinsi": 95
+    "parent": {
+      "kode": 95,
+      "nama": "PAPUA PEGUNUNGAN",
+      "tingkat": 1
+    }
   },
   {
     "kode": 9507,
     "nama": "LANNY JAYA",
     "tingkat": 2,
-    "provinsi": 95
+    "parent": {
+      "kode": 95,
+      "nama": "PAPUA PEGUNUNGAN",
+      "tingkat": 1
+    }
   },
   {
     "kode": 9508,
     "nama": "NDUGA",
     "tingkat": 2,
-    "provinsi": 95
+    "parent": {
+      "kode": 95,
+      "nama": "PAPUA PEGUNUNGAN",
+      "tingkat": 1
+    }
   },
   {
     "kode": 9601,
     "nama": "SORONG",
     "tingkat": 2,
-    "provinsi": 96
+    "parent": {
+      "kode": 96,
+      "nama": "PAPUA BARAT DAYA",
+      "tingkat": 1
+    }
   },
   {
     "kode": 9602,
     "nama": "SORONG SELATAN",
     "tingkat": 2,
-    "provinsi": 96
+    "parent": {
+      "kode": 96,
+      "nama": "PAPUA BARAT DAYA",
+      "tingkat": 1
+    }
   },
   {
     "kode": 9603,
     "nama": "RAJA AMPAT",
     "tingkat": 2,
-    "provinsi": 96
+    "parent": {
+      "kode": 96,
+      "nama": "PAPUA BARAT DAYA",
+      "tingkat": 1
+    }
   },
   {
     "kode": 9604,
     "nama": "TAMBRAUW",
     "tingkat": 2,
-    "provinsi": 96
+    "parent": {
+      "kode": 96,
+      "nama": "PAPUA BARAT DAYA",
+      "tingkat": 1
+    }
   },
   {
     "kode": 9605,
     "nama": "MAYBRAT",
     "tingkat": 2,
-    "provinsi": 96
+    "parent": {
+      "kode": 96,
+      "nama": "PAPUA BARAT DAYA",
+      "tingkat": 1
+    }
   },
   {
     "kode": 9671,
     "nama": "KOTA SORONG",
     "tingkat": 2,
-    "provinsi": 96
+    "parent": {
+      "kode": 96,
+      "nama": "PAPUA BARAT DAYA",
+      "tingkat": 1
+    }
   }
 ]
