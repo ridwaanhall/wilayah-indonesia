@@ -65,7 +65,7 @@ class TestKabupatenEndpoint:
     """Tests for kabupaten listing endpoint."""
 
     def test_list_kabupaten_success(self, client: TestClient) -> None:
-        """Test successful retrieval of kabupaten list."""
+        """Test successful retrieval of kabupaten list without parent."""
         response = client.get("/11")  # Aceh
         assert response.status_code == 200
         data = response.json()
@@ -73,14 +73,35 @@ class TestKabupatenEndpoint:
         assert isinstance(data, list)
         assert len(data) > 0
 
-        # Check structure
+        # Check structure - without parent by default
         first = data[0]
         assert "kode" in first
         assert "nama" in first
         assert "tingkat" in first
-        assert "provinsi" in first
         assert first["tingkat"] == 2
-        assert first["provinsi"] == 11
+        # parent should be None when not requested
+        assert first.get("parent") is None
+
+    def test_list_kabupaten_with_parent(self, client: TestClient) -> None:
+        """Test successful retrieval of kabupaten list with parent info."""
+        response = client.get("/11?parent=true")  # Aceh
+        assert response.status_code == 200
+        data = response.json()
+
+        assert isinstance(data, list)
+        assert len(data) > 0
+
+        # Check structure - with parent when requested
+        first = data[0]
+        assert "kode" in first
+        assert "nama" in first
+        assert "tingkat" in first
+        assert first["tingkat"] == 2
+        assert "parent" in first
+        assert first["parent"] is not None
+        assert first["parent"]["kode"] == 11
+        assert "nama" in first["parent"]
+        assert first["parent"]["tingkat"] == 1
 
     def test_list_kabupaten_not_found(self, client: TestClient) -> None:
         """Test 404 when provinsi doesn't exist."""
@@ -94,7 +115,7 @@ class TestKecamatanEndpoint:
     """Tests for kecamatan listing endpoint."""
 
     def test_list_kecamatan_success(self, client: TestClient) -> None:
-        """Test successful retrieval of kecamatan list."""
+        """Test successful retrieval of kecamatan list without parent."""
         response = client.get("/11/1101")  # Aceh / Aceh Selatan
         assert response.status_code == 200
         data = response.json()
@@ -106,8 +127,28 @@ class TestKecamatanEndpoint:
             assert "kode" in first
             assert "nama" in first
             assert "tingkat" in first
-            assert "kabupaten" in first
             assert first["tingkat"] == 3
+            # parent should be None when not requested
+            assert first.get("parent") is None
+
+    def test_list_kecamatan_with_parent(self, client: TestClient) -> None:
+        """Test successful retrieval of kecamatan list with parent info."""
+        response = client.get("/11/1101?parent=true")  # Aceh / Aceh Selatan
+        assert response.status_code == 200
+        data = response.json()
+
+        assert isinstance(data, list)
+
+        if len(data) > 0:
+            first = data[0]
+            assert "kode" in first
+            assert "nama" in first
+            assert "tingkat" in first
+            assert first["tingkat"] == 3
+            assert "parent" in first
+            assert first["parent"] is not None
+            assert first["parent"]["kode"] == 1101
+            assert first["parent"]["tingkat"] == 2
 
     def test_list_kecamatan_provinsi_not_found(self, client: TestClient) -> None:
         """Test 404 when provinsi doesn't exist."""
@@ -124,7 +165,7 @@ class TestDesaEndpoint:
     """Tests for desa listing endpoint."""
 
     def test_list_desa_success(self, client: TestClient) -> None:
-        """Test successful retrieval of desa list."""
+        """Test successful retrieval of desa list without parent."""
         response = client.get("/11/1101/110101")  # Aceh / Aceh Selatan / Bakongan
         assert response.status_code == 200
         data = response.json()
@@ -136,8 +177,28 @@ class TestDesaEndpoint:
             assert "kode" in first
             assert "nama" in first
             assert "tingkat" in first
-            assert "kecamatan" in first
             assert first["tingkat"] == 4
+            # parent should be None when not requested
+            assert first.get("parent") is None
+
+    def test_list_desa_with_parent(self, client: TestClient) -> None:
+        """Test successful retrieval of desa list with parent info."""
+        response = client.get("/11/1101/110101?parent=true")  # Aceh / Aceh Selatan / Bakongan
+        assert response.status_code == 200
+        data = response.json()
+
+        assert isinstance(data, list)
+
+        if len(data) > 0:
+            first = data[0]
+            assert "kode" in first
+            assert "nama" in first
+            assert "tingkat" in first
+            assert first["tingkat"] == 4
+            assert "parent" in first
+            assert first["parent"] is not None
+            assert first["parent"]["kode"] == 110101
+            assert first["parent"]["tingkat"] == 3
 
     def test_list_desa_not_found(self, client: TestClient) -> None:
         """Test 404 when kecamatan doesn't exist."""
@@ -167,7 +228,7 @@ class TestSearchByCodeEndpoint:
         assert data["kode"] == 1101
         assert "nama" in data
         assert data["tingkat"] == 2
-        assert "provinsi" in data
+        assert "parent" in data
 
     def test_search_kecamatan_by_code(self, client: TestClient) -> None:
         """Test searching for kecamatan by code."""
@@ -178,7 +239,7 @@ class TestSearchByCodeEndpoint:
         assert data["kode"] == 110101
         assert "nama" in data
         assert data["tingkat"] == 3
-        assert "kabupaten" in data
+        assert "parent" in data
 
     def test_search_desa_by_code(self, client: TestClient) -> None:
         """Test searching for desa by code - the main requirement."""
@@ -189,7 +250,7 @@ class TestSearchByCodeEndpoint:
         assert data["kode"] == 1101012001
         assert "nama" in data
         assert data["tingkat"] == 4
-        assert "kecamatan" in data
+        assert "parent" in data
 
     def test_search_by_code_not_found(self, client: TestClient) -> None:
         """Test 404 when code doesn't exist."""

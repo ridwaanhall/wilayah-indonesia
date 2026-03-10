@@ -1,6 +1,6 @@
 from typing import Annotated, Any
 
-from fastapi import APIRouter, Depends, HTTPException, Path, Request
+from fastapi import APIRouter, Depends, HTTPException, Path, Query, Request
 
 from .loader import DataLoader, get_loader
 from .schemas import Desa, ErrorDetail, Kabupaten, Kecamatan, Provinsi
@@ -72,8 +72,14 @@ def search_by_code(
 def list_kabupaten(
     kode_provinsi: Annotated[int, Path(gt=0, description="Kode provinsi")],
     loader: LoaderDep,
+    parent: Annotated[
+        bool,
+        Query(description="Include parent provinsi information")
+    ] = False,
 ) -> list[dict[str, Any]]:
-    result: list[dict[str, Any]] | None = loader.kabupaten_by_provinsi(kode_provinsi)
+    result: list[dict[str, Any]] | None = loader.kabupaten_by_provinsi(
+        kode_provinsi, include_parent=parent
+    )
     if result is None:
         raise HTTPException(status_code=404, detail="Provinsi tidak ditemukan.")
     return result
@@ -90,12 +96,16 @@ def list_kecamatan(
     kode_provinsi: Annotated[int, Path(gt=0, description="Kode provinsi")],
     kode_kabupaten: Annotated[int, Path(gt=0, description="Kode kabupaten/kota")],
     loader: LoaderDep,
+    parent: Annotated[
+        bool,
+        Query(description="Include parent kabupaten information")
+    ] = False,
 ) -> list[dict[str, Any]]:
     if not loader.provinsi_exists(kode_provinsi):
         raise HTTPException(status_code=404, detail="Provinsi tidak ditemukan.")
     if not loader.kabupaten_in_provinsi(kode_kabupaten, kode_provinsi):
         raise HTTPException(status_code=404, detail="Kabupaten/Kota tidak ditemukan.")
-    return loader.kecamatan_by_kabupaten(kode_kabupaten) or []
+    return loader.kecamatan_by_kabupaten(kode_kabupaten, include_parent=parent) or []
 
 
 @router.get(
@@ -110,6 +120,10 @@ def list_desa(
     kode_kabupaten: Annotated[int, Path(gt=0, description="Kode kabupaten/kota")],
     kode_kecamatan: Annotated[int, Path(gt=0, description="Kode kecamatan")],
     loader: LoaderDep,
+    parent: Annotated[
+        bool,
+        Query(description="Include parent kecamatan information")
+    ] = False,
 ) -> list[dict[str, Any]]:
     if not loader.provinsi_exists(kode_provinsi):
         raise HTTPException(status_code=404, detail="Provinsi tidak ditemukan.")
@@ -117,4 +131,4 @@ def list_desa(
         raise HTTPException(status_code=404, detail="Kabupaten/Kota tidak ditemukan.")
     if not loader.kecamatan_in_kabupaten(kode_kecamatan, kode_kabupaten):
         raise HTTPException(status_code=404, detail="Kecamatan tidak ditemukan.")
-    return loader.desa_by_kecamatan(kode_kecamatan) or []
+    return loader.desa_by_kecamatan(kode_kecamatan, include_parent=parent) or []

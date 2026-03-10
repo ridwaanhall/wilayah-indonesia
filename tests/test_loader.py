@@ -46,7 +46,18 @@ class TestDataLoader:
 
         assert result is not None
         assert len(result) > 0
-        assert all(item["provinsi"] == 11 for item in result)
+        # By default parent should be None
+        assert all(item.get("parent") is None for item in result)
+
+    def test_kabupaten_by_provinsi_with_parent(self) -> None:
+        """Test kabupaten_by_provinsi method with parent."""
+        loader = get_loader()
+        result = loader.kabupaten_by_provinsi(11, include_parent=True)
+
+        assert result is not None
+        assert len(result) > 0
+        # All items should have parent
+        assert all(item["parent"]["kode"] == 11 for item in result)
 
     def test_kabupaten_by_provinsi_invalid(self) -> None:
         """Test kabupaten_by_provinsi with invalid code."""
@@ -103,7 +114,7 @@ class TestDataLoader:
         assert result is not None
         assert result["kode"] == 1101
         assert result["tingkat"] == 2
-        assert "provinsi" in result
+        assert "parent" in result
 
     def test_find_by_code_kecamatan(self) -> None:
         """Test find_by_code method for kecamatan."""
@@ -113,7 +124,7 @@ class TestDataLoader:
         assert result is not None
         assert result["kode"] == 110101
         assert result["tingkat"] == 3
-        assert "kabupaten" in result
+        assert "parent" in result
 
     def test_find_by_code_desa(self) -> None:
         """Test find_by_code method for desa - main requirement."""
@@ -124,7 +135,7 @@ class TestDataLoader:
         assert result["kode"] == 1101012001
         assert "nama" in result
         assert result["tingkat"] == 4
-        assert "kecamatan" in result
+        assert "parent" in result
 
     def test_find_by_code_not_found(self) -> None:
         """Test find_by_code method with invalid code."""

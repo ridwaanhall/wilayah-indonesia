@@ -36,21 +36,24 @@ class DataLoader:
         }
         self._kabupaten_by_prov: dict[int, list[dict[str, Any]]] = {}
         for item in self._kabupaten:
-            self._kabupaten_by_prov.setdefault(item["provinsi"], []).append(item)
+            parent_kode = item["parent"]["kode"]
+            self._kabupaten_by_prov.setdefault(parent_kode, []).append(item)
 
         self._kecamatan_idx: dict[int, dict[str, Any]] = {
             item["kode"]: item for item in self._kecamatan
         }
         self._kecamatan_by_kab: dict[int, list[dict[str, Any]]] = {}
         for item in self._kecamatan:
-            self._kecamatan_by_kab.setdefault(item["kabupaten"], []).append(item)
+            parent_kode = item["parent"]["kode"]
+            self._kecamatan_by_kab.setdefault(parent_kode, []).append(item)
 
         self._desa_idx: dict[int, dict[str, Any]] = {
             item["kode"]: item for item in self._desa
         }
         self._desa_by_kec: dict[int, list[dict[str, Any]]] = {}
         for item in self._desa:
-            self._desa_by_kec.setdefault(item["kecamatan"], []).append(item)
+            parent_kode = item["parent"]["kode"]
+            self._desa_by_kec.setdefault(parent_kode, []).append(item)
 
         # Build comprehensive index for all codes across all levels
         self._all_codes_idx: dict[int, dict[str, Any]] = {}
@@ -64,19 +67,36 @@ class DataLoader:
         with open(DATA_DIR / filename, encoding="utf-8") as f:
             return json.load(f)
 
+    @staticmethod
+    def _remove_parent(item: dict[str, Any]) -> dict[str, Any]:
+        """Remove parent field from item."""
+        result = dict(item)
+        result.pop("parent", None)
+        return result
+
+    @staticmethod
+    def _remove_parent_from_list(items: list[dict[str, Any]]) -> list[dict[str, Any]]:
+        """Remove parent field from list of items."""
+        return [DataLoader._remove_parent(item) for item in items]
+
     @property
     def provinsi_list(self) -> list[dict[str, Any]]:
         """Return the full list of provinces."""
         return self._provinsi
 
-    def kabupaten_by_provinsi(self, kode: int) -> list[dict[str, Any]] | None:
+    def kabupaten_by_provinsi(
+        self, kode: int, include_parent: bool = False
+    ) -> list[dict[str, Any]] | None:
         """Return regencies/cities for *kode* province, or ``None`` if unknown."""
         if kode not in self._provinsi_idx:
             return None
-        return self._kabupaten_by_prov.get(kode, [])
+        result = self._kabupaten_by_prov.get(kode, [])
+        if not include_parent and result:
+            result = self._remove_parent_from_list(result)
+        return result
 
     def kecamatan_by_kabupaten(
-        self, kode: int, kode_provinsi: int | None = None
+        self, kode: int, kode_provinsi: int | None = None, include_parent: bool = False
     ) -> list[dict[str, Any]] | None:
         """Return districts for *kode* regency, or ``None`` if unknown.
 
@@ -86,12 +106,15 @@ class DataLoader:
         item: dict[str, Any] | None = self._kabupaten_idx.get(kode)
         if item is None:
             return None
-        if kode_provinsi is not None and item["provinsi"] != kode_provinsi:
+        if kode_provinsi is not None and item["parent"]["kode"] != kode_provinsi:
             return None
-        return self._kecamatan_by_kab.get(kode, [])
+        result = self._kecamatan_by_kab.get(kode, [])
+        if not include_parent and result:
+            result = self._remove_parent_from_list(result)
+        return result
 
     def desa_by_kecamatan(
-        self, kode: int, kode_kabupaten: int | None = None
+        self, kode: int, kode_kabupaten: int | None = None, include_parent: bool = False
     ) -> list[dict[str, Any]] | None:
         """Return villages for *kode* district, or ``None`` if unknown.
 
@@ -101,9 +124,12 @@ class DataLoader:
         item: dict[str, Any] | None = self._kecamatan_idx.get(kode)
         if item is None:
             return None
-        if kode_kabupaten is not None and item["kabupaten"] != kode_kabupaten:
+        if kode_kabupaten is not None and item["parent"]["kode"] != kode_kabupaten:
             return None
-        return self._desa_by_kec.get(kode, [])
+        result = self._desa_by_kec.get(kode, [])
+        if not include_parent and result:
+            result = self._remove_parent_from_list(result)
+        return result
 
     def provinsi_exists(self, kode: int) -> bool:
         """Return ``True`` if *kode* is a known province code."""
@@ -112,12 +138,12 @@ class DataLoader:
     def kabupaten_in_provinsi(self, kode_kabupaten: int, kode_provinsi: int) -> bool:
         """Return ``True`` if *kode_kabupaten* exists and belongs to *kode_provinsi*."""
         entry: dict[str, Any] | None = self._kabupaten_idx.get(kode_kabupaten)
-        return entry is not None and entry["provinsi"] == kode_provinsi
+        return entry is not None and entry["parent"]["kode"] == kode_provinsi
 
     def kecamatan_in_kabupaten(self, kode_kecamatan: int, kode_kabupaten: int) -> bool:
         """Return ``True`` if *kode_kecamatan* exists and belongs to *kode_kabupaten*."""
         entry: dict[str, Any] | None = self._kecamatan_idx.get(kode_kecamatan)
-        return entry is not None and entry["kabupaten"] == kode_kabupaten
+        return entry is not None and entry["parent"]["kode"] == kode_kabupaten
 
     def find_by_code(self, kode: int) -> dict[str, Any] | None:
         """Return the administrative region data for *kode*, or ``None`` if not found.

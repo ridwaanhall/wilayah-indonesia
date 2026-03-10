@@ -1,4 +1,15 @@
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, Field
+from typing import Optional
+
+
+class ParentInfo(BaseModel):
+    """Parent region information."""
+
+    model_config = ConfigDict(frozen=True)
+
+    kode: int
+    nama: str
+    tingkat: int
 
 
 class WilayahBase(BaseModel):
@@ -18,19 +29,19 @@ class Provinsi(WilayahBase):
 class Kabupaten(WilayahBase):
     """Regency / city - administrative level 2."""
 
-    provinsi: int
+    parent: Optional[ParentInfo] = Field(None, description="Parent provinsi information")
 
 
 class Kecamatan(WilayahBase):
     """District - administrative level 3."""
 
-    kabupaten: int
+    parent: Optional[ParentInfo] = Field(None, description="Parent kabupaten information")
 
 
 class Desa(WilayahBase):
     """Village / sub-district - administrative level 4."""
 
-    kecamatan: int
+    parent: Optional[ParentInfo] = Field(None, description="Parent kecamatan information")
 
 
 class ErrorDetail(BaseModel):
