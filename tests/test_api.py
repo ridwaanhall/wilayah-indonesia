@@ -13,7 +13,7 @@ def client() -> TestClient:
 
 class TestRootAndOpenAPITags:
     def test_root_groups_are_exposed(self, client: TestClient) -> None:
-        response = client.get("/")
+        response = client.get("/api/")
         assert response.status_code == 200
 
         data = response.json()
@@ -36,7 +36,7 @@ class TestRootAndOpenAPITags:
 
 class TestWilayahLegacyRules:
     def test_provinsi_listing(self, client: TestClient) -> None:
-        response = client.get("/0")
+        response = client.get("/api/0")
         assert response.status_code == 200
 
         data = response.json()
@@ -45,7 +45,7 @@ class TestWilayahLegacyRules:
         assert data[0]["tingkat"] == 1
 
     def test_kabupaten_listing(self, client: TestClient) -> None:
-        response = client.get("/11")
+        response = client.get("/api/11")
         assert response.status_code == 200
 
         data = response.json()
@@ -55,7 +55,7 @@ class TestWilayahLegacyRules:
         assert data[0].get("parent") is None
 
     def test_kecamatan_listing(self, client: TestClient) -> None:
-        response = client.get("/11/1101")
+        response = client.get("/api/11/1101")
         assert response.status_code == 200
 
         data = response.json()
@@ -64,7 +64,7 @@ class TestWilayahLegacyRules:
             assert data[0]["tingkat"] == 3
 
     def test_desa_listing(self, client: TestClient) -> None:
-        response = client.get("/11/1101/110101")
+        response = client.get("/api/11/1101/110101")
         assert response.status_code == 200
 
         data = response.json()
@@ -73,13 +73,13 @@ class TestWilayahLegacyRules:
             assert data[0]["tingkat"] == 4
 
     def test_invalid_wilayah_segment_returns_422(self, client: TestClient) -> None:
-        response = client.get("/11/1")
+        response = client.get("/api/11/1")
         assert response.status_code == 422
 
 
 class TestSearchRules:
     def test_search_by_code_success(self, client: TestClient) -> None:
-        response = client.get("/kode/110101")
+        response = client.get("/api/kode/110101")
         assert response.status_code == 200
 
         data = response.json()
@@ -87,14 +87,14 @@ class TestSearchRules:
         assert data["tingkat"] == 3
 
     def test_search_not_found(self, client: TestClient) -> None:
-        response = client.get("/kode/999999999")
+        response = client.get("/api/kode/999999999")
         assert response.status_code == 404
         assert "detail" in response.json()
 
 
 class TestSimpleRules:
     def test_simple_prefix_tingkat_1(self, client: TestClient) -> None:
-        response = client.get("/simple/11")
+        response = client.get("/api/s/11")
         assert response.status_code == 200
 
         data = response.json()
@@ -104,39 +104,37 @@ class TestSimpleRules:
         assert data["data"]["kode_singkat"] == "11"
 
     def test_simple_prefix_tingkat_2(self, client: TestClient) -> None:
-        response = client.get("/simple/11/01")
+        response = client.get("/api/s/11/1")
         assert response.status_code == 200
 
         data = response.json()
         assert data["success"] is True
         assert data["data"]["tingkat"] == 2
-        assert data["data"]["kode_lengkap"] == "1101"
+        assert data["data"]["kode_lengkap"] == 1101
         assert data["data"]["kode_singkat"] == "11/01"
 
     def test_simple_prefix_tingkat_3(self, client: TestClient) -> None:
-        response = client.get("/simple/11/01/01")
+        response = client.get("/api/s/11/1/1")
         assert response.status_code == 200
 
         data = response.json()
         assert data["success"] is True
         assert data["data"]["tingkat"] == 3
-        assert data["data"]["kode_lengkap"] == "110101"
+        assert data["data"]["kode_lengkap"] == 110101
         assert data["data"]["kode_singkat"] == "11/01/01"
 
-    def test_simple_alias_on_wilayah_path(self, client: TestClient) -> None:
-        response = client.get("/11/01/01")
+    def test_simple_zero_padded_response(self, client: TestClient) -> None:
+        response = client.get("/api/s/11/1/1")
         assert response.status_code == 200
 
         data = response.json()
         assert data["success"] is True
         assert data["data"]["tingkat"] == 3
-        assert data["data"]["kode_lengkap"] == "110101"
+        assert data["data"]["kode_lengkap"] == 110101
 
-    def test_simple_alias_level_2_on_wilayah_path(self, client: TestClient) -> None:
-        response = client.get("/11/01")
-        assert response.status_code == 200
+    def test_simple_not_found_response(self, client: TestClient) -> None:
+        response = client.get("/api/s/99/1/1")
+        assert response.status_code == 404
 
         data = response.json()
-        assert data["success"] is True
-        assert data["data"]["tingkat"] == 2
-        assert data["data"]["kode_lengkap"] == "1101"
+        assert "detail" in data

@@ -7,6 +7,7 @@ from app.core.http import register_exception_handlers, register_http_middleware
 
 
 def create_app() -> FastAPI:
+    """Create and configure the FastAPI application instance."""
     settings = get_settings()
 
     app = FastAPI(
@@ -18,16 +19,16 @@ def create_app() -> FastAPI:
         ),
         redirect_slashes=False,
         openapi_tags=[
-            {"name": "root", "description": "Informasi dasar API."},
-            {"name": "search", "description": "Pencarian wilayah berdasarkan kode."},
+            {"name": "root", "description": "Informasi dasar API pada namespace /api."},
+            {"name": "search", "description": "Pencarian wilayah berdasarkan kode penuh pada /api/kode/{kode}."},
             {
                 "name": "wilayah",
-                "description": "Endpoint rule lama untuk list data wilayah berdasarkan hierarki kode lengkap.",
+                "description": "Endpoint hierarki kode penuh pada namespace /api.",
             },
             {
                 "name": "simple",
                 "description": (
-                    "Endpoint shortcut untuk kode sederhana. "
+                    "Endpoint shorthand pada /api/s. "
                     "Tingkat 1 = provinsi, tingkat 2 = kabupaten/kota, tingkat 3 = kecamatan."
                 ),
             },

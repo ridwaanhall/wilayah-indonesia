@@ -1,59 +1,57 @@
 # Wilayah Indonesia API
 
-Public API untuk data wilayah administratif Indonesia berbasis FastAPI, dengan struktur proyek modern, endpoint hierarki lama (compatible), serta endpoint simple untuk kode ringkas.
+Layanan API wilayah administratif Indonesia berbasis FastAPI dengan namespace standar /api, struktur proyek profesional, dan dukungan shorthand endpoint melalui /api/s.
 
-## Highlights
+## Ringkasan
 
-- Menggunakan FastAPI standard stack melalui satu dependency utama: `fastapi[standard]`
-- Dependency dikelola dengan `uv` (`pyproject.toml` + `uv.lock`)
-- Struktur proyek layer-based: `api`, `services`, `schemas`, `core`
-- Dokumentasi OpenAPI terpisah per grup endpoint: `root`, `search`, `wilayah`, `simple`
-- Dukungan shorthand code, misalnya `11/01/01` untuk kecamatan `110101`
+- Runtime dependency menggunakan fastapi[standard]
+- Dependency management menggunakan uv dengan pyproject.toml dan uv.lock
+- Arsitektur OOP dan DRY pada service layer
+- Dokumentasi OpenAPI dibagi dalam grup root, search, wilayah, dan simple
+- Endpoint simple menggunakan namespace /api/s dengan respons terstandar
 
-## Endpoint Groups
+## Endpoint Namespace
+
+Semua endpoint data berada di bawah prefix /api.
 
 ### root
 
-- `GET /`
+- GET /api/
 
 ### search
 
-- `GET /kode/{kode}`
+- GET /api/kode/{kode}
 
-### wilayah (aturan lama)
+### wilayah (kode penuh)
 
-- `GET /0`
-- `GET /{kode_provinsi}`
-- `GET /{kode_provinsi}/{kode_kabupaten}`
-- `GET /{kode_provinsi}/{kode_kabupaten}/{kode_kecamatan}`
+- GET /api/0
+- GET /api/{kode_provinsi}
+- GET /api/{kode_provinsi}/{kode_kabupaten}
+- GET /api/{kode_provinsi}/{kode_kabupaten}/{kode_kecamatan}
 
 Catatan:
-- `parent=true` tetap didukung pada endpoint list wilayah level 2, 3, dan 4.
 
-### simple (aturan ringkas)
+- Query parent=true tetap didukung pada endpoint list wilayah level 2 sampai 4.
 
-- `GET /simple/{kode_provinsi}`
-- `GET /simple/{kode_provinsi}/{nomor_kabupaten}`
-- `GET /simple/{kode_provinsi}/{nomor_kabupaten}/{nomor_kecamatan}`
+### simple (shorthand)
 
-Alias kompatibilitas juga tersedia pada jalur lama:
-- `GET /{kode_provinsi}/{nomor_kabupaten}`
-- `GET /{kode_provinsi}/{nomor_kabupaten}/{nomor_kecamatan}`
+- GET /api/s/{kode_provinsi}
+- GET /api/s/{kode_provinsi}/{nomor_kabupaten}
+- GET /api/s/{kode_provinsi}/{nomor_kabupaten}/{nomor_kecamatan}
 
 Contoh:
-- `11/1101/110101` (format lama)
-- `11/01/01` (format simple)
+
+- /api/s/11/1/1 akan diproses menjadi kode lengkap 110101
+- Respons tetap menampilkan kode_singkat sebagai format dua digit: 11/01/01
 
 ## Standar Respons Simple
-
-Endpoint simple memakai respons terstruktur:
 
 ```json
 {
   "success": true,
   "message": "Data kecamatan berhasil ditemukan.",
   "data": {
-    "kode_lengkap": "110101",
+    "kode_lengkap": 110101,
     "kode_singkat": "11/01/01",
     "kode": 110101,
     "nama": "BAKONGAN",
@@ -68,43 +66,63 @@ Endpoint simple memakai respons terstruktur:
 }
 ```
 
-Aturan tingkat:
+Aturan tingkat pada simple endpoint:
 
-- `tingkat=1` untuk `provinsi`
-- `tingkat=2` untuk `kabupaten/kota`
-- `tingkat=3` untuk `kecamatan`
+- tingkat 1: provinsi
+- tingkat 2: kabupaten/kota
+- tingkat 3: kecamatan
 
-## Menjalankan Proyek (uv + fastapi)
+## Standar Respons Error
 
-### 1. Sinkronisasi dependency
+Untuk data yang tidak ditemukan, API menggunakan pesan profesional dan konsisten:
+
+```json
+{
+  "detail": "Data wilayah yang diminta tidak ditemukan. Pastikan kode wilayah benar dan tersedia pada dataset resmi."
+}
+```
+
+Untuk validasi parameter yang tidak sesuai:
+
+```json
+{
+  "detail": "Parameter permintaan tidak valid. Periksa kembali format dan nilai kode wilayah yang dikirim."
+}
+```
+
+## Menjalankan Proyek
+
+### Sinkronisasi dependency
 
 ```bash
 uv sync
 ```
 
-### 2. Jalankan server development
+### Menjalankan server development
 
 ```bash
 uv run fastapi dev app/main.py
 ```
 
-Atau, jika ingin langsung:
+Alternatif:
 
 ```bash
-fastapi dev app/main.py
+fastapi dev
 ```
 
-API akan aktif di `http://127.0.0.1:8000`.
+Server default: <http://127.0.0.1:8000>
 
 ## Dokumentasi API
 
-- Swagger UI: `http://127.0.0.1:8000/docs`
-- ReDoc: `http://127.0.0.1:8000/redoc`
+- Swagger UI: <http://127.0.0.1:8000/docs>
+- ReDoc: <http://127.0.0.1:8000/redoc>
+
+Simple endpoint sudah memiliki contoh respons langsung pada OpenAPI untuk tingkat 1, 2, dan 3.
 
 ## Testing
 
 ```bash
-uv run pytest -v
+uv run --group dev pytest tests -q
 ```
 
 ## Struktur Proyek
@@ -114,6 +132,7 @@ wilayah-indonesia/
 ├── app/
 │   ├── api/
 │   │   ├── deps.py
+│   │   ├── examples.py
 │   │   ├── router.py
 │   │   └── endpoints/
 │   │       ├── root.py
@@ -128,7 +147,8 @@ wilayah-indonesia/
 │   │   └── wilayah.py
 │   ├── services/
 │   │   ├── data_loader.py
-│   │   └── simple.py
+│   │   ├── simple.py
+│   │   └── wilayah.py
 │   └── main.py
 ├── api/
 │   └── main.py
@@ -142,7 +162,7 @@ wilayah-indonesia/
 
 ## Deployment
 
-`api/main.py` tetap disediakan sebagai compatibility entrypoint untuk platform yang masih mengacu ke `api.main:app`.
+Entrypoint kompatibilitas api/main.py tetap dipertahankan untuk deployment yang mengacu ke api.main:app.
 
 ## License
 

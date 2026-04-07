@@ -1,4 +1,4 @@
-from typing import Literal
+from typing import Literal, TypeAlias
 
 from pydantic import BaseModel, ConfigDict, Field
 
@@ -45,15 +45,18 @@ class Desa(WilayahBase):
     parent: ParentInfo | None = Field(default=None)
 
 
+SimpleLevel: TypeAlias = Literal["provinsi", "kabupaten", "kecamatan"]
+
+
 class SimpleWilayahData(BaseModel):
     """Response body for simple code resolution."""
 
-    kode_lengkap: str = Field(description="Canonical wilayah code")
+    kode_lengkap: int = Field(description="Canonical wilayah code as integer")
     kode_singkat: str = Field(description="Simple shorthand code")
     kode: int = Field(description="Canonical wilayah code as integer")
     nama: str
     tingkat: int = Field(description="Administrative level (1=provinsi, 2=kabupaten, 3=kecamatan)")
-    level: Literal["provinsi", "kabupaten", "kecamatan"]
+    level: SimpleLevel
     parent: ParentInfo | None = None
 
 

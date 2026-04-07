@@ -1,6 +1,6 @@
 from collections.abc import Awaitable, Callable
 
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Request, status
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
 from starlette.exceptions import HTTPException as StarletteHTTPException
@@ -8,6 +8,8 @@ from starlette.responses import Response
 
 
 def register_http_middleware(app: FastAPI) -> None:
+    """Register middleware that applies security and caching headers."""
+
     @app.middleware("http")
     async def security_headers(
         request: Request,
@@ -31,6 +33,8 @@ def register_http_middleware(app: FastAPI) -> None:
 
 
 def register_exception_handlers(app: FastAPI) -> None:
+    """Register app-wide exception handlers with consistent response payloads."""
+
     @app.exception_handler(StarletteHTTPException)
     async def http_exception_handler(
         request: Request,
@@ -43,11 +47,24 @@ def register_exception_handlers(app: FastAPI) -> None:
         request: Request,
         exc: RequestValidationError,
     ) -> JSONResponse:
-        return JSONResponse(status_code=422, content={"detail": "Parameter tidak valid."})
+        return JSONResponse(
+            status_code=status.HTTP_422_UNPROCESSABLE_CONTENT,
+            content={
+                "detail": (
+                    "Parameter permintaan tidak valid. "
+                    "Periksa kembali format dan nilai kode wilayah yang dikirim."
+                )
+            },
+        )
 
     @app.exception_handler(Exception)
     async def generic_exception_handler(request: Request, exc: Exception) -> JSONResponse:
         return JSONResponse(
-            status_code=500,
-            content={"detail": "Terjadi kesalahan pada server."},
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            content={
+                "detail": (
+                    "Terjadi kesalahan internal pada server. "
+                    "Silakan coba kembali dalam beberapa saat."
+                )
+            },
         )

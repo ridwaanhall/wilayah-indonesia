@@ -9,6 +9,7 @@ router = APIRouter(tags=["root"])
     description="Endpoint utama API dengan informasi versi dan tautan dokumentasi.",
 )
 def api_root(request: Request) -> dict[str, object]:
+    """Return API index and grouped endpoint catalog."""
     base_url = str(request.base_url).rstrip("/")
     return {
         "name": request.app.title,
@@ -19,19 +20,18 @@ def api_root(request: Request) -> dict[str, object]:
             "openapi": f"{base_url}/openapi.json",
         },
         "groups": {
-            "root": ["/"],
-            "search": ["/kode/{kode}"],
+            "root": ["/api/"],
+            "search": ["/api/kode/{kode}"],
             "wilayah": [
-                "/0",
-                "/{kode_provinsi}",
-                "/{kode_provinsi}/{kode_kabupaten}",
-                "/{kode_provinsi}/{kode_kabupaten}/{kode_kecamatan}",
+                "/api/0",
+                "/api/{kode_provinsi}",
+                "/api/{kode_provinsi}/{kode_kabupaten}",
+                "/api/{kode_provinsi}/{kode_kabupaten}/{kode_kecamatan}",
             ],
             "simple": [
-                "/simple/{kode_provinsi}",
-                "/simple/{kode_provinsi}/{nomor_kabupaten}",
-                "/simple/{kode_provinsi}/{nomor_kabupaten}/{nomor_kecamatan}",
-                "alias: /{kode_provinsi}/{nomor_kabupaten}/{nomor_kecamatan}",
+                "/api/s/{kode_provinsi}",
+                "/api/s/{kode_provinsi}/{nomor_kabupaten}",
+                "/api/s/{kode_provinsi}/{nomor_kabupaten}/{nomor_kecamatan}",
             ],
         },
     }
