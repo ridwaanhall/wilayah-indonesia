@@ -17,7 +17,7 @@ def create_app() -> FastAPI:
             "API data wilayah administratif Indonesia untuk level provinsi, "
             "kabupaten/kota, kecamatan, dan desa/kelurahan."
         ),
-        redirect_slashes=False,
+        redirect_slashes=True,
         openapi_tags=[
             {"name": "root", "description": "Informasi dasar API pada namespace /api."},
             {"name": "search", "description": "Pencarian wilayah berdasarkan kode penuh pada /api/kode/{kode}."},
