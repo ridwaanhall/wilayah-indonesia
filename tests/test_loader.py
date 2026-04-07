@@ -1,6 +1,6 @@
 """Tests for DataLoader class."""
 
-from api.loader import DataLoader, get_loader
+from app.services.data_loader import DataLoader, get_loader
 
 
 class TestDataLoader:
