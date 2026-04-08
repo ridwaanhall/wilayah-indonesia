@@ -33,7 +33,7 @@ router = APIRouter(tags=["search"])
             "description": "Kode wilayah tidak tersedia pada dataset.",
             "content": {"application/json": {"example": ERROR_NOT_FOUND_EXAMPLE}},
         },
-        status.HTTP_422_UNPROCESSABLE_CONTENT: {
+        422: {
             "model": ErrorResponse,
             "description": "Format kode wilayah tidak valid.",
             "content": {"application/json": {"example": ERROR_VALIDATION_EXAMPLE}},

@@ -34,7 +34,7 @@ router = APIRouter(prefix="/s", tags=["simple"])
             "description": "Provinsi tidak ditemukan.",
             "content": {"application/json": {"example": ERROR_NOT_FOUND_EXAMPLE}},
         },
-        status.HTTP_422_UNPROCESSABLE_CONTENT: {
+        422: {
             "model": ErrorResponse,
             "description": "Format parameter tidak valid.",
             "content": {"application/json": {"example": ERROR_VALIDATION_EXAMPLE}},
@@ -73,7 +73,7 @@ def simple_provinsi(
             "description": "Provinsi atau kabupaten/kota tidak ditemukan.",
             "content": {"application/json": {"example": ERROR_NOT_FOUND_EXAMPLE}},
         },
-        status.HTTP_422_UNPROCESSABLE_CONTENT: {
+        422: {
             "model": ErrorResponse,
             "description": "Format parameter tidak valid.",
             "content": {"application/json": {"example": ERROR_VALIDATION_EXAMPLE}},
@@ -121,7 +121,7 @@ def simple_kabupaten(
             "description": "Provinsi, kabupaten/kota, atau kecamatan tidak ditemukan.",
             "content": {"application/json": {"example": ERROR_NOT_FOUND_EXAMPLE}},
         },
-        status.HTTP_422_UNPROCESSABLE_CONTENT: {
+        422: {
             "model": ErrorResponse,
             "description": "Format parameter tidak valid.",
             "content": {"application/json": {"example": ERROR_VALIDATION_EXAMPLE}},
@@ -171,7 +171,7 @@ def simple_kecamatan(
             "description": "Wilayah referensi tidak ditemukan pada hierarki yang diberikan.",
             "content": {"application/json": {"example": ERROR_NOT_FOUND_EXAMPLE}},
         },
-        status.HTTP_422_UNPROCESSABLE_CONTENT: {
+        422: {
             "model": ErrorResponse,
             "description": "Format parameter tidak valid.",
             "content": {"application/json": {"example": ERROR_VALIDATION_EXAMPLE}},

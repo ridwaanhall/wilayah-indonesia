@@ -56,7 +56,7 @@ def list_provinsi(
             "description": "Provinsi tidak ditemukan.",
             "content": {"application/json": {"example": ERROR_NOT_FOUND_EXAMPLE}},
         },
-        status.HTTP_422_UNPROCESSABLE_CONTENT: {
+        422: {
             "model": ErrorResponse,
             "description": "Format kode provinsi tidak valid.",
             "content": {"application/json": {"example": ERROR_VALIDATION_EXAMPLE}},
@@ -95,7 +95,7 @@ def list_kabupaten(
             "description": "Provinsi atau kabupaten/kota tidak ditemukan.",
             "content": {"application/json": {"example": ERROR_NOT_FOUND_EXAMPLE}},
         },
-        status.HTTP_422_UNPROCESSABLE_CONTENT: {
+        422: {
             "model": ErrorResponse,
             "description": "Format kode provinsi/kabupaten tidak valid.",
             "content": {"application/json": {"example": ERROR_VALIDATION_EXAMPLE}},
@@ -139,7 +139,7 @@ def list_kecamatan(
             "description": "Provinsi, kabupaten/kota, atau kecamatan tidak ditemukan.",
             "content": {"application/json": {"example": ERROR_NOT_FOUND_EXAMPLE}},
         },
-        status.HTTP_422_UNPROCESSABLE_CONTENT: {
+        422: {
             "model": ErrorResponse,
             "description": "Format kode wilayah tidak valid.",
             "content": {"application/json": {"example": ERROR_VALIDATION_EXAMPLE}},

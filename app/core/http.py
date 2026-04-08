@@ -104,11 +104,11 @@ def register_exception_handlers(app: FastAPI) -> None:
     ) -> JSONResponse:
         return error_response(
             request,
-            status_code=status.HTTP_422_UNPROCESSABLE_CONTENT,
+            status_code=422,
             code="VALIDATION_FAILED",
             message="One or more request parameters are invalid.",
-            detail="Parameter validation failed for the incoming request.",
-            hint="Check the fields array for per-field validation details.",
+            detail="Request validation failed.",
+            hint="Fix the invalid request parameters and try again. See fields for details.",
             fields=_validation_fields(exc),
         )
 

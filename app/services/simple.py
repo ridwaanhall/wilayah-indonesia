@@ -20,7 +20,7 @@ class SimpleWilayahService:
         """Validate and return a two-digit segment string."""
         if value < 1 or value > 99:
             raise ApiException(
-                status_code=status.HTTP_422_UNPROCESSABLE_CONTENT,
+                status_code=422,
                 code="INVALID_REGION_CODE",
                 message="The region code format is invalid.",
                 detail=f"Parameter {name} must be an integer between 1 and 99.",
@@ -41,7 +41,7 @@ class SimpleWilayahService:
         """Validate and return a four-digit segment string."""
         if value < 1 or value > 9999:
             raise ApiException(
-                status_code=status.HTTP_422_UNPROCESSABLE_CONTENT,
+                status_code=422,
                 code="INVALID_REGION_CODE",
                 message="The region code format is invalid.",
                 detail=f"Parameter {name} must be an integer between 1 and 9999.",

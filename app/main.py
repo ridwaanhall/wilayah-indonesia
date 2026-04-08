@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Request
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse
 
@@ -7,11 +7,11 @@ from app.core.config import get_settings
 from app.core.http import register_exception_handlers, register_http_middleware
 
 
-def _landing_html(*, base_url: str, app_name: str, app_version: str, api_version: str) -> str:
+def _landing_html(*, app_name: str, app_version: str, api_version: str) -> str:
     """Build the root landing page HTML."""
-    docs_url = f"{base_url}/docs"
-    openapi_url = f"{base_url}/openapi.json"
-    api_url = f"{base_url}/api"
+    docs_url = "/docs"
+    openapi_url = "/openapi.json"
+    api_url = "/api"
     title = f"{app_name} - Indonesia Administrative Region API"
     description = (
         "Production-ready FastAPI service for Indonesian administrative region data "
@@ -31,13 +31,13 @@ def _landing_html(*, base_url: str, app_name: str, app_version: str, api_version
     <meta name="description" content="{description}" />
     <meta name="keywords" content="{keywords}" />
     <meta name="robots" content="index, follow" />
-    <link rel="canonical" href="{base_url}/" />
+    <link rel="canonical" href="/" />
     <link rel="icon" href="https://rone.dev/static/img/favicon/favicon.ico" />
 
     <meta property="og:type" content="website" />
     <meta property="og:title" content="{title}" />
     <meta property="og:description" content="{description}" />
-    <meta property="og:url" content="{base_url}/" />
+    <meta property="og:url" content="/" />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="{title}" />
@@ -141,12 +141,10 @@ def create_app() -> FastAPI:
     register_exception_handlers(app)
 
     @app.get("/", include_in_schema=False, response_class=HTMLResponse)
-    async def landing_page(request: Request) -> HTMLResponse:
+    async def landing_page() -> HTMLResponse:
         """Serve the public landing page at the root URL."""
-        base_url = str(request.base_url).rstrip("/")
         return HTMLResponse(
             _landing_html(
-                base_url=base_url,
                 app_name=settings.app_name,
                 app_version=settings.app_version,
                 api_version=settings.api_version,

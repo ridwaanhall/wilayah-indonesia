@@ -34,7 +34,7 @@ class WilayahService:
         """Validate numeric code length for hierarchical endpoints."""
         if len(str(code)) != length:
             raise ApiException(
-                status_code=status.HTTP_422_UNPROCESSABLE_CONTENT,
+                status_code=422,
                 code="INVALID_REGION_CODE",
                 message="The region code format is invalid.",
                 detail=f"Parameter {name} must be a {length}-digit numeric code. Received: {code}.",
@@ -104,7 +104,7 @@ class WilayahService:
     def _ensure_search_code_length(kode: int) -> None:
         if len(str(kode)) not in {2, 4, 6, 10}:
             raise ApiException(
-                status_code=status.HTTP_422_UNPROCESSABLE_CONTENT,
+                status_code=422,
                 code="INVALID_REGION_CODE",
                 message="The region code format is invalid.",
                 detail=(

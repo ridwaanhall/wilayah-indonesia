@@ -46,7 +46,7 @@ ERROR_NOT_FOUND_EXAMPLE: dict[str, object] = {
         "message": "The requested region could not be found.",
         "detail": "No region with code 330999 exists in the national reference dataset.",
         "hint": "Verify the region code using GET /api/0 for valid province codes.",
-        "docs": "/docs/errors#REGION_NOT_FOUND",
+        "docs": "https://api.example.com/docs/errors#REGION_NOT_FOUND",
         "fields": None,
     },
     "meta": {
@@ -63,9 +63,9 @@ ERROR_VALIDATION_EXAMPLE: dict[str, object] = {
     "error": {
         "code": "VALIDATION_FAILED",
         "message": "One or more request parameters are invalid.",
-        "detail": "Parameter validation failed for incoming request.",
-        "hint": "Check the fields array for per-field details.",
-        "docs": "/docs/errors#VALIDATION_FAILED",
+        "detail": "Request validation failed.",
+        "hint": "Fix the invalid request parameters and try again. See fields for details.",
+        "docs": "https://api.example.com/docs/errors#VALIDATION_FAILED",
         "fields": [
             {
                 "field": "kode_provinsi",
