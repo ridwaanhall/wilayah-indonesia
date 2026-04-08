@@ -1,7 +1,9 @@
 from functools import lru_cache
+from dotenv import load_dotenv
 
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
+load_dotenv()  # Load environment variables from .env file at startup
 
 class Settings(BaseSettings):
     """Application settings loaded from environment variables."""
@@ -14,6 +16,7 @@ class Settings(BaseSettings):
 
     app_name: str = "Wilayah Indonesia API"
     app_version: str = "3.0.0"
+    DEBUG: bool = False
     allowed_origins: str = ""
 
     @property

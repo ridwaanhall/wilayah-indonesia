@@ -1,68 +1,35 @@
-from typing import Literal, TypeAlias
+from typing import Literal
 
 from pydantic import BaseModel, ConfigDict, Field
 
-
-class ParentInfo(BaseModel):
-    """Parent region information."""
-
-    model_config = ConfigDict(frozen=True)
-
-    kode: int
-    nama: str
-    tingkat: int
+RegionType = Literal["province", "regency", "district", "village"]
 
 
-class WilayahBase(BaseModel):
-    """Base schema for all administrative region levels."""
+class RegionParent(BaseModel):
+    """Recursive parent chain object for region resources."""
 
     model_config = ConfigDict(frozen=True)
 
-    kode: int
-    nama: str
-    tingkat: int
+    code: int
+    short_code: str
+    name: str
+    depth: int = Field(ge=1, le=4)
+    type: RegionType
+    parent: "RegionParent | None" = None
 
 
-class Provinsi(WilayahBase):
-    """Province schema (tingkat 1)."""
+class RegionResource(BaseModel):
+    """Canonical region resource returned by all data endpoints."""
+
+    model_config = ConfigDict(frozen=True)
+
+    code: int
+    short_code: str
+    name: str
+    depth: int = Field(ge=1, le=4)
+    type: RegionType
+    has_children: bool
+    parent: RegionParent | None = None
 
 
-class Kabupaten(WilayahBase):
-    """Regency/city schema (tingkat 2)."""
-
-    parent: ParentInfo | None = Field(default=None)
-
-
-class Kecamatan(WilayahBase):
-    """District schema (tingkat 3)."""
-
-    parent: ParentInfo | None = Field(default=None)
-
-
-class Desa(WilayahBase):
-    """Village schema (tingkat 4)."""
-
-    parent: ParentInfo | None = Field(default=None)
-
-
-SimpleLevel: TypeAlias = Literal["provinsi", "kabupaten", "kecamatan"]
-
-
-class SimpleWilayahData(BaseModel):
-    """Response body for simple code resolution."""
-
-    kode_lengkap: int = Field(description="Canonical wilayah code as integer")
-    kode_singkat: str = Field(description="Simple shorthand code")
-    kode: int = Field(description="Canonical wilayah code as integer")
-    nama: str
-    tingkat: int = Field(description="Administrative level (1=provinsi, 2=kabupaten, 3=kecamatan)")
-    level: SimpleLevel
-    parent: ParentInfo | None = None
-
-
-class SimpleWilayahResponse(BaseModel):
-    """Standard success response for the simple endpoints."""
-
-    success: Literal[True] = True
-    message: str
-    data: SimpleWilayahData
+RegionParent.model_rebuild()

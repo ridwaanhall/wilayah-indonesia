@@ -1,13 +1,54 @@
-from pydantic import BaseModel
+"""Shared API response schema definitions."""
+
+from typing import Any
+
+from pydantic import BaseModel, Field
 
 
-class ErrorDetail(BaseModel):
-    """Standard error response body."""
+class MetaInfo(BaseModel):
+    """Metadata included in every API response."""
 
+    api_version: str = Field(description="API version identifier", examples=["v3"])
+    timestamp: str = Field(description="ISO 8601 UTC timestamp")
+    request_id: str = Field(description="Unique request identifier")
+    duration_ms: int = Field(ge=0, description="Server processing duration in milliseconds")
+
+
+class ValidationField(BaseModel):
+    """Per-field validation error details."""
+
+    field: str
+    value: Any
+    rule: str
+    message: str
+
+
+class ErrorInfo(BaseModel):
+    """Standardized error shape inside the response envelope."""
+
+    code: str
+    message: str
     detail: str
+    hint: str
+    docs: str
+    fields: list[ValidationField] | None = None
 
 
-class ErrorResponse(BaseModel):
-    """Standardized professional error response schema."""
+class PaginationInfo(BaseModel):
+    """Pagination payload used by all list endpoints."""
 
-    detail: str
+    total: int = Field(ge=0)
+    per_page: int = Field(ge=0)
+    has_next: bool
+    has_prev: bool
+    next_cursor: str | None = None
+    prev_cursor: str | None = None
+
+
+class ApiEnvelope(BaseModel):
+    """Universal top-level API response envelope."""
+
+    success: bool
+    data: Any | None
+    error: ErrorInfo | None
+    meta: MetaInfo

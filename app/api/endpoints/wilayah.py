@@ -1,13 +1,13 @@
 """Wilayah hierarchy endpoints using full administrative codes."""
 
-from typing import Annotated, Any
+from typing import Annotated
 
-from fastapi import APIRouter, Depends, Path, Query, status
+from fastapi import APIRouter, Depends, Path, Query, Request, status
 
 from app.api.deps import get_wilayah_service
 from app.api.examples import ERROR_NOT_FOUND_EXAMPLE, ERROR_VALIDATION_EXAMPLE
-from app.schemas.common import ErrorResponse
-from app.schemas.wilayah import Desa, Kabupaten, Kecamatan, Provinsi
+from app.core.responses import list_response
+from app.schemas.common import ApiEnvelope
 from app.services.wilayah import WilayahService
 
 router = APIRouter(tags=["wilayah"])
@@ -18,13 +18,14 @@ router = APIRouter(tags=["wilayah"])
     summary="Daftar Provinsi",
     description="Daftar seluruh provinsi di Indonesia.",
     status_code=status.HTTP_200_OK,
-    response_model=list[Provinsi],
+    response_model=ApiEnvelope,
 )
 def list_provinsi(
+    request: Request,
     service: Annotated[WilayahService, Depends(get_wilayah_service)],
-) -> list[dict[str, Any]]:
+) -> object:
     """List all provinces in Indonesia."""
-    return service.list_provinsi()
+    return list_response(request, service.list_provinsi())
 
 
 @router.get(
@@ -32,27 +33,31 @@ def list_provinsi(
     summary="Daftar Kabupaten/Kota",
     description="Daftar kabupaten/kota pada provinsi tertentu.",
     status_code=status.HTTP_200_OK,
-    response_model=list[Kabupaten],
+    response_model=ApiEnvelope,
     responses={
         status.HTTP_404_NOT_FOUND: {
-            "model": ErrorResponse,
+            "model": ApiEnvelope,
             "description": "Provinsi tidak ditemukan.",
             "content": {"application/json": {"example": ERROR_NOT_FOUND_EXAMPLE}},
         },
         status.HTTP_422_UNPROCESSABLE_CONTENT: {
-            "model": ErrorResponse,
+            "model": ApiEnvelope,
             "description": "Format kode provinsi tidak valid.",
             "content": {"application/json": {"example": ERROR_VALIDATION_EXAMPLE}},
         },
     },
 )
 def list_kabupaten(
+    request: Request,
     kode_provinsi: Annotated[int, Path(gt=0, description="Kode provinsi 2 digit")],
     service: Annotated[WilayahService, Depends(get_wilayah_service)],
     parent: Annotated[bool, Query(description="Sertakan parent provinsi")] = False,
-) -> list[dict[str, Any]]:
+) -> object:
     """List kabupaten/kota by province code."""
-    return service.list_kabupaten(kode_provinsi, include_parent=parent)
+    return list_response(
+        request,
+        service.list_kabupaten(kode_provinsi, include_parent=parent),
+    )
 
 
 @router.get(
@@ -60,31 +65,35 @@ def list_kabupaten(
     summary="Daftar Kecamatan",
     description="Daftar kecamatan berdasarkan kode provinsi dan kode kabupaten/kota penuh.",
     status_code=status.HTTP_200_OK,
-    response_model=list[Kecamatan],
+    response_model=ApiEnvelope,
     responses={
         status.HTTP_404_NOT_FOUND: {
-            "model": ErrorResponse,
+            "model": ApiEnvelope,
             "description": "Provinsi atau kabupaten/kota tidak ditemukan.",
             "content": {"application/json": {"example": ERROR_NOT_FOUND_EXAMPLE}},
         },
         status.HTTP_422_UNPROCESSABLE_CONTENT: {
-            "model": ErrorResponse,
+            "model": ApiEnvelope,
             "description": "Format kode provinsi/kabupaten tidak valid.",
             "content": {"application/json": {"example": ERROR_VALIDATION_EXAMPLE}},
         },
     },
 )
 def list_kecamatan(
+    request: Request,
     kode_provinsi: Annotated[int, Path(gt=0, description="Kode provinsi 2 digit")],
     kode_kabupaten: Annotated[int, Path(gt=0, description="Kode kabupaten/kota 4 digit")],
     service: Annotated[WilayahService, Depends(get_wilayah_service)],
     parent: Annotated[bool, Query(description="Sertakan parent kabupaten")] = False,
-) -> list[dict[str, Any]]:
+) -> object:
     """List kecamatan by full province and kabupaten codes."""
-    return service.list_kecamatan(
-        kode_provinsi=kode_provinsi,
-        kode_kabupaten=kode_kabupaten,
-        include_parent=parent,
+    return list_response(
+        request,
+        service.list_kecamatan(
+            kode_provinsi=kode_provinsi,
+            kode_kabupaten=kode_kabupaten,
+            include_parent=parent,
+        ),
     )
 
 
@@ -93,31 +102,35 @@ def list_kecamatan(
     summary="Daftar Desa/Kelurahan",
     description="Daftar desa/kelurahan berdasarkan kode hierarki wilayah penuh.",
     status_code=status.HTTP_200_OK,
-    response_model=list[Desa],
+    response_model=ApiEnvelope,
     responses={
         status.HTTP_404_NOT_FOUND: {
-            "model": ErrorResponse,
+            "model": ApiEnvelope,
             "description": "Provinsi, kabupaten/kota, atau kecamatan tidak ditemukan.",
             "content": {"application/json": {"example": ERROR_NOT_FOUND_EXAMPLE}},
         },
         status.HTTP_422_UNPROCESSABLE_CONTENT: {
-            "model": ErrorResponse,
+            "model": ApiEnvelope,
             "description": "Format kode wilayah tidak valid.",
             "content": {"application/json": {"example": ERROR_VALIDATION_EXAMPLE}},
         },
     },
 )
 def list_desa(
+    request: Request,
     kode_provinsi: Annotated[int, Path(gt=0, description="Kode provinsi 2 digit")],
     kode_kabupaten: Annotated[int, Path(gt=0, description="Kode kabupaten/kota 4 digit")],
     kode_kecamatan: Annotated[int, Path(gt=0, description="Kode kecamatan 6 digit")],
     service: Annotated[WilayahService, Depends(get_wilayah_service)],
     parent: Annotated[bool, Query(description="Sertakan parent kecamatan")] = False,
-) -> list[dict[str, Any]]:
+) -> object:
     """List desa by full province, kabupaten, and kecamatan codes."""
-    return service.list_desa(
-        kode_provinsi=kode_provinsi,
-        kode_kabupaten=kode_kabupaten,
-        kode_kecamatan=kode_kecamatan,
-        include_parent=parent,
+    return list_response(
+        request,
+        service.list_desa(
+            kode_provinsi=kode_provinsi,
+            kode_kabupaten=kode_kabupaten,
+            kode_kecamatan=kode_kecamatan,
+            include_parent=parent,
+        ),
     )

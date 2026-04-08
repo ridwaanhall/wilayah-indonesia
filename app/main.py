@@ -11,6 +11,7 @@ def create_app() -> FastAPI:
     settings = get_settings()
 
     app = FastAPI(
+        debug=settings.DEBUG,
         title=settings.app_name,
         version=settings.app_version,
         description=(
@@ -29,7 +30,8 @@ def create_app() -> FastAPI:
                 "name": "simple",
                 "description": (
                     "Endpoint shorthand pada /api/s. "
-                    "Tingkat 1 = provinsi, tingkat 2 = kabupaten/kota, tingkat 3 = kecamatan."
+                    "Tingkat 1 = provinsi, tingkat 2 = kabupaten/kota, "
+                    "tingkat 3 = kecamatan, tingkat 4 = desa/kelurahan."
                 ),
             },
         ],

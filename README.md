@@ -8,7 +8,8 @@ Layanan API wilayah administratif Indonesia berbasis FastAPI dengan namespace st
 - Dependency management menggunakan uv dengan pyproject.toml dan uv.lock
 - Arsitektur OOP dan DRY pada service layer
 - Dokumentasi OpenAPI dibagi dalam grup root, search, wilayah, dan simple
-- Endpoint simple menggunakan namespace /api/s dengan respons terstandar
+- Seluruh endpoint memakai envelope respons standar: success, data, error, meta
+- Endpoint simple menggunakan namespace /api/s hingga level desa/kelurahan (level 4)
 
 ## Endpoint Namespace
 
@@ -38,30 +39,47 @@ Catatan:
 - GET /api/s/{kode_provinsi}
 - GET /api/s/{kode_provinsi}/{nomor_kabupaten}
 - GET /api/s/{kode_provinsi}/{nomor_kabupaten}/{nomor_kecamatan}
+- GET /api/s/{kode_provinsi}/{nomor_kabupaten}/{nomor_kecamatan}/{nomor_desa}
 
 Contoh:
 
 - /api/s/11/1/1 akan diproses menjadi kode lengkap 110101
 - Respons tetap menampilkan kode_singkat sebagai format dua digit: 11/01/01
 
-## Standar Respons Simple
+## Standar Respons API
 
 ```json
 {
   "success": true,
-  "message": "Data kecamatan berhasil ditemukan.",
   "data": {
-    "kode_lengkap": 110101,
-    "kode_singkat": "11/01/01",
-    "kode": 110101,
-    "nama": "BAKONGAN",
-    "tingkat": 3,
-    "level": "kecamatan",
+    "code": 110101,
+    "short_code": "11/01/01",
+    "name": "BAKONGAN",
+    "depth": 3,
+    "type": "district",
+    "has_children": true,
     "parent": {
-      "kode": 1101,
-      "nama": "KABUPATEN ACEH SELATAN",
-      "tingkat": 2
+      "code": 1101,
+      "short_code": "11/01",
+      "name": "ACEH SELATAN",
+      "depth": 2,
+      "type": "regency",
+      "parent": {
+        "code": 11,
+        "short_code": "11",
+        "name": "ACEH",
+        "depth": 1,
+        "type": "province",
+        "parent": null
+      }
     }
+  },
+  "error": null,
+  "meta": {
+    "api_version": "v3",
+    "timestamp": "2026-04-08T04:30:00Z",
+    "request_id": "01HZ9QXMBF3RVTKNE8D4J7WQCX",
+    "duration_ms": 12
   }
 }
 ```
@@ -71,22 +89,30 @@ Aturan tingkat pada simple endpoint:
 - tingkat 1: provinsi
 - tingkat 2: kabupaten/kota
 - tingkat 3: kecamatan
+- tingkat 4: desa/kelurahan
 
 ## Standar Respons Error
 
-Untuk data yang tidak ditemukan, API menggunakan pesan profesional dan konsisten:
+Untuk error, API selalu mengembalikan envelope yang sama (`success=false`, `data=null`, `error`, `meta`).
 
 ```json
 {
-  "detail": "Data wilayah yang diminta tidak ditemukan. Pastikan kode wilayah benar dan tersedia pada dataset resmi."
-}
-```
-
-Untuk validasi parameter yang tidak sesuai:
-
-```json
-{
-  "detail": "Parameter permintaan tidak valid. Periksa kembali format dan nilai kode wilayah yang dikirim."
+  "success": false,
+  "data": null,
+  "error": {
+    "code": "REGION_NOT_FOUND",
+    "message": "The requested region could not be found.",
+    "detail": "No region with code 330999 exists in the national reference dataset.",
+    "hint": "Verify the region code using GET /api/0 for valid province codes.",
+    "docs": "https://api.yourapp.com/docs/errors#REGION_NOT_FOUND",
+    "fields": null
+  },
+  "meta": {
+    "api_version": "v3",
+    "timestamp": "2026-04-08T04:30:00Z",
+    "request_id": "01HZ9U00000000000000000000",
+    "duration_ms": 4
+  }
 }
 ```
 
@@ -117,7 +143,7 @@ Server default: <http://127.0.0.1:8000>
 - Swagger UI: <http://127.0.0.1:8000/docs>
 - ReDoc: <http://127.0.0.1:8000/redoc>
 
-Simple endpoint sudah memiliki contoh respons langsung pada OpenAPI untuk tingkat 1, 2, dan 3.
+Simple endpoint sudah memiliki contoh respons langsung pada OpenAPI untuk tingkat 1, 2, 3, dan 4.
 
 ## Testing
 

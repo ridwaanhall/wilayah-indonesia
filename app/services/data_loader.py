@@ -85,6 +85,9 @@ class DataLoader:
     def kecamatan_exists(self, kode: int) -> bool:
         return kode in self._kecamatan_idx
 
+    def desa_exists(self, kode: int) -> bool:
+        return kode in self._desa_idx
+
     def kabupaten_in_provinsi(self, kode_kabupaten: int, kode_provinsi: int) -> bool:
         item = self._kabupaten_idx.get(kode_kabupaten)
         return item is not None and item["parent"]["kode"] == kode_provinsi
@@ -92,6 +95,19 @@ class DataLoader:
     def kecamatan_in_kabupaten(self, kode_kecamatan: int, kode_kabupaten: int) -> bool:
         item = self._kecamatan_idx.get(kode_kecamatan)
         return item is not None and item["parent"]["kode"] == kode_kabupaten
+
+    def desa_in_kecamatan(self, kode_desa: int, kode_kecamatan: int) -> bool:
+        item = self._desa_idx.get(kode_desa)
+        return item is not None and item["parent"]["kode"] == kode_kecamatan
+
+    def has_children(self, kode: int, tingkat: int) -> bool:
+        if tingkat == 1:
+            return bool(self._kabupaten_by_prov.get(kode))
+        if tingkat == 2:
+            return bool(self._kecamatan_by_kab.get(kode))
+        if tingkat == 3:
+            return bool(self._desa_by_kec.get(kode))
+        return False
 
     def kabupaten_by_provinsi(
         self,
