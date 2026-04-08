@@ -1,16 +1,44 @@
 from fastapi import APIRouter, Request
+from pydantic import BaseModel
 
+from app.core.config import get_settings
 from app.core.responses import success_response
-from app.schemas.common import ApiEnvelope
+from app.schemas.common import SuccessResponse
 
 router = APIRouter(tags=["root"])
+
+
+class DocsLinks(BaseModel):
+    swagger: str
+    redoc: str
+    openapi: str
+
+
+class EndpointGroups(BaseModel):
+    root: list[str]
+    search: list[str]
+    wilayah: list[str]
+    simple: list[str]
+
+
+class RootData(BaseModel):
+    name: str
+    version: str
+    docs: DocsLinks
+    groups: EndpointGroups
+
+
+class HealthData(BaseModel):
+    status: str
+    version: str
+    database: str
 
 
 @router.get(
     "/",
     summary="API Root",
     description="Endpoint utama API dengan informasi versi dan tautan dokumentasi.",
-    response_model=ApiEnvelope,
+    response_model=SuccessResponse[RootData],
 )
 def api_root(request: Request) -> object:
     """Return API index and grouped endpoint catalog."""
@@ -47,15 +75,16 @@ def api_root(request: Request) -> object:
     "/health",
     summary="Health Check",
     description="Endpoint status kesehatan layanan.",
-    response_model=ApiEnvelope,
+    response_model=SuccessResponse[HealthData],
 )
 def health_check(request: Request) -> object:
     """Return a standardized health status payload."""
+    settings = get_settings()
     return success_response(
         request,
         {
             "status": "ok",
-            "version": "v3",
+            "version": settings.api_version,
             "database": "connected",
         },
     )

@@ -91,7 +91,7 @@ class SimpleWilayahService:
             fields=None,
         )
 
-    def get_provinsi(self, kode_provinsi: int) -> dict[str, object]:
+    def get_provinsi(self, kode_provinsi: int, *, include_parent: bool = True) -> dict[str, object]:
         """Resolve a province using simplified code format."""
         provinsi_segment = self._format_two_digit_segment("kode_provinsi", kode_provinsi)
         kode = int(provinsi_segment)
@@ -100,9 +100,15 @@ class SimpleWilayahService:
                 "province",
                 detail=f"No province with code {kode} exists in the national reference dataset.",
             )
-        return self.wilayah_service.search_by_code(kode)
+        return self.wilayah_service.search_by_code(kode, include_parent=include_parent)
 
-    def get_kabupaten(self, kode_provinsi: int, nomor_kabupaten: int) -> dict[str, object]:
+    def get_kabupaten(
+        self,
+        kode_provinsi: int,
+        nomor_kabupaten: int,
+        *,
+        include_parent: bool = True,
+    ) -> dict[str, object]:
         """Resolve a kabupaten/kota using simplified code format."""
         provinsi_segment = self._format_two_digit_segment("kode_provinsi", kode_provinsi)
         kabupaten_segment = self._format_two_digit_segment("nomor_kabupaten", nomor_kabupaten)
@@ -126,13 +132,15 @@ class SimpleWilayahService:
                 ),
             )
 
-        return self.wilayah_service.search_by_code(kode)
+        return self.wilayah_service.search_by_code(kode, include_parent=include_parent)
 
     def get_kecamatan(
         self,
         kode_provinsi: int,
         nomor_kabupaten: int,
         nomor_kecamatan: int,
+        *,
+        include_parent: bool = True,
     ) -> dict[str, object]:
         """Resolve a kecamatan using simplified code format."""
         provinsi_segment = self._format_two_digit_segment("kode_provinsi", kode_provinsi)
@@ -169,7 +177,10 @@ class SimpleWilayahService:
                 ),
             )
 
-        return self.wilayah_service.search_by_code(kode_kecamatan_int)
+        return self.wilayah_service.search_by_code(
+            kode_kecamatan_int,
+            include_parent=include_parent,
+        )
 
     def get_desa(
         self,
@@ -177,6 +188,8 @@ class SimpleWilayahService:
         nomor_kabupaten: int,
         nomor_kecamatan: int,
         nomor_desa: int,
+        *,
+        include_parent: bool = True,
     ) -> dict[str, object]:
         """Resolve a desa/kelurahan using simplified code format."""
         provinsi_segment = self._format_two_digit_segment("kode_provinsi", kode_provinsi)
@@ -222,4 +235,7 @@ class SimpleWilayahService:
                 ),
             )
 
-        return self.wilayah_service.search_by_code(kode_desa_int)
+        return self.wilayah_service.search_by_code(
+            kode_desa_int,
+            include_parent=include_parent,
+        )

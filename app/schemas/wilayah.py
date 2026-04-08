@@ -2,6 +2,8 @@ from typing import Literal
 
 from pydantic import BaseModel, ConfigDict, Field
 
+from app.schemas.common import PaginationInfo
+
 RegionType = Literal["province", "regency", "district", "village"]
 
 
@@ -30,6 +32,13 @@ class RegionResource(BaseModel):
     type: RegionType
     has_children: bool
     parent: RegionParent | None = None
+
+
+class RegionListData(BaseModel):
+    """Typed list payload for region collection responses."""
+
+    items: list[RegionResource]
+    pagination: PaginationInfo
 
 
 RegionParent.model_rebuild()

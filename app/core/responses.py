@@ -8,15 +8,20 @@ from typing import Any
 from fastapi import Request
 from fastapi.responses import JSONResponse
 
-ERROR_DOCS_BASE_URL = "https://api.yourapp.com/docs/errors"
+from app.core.config import get_settings
+
+
+def _base_url(request: Request) -> str:
+    return str(request.base_url).rstrip("/")
 
 
 def _meta_from_request(request: Request) -> dict[str, Any]:
+    settings = get_settings()
     start_time = getattr(request.state, "start_time", time.perf_counter())
     request_id = getattr(request.state, "request_id", str(uuid.uuid4()))
 
     return {
-        "api_version": "v3",
+        "api_version": settings.api_version,
         "timestamp": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
         "request_id": request_id,
         "duration_ms": max(int((time.perf_counter() - start_time) * 1000), 0),
@@ -79,6 +84,7 @@ def error_response(
     fields: list[dict[str, Any]] | None = None,
 ) -> JSONResponse:
     """Return a handbook-compliant error envelope."""
+    docs_url = f"{_base_url(request)}/docs/errors#{code}"
     return JSONResponse(
         status_code=status_code,
         content={
@@ -89,7 +95,7 @@ def error_response(
                 "message": message,
                 "detail": detail,
                 "hint": hint,
-                "docs": f"{ERROR_DOCS_BASE_URL}#{code}",
+                "docs": docs_url,
                 "fields": fields,
             },
             "meta": _meta_from_request(request),

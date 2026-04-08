@@ -171,7 +171,7 @@ class WilayahService:
             for item in self.loader.provinsi_list
         ]
 
-    def search_by_code(self, kode: int) -> dict[str, Any]:
+    def search_by_code(self, kode: int, *, include_parent: bool = True) -> dict[str, Any]:
         """Return wilayah by code across all administrative levels."""
         self._ensure_search_code_length(kode)
         result = self.loader.find_by_code(kode)
@@ -180,7 +180,11 @@ class WilayahService:
                 "region",
                 detail=f"No region with code {kode} exists in the national reference dataset.",
             )
-        return self._build_region(result, include_parent=True, full_chain=True)
+        return self._build_region(
+            result,
+            include_parent=include_parent,
+            full_chain=include_parent,
+        )
 
     def list_kabupaten(self, kode_provinsi: int, include_parent: bool) -> list[dict[str, Any]]:
         """Return kabupaten list for a province."""

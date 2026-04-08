@@ -1,9 +1,14 @@
 """Tests for API endpoints."""
 
+from typing import Any, cast
+
 import pytest
 from fastapi.testclient import TestClient
 
+from app.core.config import get_settings
 from prod.main import app
+
+SETTINGS = get_settings()
 
 
 @pytest.fixture
@@ -12,7 +17,7 @@ def client() -> TestClient:
 
 
 def assert_meta(meta: dict[str, object]) -> None:
-    assert meta["api_version"] == "v3"
+    assert meta["api_version"] == SETTINGS.api_version
     assert isinstance(meta["timestamp"], str)
     assert isinstance(meta["request_id"], str)
     assert isinstance(meta["duration_ms"], int)
@@ -24,7 +29,7 @@ def assert_envelope(payload: dict[str, object], success: bool) -> None:
     assert "data" in payload
     assert "error" in payload
     assert "meta" in payload
-    assert_meta(payload["meta"])
+    assert_meta(cast(dict[str, Any], payload["meta"]))
 
 
 def assert_region_shape(region: dict[str, object]) -> None:
@@ -43,10 +48,22 @@ def assert_error_shape(error: dict[str, object], expected_code: str) -> None:
     assert isinstance(error["detail"], str)
     assert isinstance(error["hint"], str)
     assert isinstance(error["docs"], str)
+    assert error["docs"].endswith(f"/docs/errors#{expected_code}")
     assert "fields" in error
 
 
 class TestRootAndOpenAPITags:
+    def test_landing_page_contains_tailwind_and_seo(self, client: TestClient) -> None:
+        response = client.get("/")
+        assert response.status_code == 200
+        assert "text/html" in response.headers["content-type"]
+
+        body = response.text
+        assert "@tailwindcss/browser@4" in body
+        assert "https://rone.dev/static/img/favicon/favicon.ico" in body
+        assert "<meta name=\"description\"" in body
+        assert "<meta property=\"og:title\"" in body
+
     def test_root_groups_are_exposed(self, client: TestClient) -> None:
         response = client.get("/api/")
         assert response.status_code == 200
@@ -70,7 +87,7 @@ class TestRootAndOpenAPITags:
         payload = response.json()
         assert_envelope(payload, success=True)
         assert payload["data"]["status"] == "ok"
-        assert payload["data"]["version"] == "v3"
+        assert payload["data"]["version"] == SETTINGS.api_version
 
     def test_openapi_has_required_tag_sections(self, client: TestClient) -> None:
         response = client.get("/openapi.json")
@@ -109,6 +126,37 @@ class TestWilayahLegacyRules:
         assert_region_shape(items[0])
         assert items[0]["depth"] == 2
         assert items[0]["parent"] is None
+
+    def test_parent_query_flag_keeps_same_shape(self, client: TestClient) -> None:
+        without_parent = client.get("/api/11/1101")
+        with_parent = client.get("/api/11/1101?parent=true")
+
+        assert without_parent.status_code == 200
+        assert with_parent.status_code == 200
+
+        items_without = without_parent.json()["data"]["items"]
+        items_with = with_parent.json()["data"]["items"]
+        assert len(items_without) == len(items_with)
+
+        if items_without and items_with:
+            assert set(items_without[0].keys()) == set(items_with[0].keys())
+            assert items_without[0]["parent"] is None
+            assert items_with[0]["parent"] is not None
+            assert items_with[0]["parent"]["depth"] == 2
+            assert items_with[0]["parent"]["parent"] is None
+
+    def test_provinsi_parent_query_keeps_parent_null(self, client: TestClient) -> None:
+        without_parent = client.get("/api/0?parent=false")
+        with_parent = client.get("/api/0?parent=true")
+
+        assert without_parent.status_code == 200
+        assert with_parent.status_code == 200
+
+        first_without = without_parent.json()["data"]["items"][0]
+        first_with = with_parent.json()["data"]["items"][0]
+        assert set(first_without.keys()) == set(first_with.keys())
+        assert first_without["parent"] is None
+        assert first_with["parent"] is None
 
     def test_kecamatan_listing(self, client: TestClient) -> None:
         response = client.get("/api/11/1101?parent=true")
@@ -192,6 +240,20 @@ class TestSearchRules:
         assert_envelope(payload, success=False)
         assert_error_shape(payload["error"], "REGION_NOT_FOUND")
 
+    def test_search_parent_query_flag(self, client: TestClient) -> None:
+        without_parent = client.get("/api/kode/110101?parent=false")
+        with_parent = client.get("/api/kode/110101?parent=true")
+
+        assert without_parent.status_code == 200
+        assert with_parent.status_code == 200
+
+        data_without = without_parent.json()["data"]
+        data_with = with_parent.json()["data"]
+
+        assert set(data_without.keys()) == set(data_with.keys())
+        assert data_without["parent"] is None
+        assert data_with["parent"] is not None
+
 
 class TestSimpleRules:
     def test_simple_prefix_tingkat_1(self, client: TestClient) -> None:
@@ -259,3 +321,35 @@ class TestSimpleRules:
         assert_envelope(payload, success=False)
         assert_error_shape(payload["error"], "VALIDATION_FAILED")
         assert payload["error"]["fields"] is not None
+
+    @pytest.mark.parametrize(
+        "path, expect_parent_when_true",
+        [
+            ("/api/s/11", False),
+            ("/api/s/11/1", True),
+            ("/api/s/11/1/1", True),
+            ("/api/s/11/1/1/2001", True),
+        ],
+    )
+    def test_simple_parent_query_flag(
+        self,
+        client: TestClient,
+        path: str,
+        expect_parent_when_true: bool,
+    ) -> None:
+        without_parent = client.get(f"{path}?parent=false")
+        with_parent = client.get(f"{path}?parent=true")
+
+        assert without_parent.status_code == 200
+        assert with_parent.status_code == 200
+
+        data_without = without_parent.json()["data"]
+        data_with = with_parent.json()["data"]
+
+        assert set(data_without.keys()) == set(data_with.keys())
+        assert data_without["parent"] is None
+
+        if expect_parent_when_true:
+            assert data_with["parent"] is not None
+        else:
+            assert data_with["parent"] is None

@@ -1,5 +1,9 @@
 """OpenAPI examples for consistent API documentation."""
 
+from app.core.config import get_settings
+
+API_VERSION = get_settings().api_version
+
 SIMPLE_REGION_EXAMPLE: dict[str, object] = {
     "success": True,
     "data": {
@@ -27,7 +31,7 @@ SIMPLE_REGION_EXAMPLE: dict[str, object] = {
     },
     "error": None,
     "meta": {
-        "api_version": "v3",
+        "api_version": API_VERSION,
         "timestamp": "2026-04-08T04:30:00Z",
         "request_id": "01HZ9QXMBF3RVTKNE8D4J7WQCX",
         "duration_ms": 11,
@@ -42,11 +46,11 @@ ERROR_NOT_FOUND_EXAMPLE: dict[str, object] = {
         "message": "The requested region could not be found.",
         "detail": "No region with code 330999 exists in the national reference dataset.",
         "hint": "Verify the region code using GET /api/0 for valid province codes.",
-        "docs": "https://api.yourapp.com/docs/errors#REGION_NOT_FOUND",
+        "docs": "/docs/errors#REGION_NOT_FOUND",
         "fields": None,
     },
     "meta": {
-        "api_version": "v3",
+        "api_version": API_VERSION,
         "timestamp": "2026-04-08T04:30:00Z",
         "request_id": "01HZ9U00000000000000000000",
         "duration_ms": 4,
@@ -61,7 +65,7 @@ ERROR_VALIDATION_EXAMPLE: dict[str, object] = {
         "message": "One or more request parameters are invalid.",
         "detail": "Parameter validation failed for incoming request.",
         "hint": "Check the fields array for per-field details.",
-        "docs": "https://api.yourapp.com/docs/errors#VALIDATION_FAILED",
+        "docs": "/docs/errors#VALIDATION_FAILED",
         "fields": [
             {
                 "field": "kode_provinsi",
@@ -72,7 +76,7 @@ ERROR_VALIDATION_EXAMPLE: dict[str, object] = {
         ],
     },
     "meta": {
-        "api_version": "v3",
+        "api_version": API_VERSION,
         "timestamp": "2026-04-08T04:30:00Z",
         "request_id": "01HZ9V00000000000000000000",
         "duration_ms": 2,
@@ -104,7 +108,7 @@ LIST_REGION_EXAMPLE: dict[str, object] = {
     },
     "error": None,
     "meta": {
-        "api_version": "v3",
+        "api_version": API_VERSION,
         "timestamp": "2026-04-08T04:30:00Z",
         "request_id": "01HZ9R00000000000000000000",
         "duration_ms": 9,

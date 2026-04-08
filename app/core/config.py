@@ -18,6 +18,16 @@ class Settings(BaseSettings):
     allowed_origins: str = ""
 
     @property
+    def api_version(self) -> str:
+        """Return API version label (e.g. app_version 3.0.0 -> v3)."""
+        raw = self.app_version.strip()
+        normalized = raw[1:] if raw.lower().startswith("v") else raw
+        major = normalized.split(".", maxsplit=1)[0]
+        if major.isdigit():
+            return f"v{major}"
+        return raw if raw.lower().startswith("v") else f"v{raw}"
+
+    @property
     def allowed_origins_list(self) -> list[str]:
         if not self.allowed_origins.strip():
             return []

@@ -1,8 +1,10 @@
 """Shared API response schema definitions."""
 
-from typing import Any
+from typing import Any, Generic, Literal, TypeVar
 
 from pydantic import BaseModel, Field
+
+TData = TypeVar("TData")
 
 
 class MetaInfo(BaseModel):
@@ -51,4 +53,22 @@ class ApiEnvelope(BaseModel):
     success: bool
     data: Any | None
     error: ErrorInfo | None
+    meta: MetaInfo
+
+
+class SuccessResponse(BaseModel, Generic[TData]):
+    """Typed success envelope for explicit OpenAPI data contracts."""
+
+    success: Literal[True] = True
+    data: TData
+    error: None = None
+    meta: MetaInfo
+
+
+class ErrorResponse(BaseModel):
+    """Typed error envelope for explicit OpenAPI error contracts."""
+
+    success: Literal[False] = False
+    data: None = None
+    error: ErrorInfo
     meta: MetaInfo

@@ -2,7 +2,7 @@
 
 from typing import Annotated
 
-from fastapi import APIRouter, Depends, Path, Request, status
+from fastapi import APIRouter, Depends, Path, Query, Request, status
 
 from app.api.deps import get_simple_service
 from app.api.examples import (
@@ -11,7 +11,8 @@ from app.api.examples import (
     SIMPLE_REGION_EXAMPLE,
 )
 from app.core.responses import success_response
-from app.schemas.common import ApiEnvelope
+from app.schemas.common import ErrorResponse, SuccessResponse
+from app.schemas.wilayah import RegionResource
 from app.services.simple import SimpleWilayahService
 
 router = APIRouter(prefix="/s", tags=["simple"])
@@ -22,19 +23,19 @@ router = APIRouter(prefix="/s", tags=["simple"])
     summary="Simple Tingkat 1 (Provinsi)",
     description="Ambil data provinsi berdasarkan kode provinsi 2 digit. Tingkat 1 = provinsi.",
     status_code=status.HTTP_200_OK,
-    response_model=ApiEnvelope,
+    response_model=SuccessResponse[RegionResource],
     responses={
         status.HTTP_200_OK: {
             "description": "Data provinsi berhasil ditemukan.",
             "content": {"application/json": {"example": SIMPLE_REGION_EXAMPLE}},
         },
         status.HTTP_404_NOT_FOUND: {
-            "model": ApiEnvelope,
+            "model": ErrorResponse,
             "description": "Provinsi tidak ditemukan.",
             "content": {"application/json": {"example": ERROR_NOT_FOUND_EXAMPLE}},
         },
         status.HTTP_422_UNPROCESSABLE_CONTENT: {
-            "model": ApiEnvelope,
+            "model": ErrorResponse,
             "description": "Format parameter tidak valid.",
             "content": {"application/json": {"example": ERROR_VALIDATION_EXAMPLE}},
         },
@@ -44,9 +45,13 @@ def simple_provinsi(
     request: Request,
     kode_provinsi: Annotated[int, Path(ge=1, le=99, description="Kode provinsi 2 digit")],
     service: Annotated[SimpleWilayahService, Depends(get_simple_service)],
+    parent: Annotated[
+        bool,
+        Query(description="Sertakan hierarki parent pada data wilayah (default true)."),
+    ] = True,
 ) -> object:
     """Resolve province from shorthand code."""
-    return success_response(request, service.get_provinsi(kode_provinsi))
+    return success_response(request, service.get_provinsi(kode_provinsi, include_parent=parent))
 
 
 @router.get(
@@ -57,19 +62,19 @@ def simple_provinsi(
         "{kode_provinsi}/{nomor_kabupaten}. Tingkat 2 = kabupaten/kota."
     ),
     status_code=status.HTTP_200_OK,
-    response_model=ApiEnvelope,
+    response_model=SuccessResponse[RegionResource],
     responses={
         status.HTTP_200_OK: {
             "description": "Data kabupaten/kota berhasil ditemukan.",
             "content": {"application/json": {"example": SIMPLE_REGION_EXAMPLE}},
         },
         status.HTTP_404_NOT_FOUND: {
-            "model": ApiEnvelope,
+            "model": ErrorResponse,
             "description": "Provinsi atau kabupaten/kota tidak ditemukan.",
             "content": {"application/json": {"example": ERROR_NOT_FOUND_EXAMPLE}},
         },
         status.HTTP_422_UNPROCESSABLE_CONTENT: {
-            "model": ApiEnvelope,
+            "model": ErrorResponse,
             "description": "Format parameter tidak valid.",
             "content": {"application/json": {"example": ERROR_VALIDATION_EXAMPLE}},
         },
@@ -80,9 +85,20 @@ def simple_kabupaten(
     kode_provinsi: Annotated[int, Path(ge=1, le=99, description="Kode provinsi 2 digit")],
     nomor_kabupaten: Annotated[int, Path(ge=1, le=99, description="Nomor kabupaten 2 digit")],
     service: Annotated[SimpleWilayahService, Depends(get_simple_service)],
+    parent: Annotated[
+        bool,
+        Query(description="Sertakan hierarki parent pada data wilayah (default true)."),
+    ] = True,
 ) -> object:
     """Resolve kabupaten/kota from shorthand code."""
-    return success_response(request, service.get_kabupaten(kode_provinsi, nomor_kabupaten))
+    return success_response(
+        request,
+        service.get_kabupaten(
+            kode_provinsi,
+            nomor_kabupaten,
+            include_parent=parent,
+        ),
+    )
 
 
 @router.get(
@@ -94,19 +110,19 @@ def simple_kabupaten(
         "Tingkat 3 = kecamatan."
     ),
     status_code=status.HTTP_200_OK,
-    response_model=ApiEnvelope,
+    response_model=SuccessResponse[RegionResource],
     responses={
         status.HTTP_200_OK: {
             "description": "Data kecamatan berhasil ditemukan.",
             "content": {"application/json": {"example": SIMPLE_REGION_EXAMPLE}},
         },
         status.HTTP_404_NOT_FOUND: {
-            "model": ApiEnvelope,
+            "model": ErrorResponse,
             "description": "Provinsi, kabupaten/kota, atau kecamatan tidak ditemukan.",
             "content": {"application/json": {"example": ERROR_NOT_FOUND_EXAMPLE}},
         },
         status.HTTP_422_UNPROCESSABLE_CONTENT: {
-            "model": ApiEnvelope,
+            "model": ErrorResponse,
             "description": "Format parameter tidak valid.",
             "content": {"application/json": {"example": ERROR_VALIDATION_EXAMPLE}},
         },
@@ -118,11 +134,20 @@ def simple_kecamatan(
     nomor_kabupaten: Annotated[int, Path(ge=1, le=99, description="Nomor kabupaten 2 digit")],
     nomor_kecamatan: Annotated[int, Path(ge=1, le=99, description="Nomor kecamatan 2 digit")],
     service: Annotated[SimpleWilayahService, Depends(get_simple_service)],
+    parent: Annotated[
+        bool,
+        Query(description="Sertakan hierarki parent pada data wilayah (default true)."),
+    ] = True,
 ) -> object:
     """Resolve kecamatan from shorthand code."""
     return success_response(
         request,
-        service.get_kecamatan(kode_provinsi, nomor_kabupaten, nomor_kecamatan),
+        service.get_kecamatan(
+            kode_provinsi,
+            nomor_kabupaten,
+            nomor_kecamatan,
+            include_parent=parent,
+        ),
     )
 
 
@@ -135,19 +160,19 @@ def simple_kecamatan(
         "Tingkat 4 = desa/kelurahan."
     ),
     status_code=status.HTTP_200_OK,
-    response_model=ApiEnvelope,
+    response_model=SuccessResponse[RegionResource],
     responses={
         status.HTTP_200_OK: {
             "description": "Data desa/kelurahan berhasil ditemukan.",
             "content": {"application/json": {"example": SIMPLE_REGION_EXAMPLE}},
         },
         status.HTTP_404_NOT_FOUND: {
-            "model": ApiEnvelope,
+            "model": ErrorResponse,
             "description": "Wilayah referensi tidak ditemukan pada hierarki yang diberikan.",
             "content": {"application/json": {"example": ERROR_NOT_FOUND_EXAMPLE}},
         },
         status.HTTP_422_UNPROCESSABLE_CONTENT: {
-            "model": ApiEnvelope,
+            "model": ErrorResponse,
             "description": "Format parameter tidak valid.",
             "content": {"application/json": {"example": ERROR_VALIDATION_EXAMPLE}},
         },
@@ -160,6 +185,10 @@ def simple_desa(
     nomor_kecamatan: Annotated[int, Path(ge=1, le=99, description="Nomor kecamatan 2 digit")],
     nomor_desa: Annotated[int, Path(ge=1, le=9999, description="Nomor desa 4 digit")],
     service: Annotated[SimpleWilayahService, Depends(get_simple_service)],
+    parent: Annotated[
+        bool,
+        Query(description="Sertakan hierarki parent pada data wilayah (default true)."),
+    ] = True,
 ) -> object:
     """Resolve desa/kelurahan from shorthand code."""
     return success_response(
@@ -169,5 +198,6 @@ def simple_desa(
             nomor_kabupaten=nomor_kabupaten,
             nomor_kecamatan=nomor_kecamatan,
             nomor_desa=nomor_desa,
+            include_parent=parent,
         ),
     )
