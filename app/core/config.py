@@ -1,9 +1,7 @@
 from functools import lru_cache
-from dotenv import load_dotenv
 
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
-load_dotenv()  # Load environment variables from .env file at startup
 
 class Settings(BaseSettings):
     """Application settings loaded from environment variables."""
