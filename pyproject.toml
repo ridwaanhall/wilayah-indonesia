@@ -1,0 +1,37 @@
+[project]
+name = "wilayah-indonesia"
+version = "3.0.0"
+description = "FastAPI API untuk data wilayah administratif Indonesia"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi[standard]>=0.116.0",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.4.2",
+]
+
+[tool.fastapi]
+app = "app.main:app"
+
+[build-system]
+requires = ["hatchling>=1.27.0"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["app", "api", "prod"]
+
+[tool.hatch.build.targets.sdist]
+include = [
+    "app",
+    "api",
+    "prod",
+    "data",
+    "tests",
+    "README.md",
+    "pyproject.toml",
+    "vercel.json",
+    "LICENSE",
+]
