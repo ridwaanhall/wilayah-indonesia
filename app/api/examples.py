@@ -1,116 +1,127 @@
-"""OpenAPI examples for consistent API documentation."""
+"""OpenAPI examples and response declarations shared by every data endpoint."""
+
+from typing import Any
 
 from app.core.config import get_settings
+from app.schemas.common import ErrorResponse
 
-API_VERSION = get_settings().api_version
 
-SIMPLE_REGION_EXAMPLE: dict[str, object] = {
-    "success": True,
-    "data": {
-        "code": 110101,
-        "short_code": "11/01/01",
-        "name": "BAKONGAN",
+def _meta(duration_ms: int) -> dict[str, Any]:
+    return {
+        "api_version": get_settings().api_version,
+        "timestamp": "2026-04-08T04:30:00Z",
+        "request_id": "01HZ9QXMBF3RVTKNE8D4J7WQCX",
+        "duration_ms": duration_ms,
+    }
+
+
+def _success(data: dict[str, Any]) -> dict[str, Any]:
+    return {"success": True, "data": data, "error": None, "meta": _meta(3)}
+
+
+def _error(code: str, message: str, detail: str, hint: str, fields: list[dict[str, Any]] | None) -> dict[str, Any]:
+    return {
+        "success": False,
+        "data": None,
+        "error": {
+            "code": code,
+            "message": message,
+            "detail": detail,
+            "hint": hint,
+            "docs": f"https://wilayah.rone.dev/docs/errors#{code}",
+            "fields": fields,
+        },
+        "meta": _meta(1),
+    }
+
+
+_PROVINCE = {"code": 33, "short_code": "33", "name": "JAWA TENGAH", "depth": 1, "type": "province"}
+
+REGION_EXAMPLE = _success(
+    {
+        "code": 330101,
+        "short_code": "33/01/01",
+        "name": "KEDUNGREJA",
         "depth": 3,
         "type": "district",
         "has_children": True,
         "parent": {
-            "code": 1101,
-            "short_code": "11/01",
-            "name": "ACEH SELATAN",
+            "code": 3301,
+            "short_code": "33/01",
+            "name": "CILACAP",
             "depth": 2,
             "type": "regency",
-            "parent": {
-                "code": 11,
-                "short_code": "11",
-                "name": "ACEH",
-                "depth": 1,
-                "type": "province",
-                "parent": None,
-            },
+            "parent": {**_PROVINCE, "parent": None},
         },
-    },
-    "error": None,
-    "meta": {
-        "api_version": API_VERSION,
-        "timestamp": "2026-04-08T04:30:00Z",
-        "request_id": "01HZ9QXMBF3RVTKNE8D4J7WQCX",
-        "duration_ms": 11,
-    },
-}
+    }
+)
 
-ERROR_NOT_FOUND_EXAMPLE: dict[str, object] = {
-    "success": False,
-    "data": None,
-    "error": {
-        "code": "REGION_NOT_FOUND",
-        "message": "The requested region could not be found.",
-        "detail": "No region with code 330999 exists in the national reference dataset.",
-        "hint": "Verify the region code using GET /api/0 for valid province codes.",
-        "docs": "https://api.example.com/docs/errors#REGION_NOT_FOUND",
-        "fields": None,
-    },
-    "meta": {
-        "api_version": API_VERSION,
-        "timestamp": "2026-04-08T04:30:00Z",
-        "request_id": "01HZ9U00000000000000000000",
-        "duration_ms": 4,
-    },
-}
-
-ERROR_VALIDATION_EXAMPLE: dict[str, object] = {
-    "success": False,
-    "data": None,
-    "error": {
-        "code": "VALIDATION_FAILED",
-        "message": "One or more request parameters are invalid.",
-        "detail": "Request validation failed.",
-        "hint": "Fix the invalid request parameters and try again. See fields for details.",
-        "docs": "https://api.example.com/docs/errors#VALIDATION_FAILED",
-        "fields": [
-            {
-                "field": "kode_provinsi",
-                "value": "33XY",
-                "rule": "numeric",
-                "message": "kode_provinsi must be a 2-digit numeric integer between 11 and 99.",
-            }
-        ],
-    },
-    "meta": {
-        "api_version": API_VERSION,
-        "timestamp": "2026-04-08T04:30:00Z",
-        "request_id": "01HZ9V00000000000000000000",
-        "duration_ms": 2,
-    },
-}
-
-LIST_REGION_EXAMPLE: dict[str, object] = {
-    "success": True,
-    "data": {
-        "items": [
-            {
-                "code": 11,
-                "short_code": "11",
-                "name": "ACEH",
-                "depth": 1,
-                "type": "province",
-                "has_children": True,
-                "parent": None,
-            }
-        ],
+LIST_EXAMPLE = _success(
+    {
+        "items": [{**_PROVINCE, "has_children": True, "parent": None}],
         "pagination": {
-            "total": 38,
-            "per_page": 38,
+            "total": 1,
+            "per_page": 1,
             "has_next": False,
             "has_prev": False,
             "next_cursor": None,
             "prev_cursor": None,
         },
-    },
-    "error": None,
-    "meta": {
-        "api_version": API_VERSION,
-        "timestamp": "2026-04-08T04:30:00Z",
-        "request_id": "01HZ9R00000000000000000000",
-        "duration_ms": 9,
-    },
-}
+    }
+)
+
+STATS_EXAMPLE = _success(
+    {
+        "region": {**_PROVINCE, "has_children": True, "parent": None},
+        "levels": {"province": 0, "regency": 35, "district": 576, "village": 8563},
+        "kinds": {"kabupaten": 29, "kota": 6, "desa": 7810, "kelurahan": 753, "desa_adat": 0},
+        "children": [
+            {
+                "region": {
+                    "code": 3301,
+                    "short_code": "33/01",
+                    "name": "CILACAP",
+                    "depth": 2,
+                    "type": "regency",
+                    "has_children": True,
+                    "parent": None,
+                },
+                "levels": {"province": 0, "regency": 0, "district": 24, "village": 284},
+                "kinds": {"kabupaten": 0, "kota": 0, "desa": 269, "kelurahan": 15, "desa_adat": 0},
+            }
+        ],
+    }
+)
+
+_NOT_FOUND_EXAMPLE = _error(
+    "REGION_NOT_FOUND",
+    "The requested region could not be found.",
+    "No region with code 330999 exists in the national reference dataset.",
+    "Verify the region code using GET /api/0 for valid province codes.",
+    None,
+)
+
+_VALIDATION_EXAMPLE = _error(
+    "INVALID_REGION_CODE",
+    "The region code format is invalid.",
+    "Parameter kode_kabupaten must be a 4-digit numeric code. Received: 1.",
+    "Use 2 digits for a province, 4 for a regency, 6 for a district, or 10 for a village.",
+    [{"field": "kode_kabupaten", "value": 1, "rule": "digits:4", "message": "kode_kabupaten must contain exactly 4 digits."}],
+)
+
+
+def responses(example: dict[str, Any]) -> dict[int | str, dict[str, Any]]:
+    """Declare the success example plus the shared 404 and 422 error envelopes."""
+    return {
+        200: {"description": "Berhasil.", "content": {"application/json": {"example": example}}},
+        404: {
+            "model": ErrorResponse,
+            "description": "Wilayah tidak ditemukan.",
+            "content": {"application/json": {"example": _NOT_FOUND_EXAMPLE}},
+        },
+        422: {
+            "model": ErrorResponse,
+            "description": "Kode atau parameter tidak valid.",
+            "content": {"application/json": {"example": _VALIDATION_EXAMPLE}},
+        },
+    }

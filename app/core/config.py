@@ -16,6 +16,8 @@ class Settings(BaseSettings):
     app_version: str = "3.0.0"
     DEBUG: bool = False
     allowed_origins: str = ""
+    site_url: str = "https://wilayah.rone.dev"
+    repository_url: str = "https://github.com/ridwaanhall/wilayah-indonesia"
 
     @property
     def api_version(self) -> str:
@@ -29,6 +31,7 @@ class Settings(BaseSettings):
 
     @property
     def allowed_origins_list(self) -> list[str]:
+        """Return CORS origins parsed from the comma-separated setting."""
         if not self.allowed_origins.strip():
             return []
         return [origin.strip() for origin in self.allowed_origins.split(",") if origin.strip()]

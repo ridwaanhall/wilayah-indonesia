@@ -1,38 +1,10 @@
 # Tests
 
-This directory contains the test suite for the Wilayah Indonesia API.
-
-## Running Tests
-
-To run all tests:
-
 ```bash
-uv run pytest tests/ -v
+uv run --group dev pytest tests -q
 ```
 
-To run tests with coverage:
-
-```bash
-uv run pytest tests/ --cov=app --cov-report=term-missing
-```
-
-To run a specific test file:
-
-```bash
-uv run pytest tests/test_api.py -v
-uv run pytest tests/test_loader.py -v
-```
-
-## Test Structure
-
-- `test_api.py`: Tests for API endpoint groups (`root`, `search`, `wilayah`, `simple`)
-- `test_loader.py`: Tests for the DataLoader class and data indexing functionality
-
-## Test Coverage
-
-The test suite includes:
-
-- API endpoint tests (legacy wilayah rules, search by code, and simple shorthand)
-- DataLoader functionality tests (singleton pattern, data indexing, search methods)
-- Error handling and validation tests
-- Response structure validation
+- `test_api.py`: every endpoint group (`root`, `search`, `stats`, `wilayah`, `simple`), the demo
+  pages, `robots.txt`, `sitemap.xml`, static assets and generic 404/405 errors.
+- `test_schema_contracts.py`: success and error payloads validated against the declared Pydantic models.
+- `test_loader.py`: the in-memory index, national counts and the kabupaten/kota and desa/kelurahan rules.

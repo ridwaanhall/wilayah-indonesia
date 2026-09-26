@@ -47,15 +47,6 @@ class PaginationInfo(BaseModel):
     prev_cursor: str | None = None
 
 
-class ApiEnvelope(BaseModel):
-    """Universal top-level API response envelope."""
-
-    success: bool
-    data: Any | None
-    error: ErrorInfo | None
-    meta: MetaInfo
-
-
 class SuccessResponse(BaseModel, Generic[TData]):
     """Typed success envelope for explicit OpenAPI data contracts."""
 

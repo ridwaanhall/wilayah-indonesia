@@ -1,160 +1,93 @@
+"""In-memory index of the Indonesian administrative region dataset."""
+
 import json
+from collections import Counter
 from functools import lru_cache
 from pathlib import Path
 from typing import Any
 
 DATA_DIR: Path = Path(__file__).resolve().parent.parent.parent / "data"
+DATA_FILES: tuple[str, ...] = ("provinsi.json", "kabupaten.json", "kecamatan.json", "desa.json")
+
+# Code 0 is the national root: its children are the provinces, as in GET /api/0.
+ROOT_CODE = 0
+
+LEVEL_TYPES: dict[int, str] = {1: "province", 2: "regency", 3: "district", 4: "village"}
+VILLAGE_KINDS: dict[str, str] = {"1": "kelurahan", "2": "desa", "3": "desa_adat"}
+KIND_KEYS: tuple[str, ...] = ("kabupaten", "kota", "desa", "kelurahan", "desa_adat")
+
+
+def region_kind(code: int, depth: int) -> str | None:
+    """Classify regencies and villages by the official code convention.
+
+    Regency segments 71-99 are cities (kota). The first digit of a village's
+    4-digit segment is 1 for kelurahan, 2 for desa and 3 for desa adat.
+    Names are not reliable for this: KOTAWARINGIN BARAT is a kabupaten.
+    """
+    text = str(code)
+    if depth == 2:
+        return "kota" if int(text[2:4]) >= 71 else "kabupaten"
+    if depth == 4:
+        return VILLAGE_KINDS.get(text[6])
+    return None
 
 
 class DataLoader:
-    """Singleton that loads and indexes Indonesian administrative region data."""
+    """Loads the dataset once and indexes it by code, parent and descendant counts."""
 
-    _instance: "DataLoader | None" = None
+    def __init__(self) -> None:
+        self.regions: dict[int, dict[str, Any]] = {}
+        self.children: dict[int, list[dict[str, Any]]] = {}
+        self.levels: dict[int, Counter[str]] = {}
+        self.kinds: dict[int, Counter[str]] = {}
 
-    def __new__(cls) -> "DataLoader":
-        if cls._instance is None:
-            cls._instance = super().__new__(cls)
-            cls._instance._load_and_index()
-        return cls._instance
+        for filename in DATA_FILES:
+            with open(DATA_DIR / filename, encoding="utf-8") as file_handle:
+                for item in json.load(file_handle):
+                    self._index(item)
 
-    def _load_and_index(self) -> None:
-        self._provinsi: list[dict[str, Any]] = self._read("provinsi.json")
-        self._kabupaten: list[dict[str, Any]] = self._read("kabupaten.json")
-        self._kecamatan: list[dict[str, Any]] = self._read("kecamatan.json")
-        self._desa: list[dict[str, Any]] = self._read("desa.json")
+    def _index(self, item: dict[str, Any]) -> None:
+        code = item["kode"]
+        depth = item["tingkat"]
+        parent_code = item["parent"]["kode"] if "parent" in item else ROOT_CODE
 
-        self._provinsi_idx: dict[int, dict[str, Any]] = {
-            item["kode"]: item for item in self._provinsi
+        self.regions[code] = item
+        self.children.setdefault(parent_code, []).append(item)
+
+        level = LEVEL_TYPES[depth]
+        kind = region_kind(code, depth)
+        # Parents are indexed before children, so every ancestor is already known.
+        ancestor: int | None = parent_code
+        while ancestor is not None:
+            self.levels.setdefault(ancestor, Counter())[level] += 1
+            if kind:
+                self.kinds.setdefault(ancestor, Counter())[kind] += 1
+            ancestor = self.parent_code(ancestor)
+
+    def parent_code(self, code: int) -> int | None:
+        """Return the parent code, ROOT_CODE for provinces, None for the root."""
+        if code == ROOT_CODE:
+            return None
+        parent = self.regions[code].get("parent")
+        return parent["kode"] if parent else ROOT_CODE
+
+    def get(self, code: int) -> dict[str, Any] | None:
+        return self.regions.get(code)
+
+    def children_of(self, code: int) -> list[dict[str, Any]]:
+        return self.children.get(code, [])
+
+    def is_child(self, code: int, parent_code: int) -> bool:
+        return code in self.regions and self.parent_code(code) == parent_code
+
+    def counts(self, code: int) -> dict[str, dict[str, int]]:
+        """Return descendant totals per level and per kind, with zeros filled in."""
+        levels = self.levels.get(code, Counter())
+        kinds = self.kinds.get(code, Counter())
+        return {
+            "levels": {level: levels[level] for level in LEVEL_TYPES.values()},
+            "kinds": {kind: kinds[kind] for kind in KIND_KEYS},
         }
-        self._kabupaten_idx: dict[int, dict[str, Any]] = {
-            item["kode"]: item for item in self._kabupaten
-        }
-        self._kecamatan_idx: dict[int, dict[str, Any]] = {
-            item["kode"]: item for item in self._kecamatan
-        }
-        self._desa_idx: dict[int, dict[str, Any]] = {
-            item["kode"]: item for item in self._desa
-        }
-
-        self._kabupaten_by_prov: dict[int, list[dict[str, Any]]] = {}
-        for item in self._kabupaten:
-            parent_kode = item["parent"]["kode"]
-            self._kabupaten_by_prov.setdefault(parent_kode, []).append(item)
-
-        self._kecamatan_by_kab: dict[int, list[dict[str, Any]]] = {}
-        for item in self._kecamatan:
-            parent_kode = item["parent"]["kode"]
-            self._kecamatan_by_kab.setdefault(parent_kode, []).append(item)
-
-        self._desa_by_kec: dict[int, list[dict[str, Any]]] = {}
-        for item in self._desa:
-            parent_kode = item["parent"]["kode"]
-            self._desa_by_kec.setdefault(parent_kode, []).append(item)
-
-        self._all_codes_idx: dict[int, dict[str, Any]] = {}
-        self._all_codes_idx.update(self._provinsi_idx)
-        self._all_codes_idx.update(self._kabupaten_idx)
-        self._all_codes_idx.update(self._kecamatan_idx)
-        self._all_codes_idx.update(self._desa_idx)
-
-    @staticmethod
-    def _read(filename: str) -> list[dict[str, Any]]:
-        with open(DATA_DIR / filename, encoding="utf-8") as file_handle:
-            return json.load(file_handle)
-
-    @staticmethod
-    def _remove_parent(item: dict[str, Any]) -> dict[str, Any]:
-        result = dict(item)
-        result.pop("parent", None)
-        return result
-
-    @staticmethod
-    def _remove_parent_from_list(items: list[dict[str, Any]]) -> list[dict[str, Any]]:
-        return [DataLoader._remove_parent(item) for item in items]
-
-    @property
-    def provinsi_list(self) -> list[dict[str, Any]]:
-        return self._provinsi
-
-    def provinsi_exists(self, kode: int) -> bool:
-        return kode in self._provinsi_idx
-
-    def kabupaten_exists(self, kode: int) -> bool:
-        return kode in self._kabupaten_idx
-
-    def kecamatan_exists(self, kode: int) -> bool:
-        return kode in self._kecamatan_idx
-
-    def desa_exists(self, kode: int) -> bool:
-        return kode in self._desa_idx
-
-    def kabupaten_in_provinsi(self, kode_kabupaten: int, kode_provinsi: int) -> bool:
-        item = self._kabupaten_idx.get(kode_kabupaten)
-        return item is not None and item["parent"]["kode"] == kode_provinsi
-
-    def kecamatan_in_kabupaten(self, kode_kecamatan: int, kode_kabupaten: int) -> bool:
-        item = self._kecamatan_idx.get(kode_kecamatan)
-        return item is not None and item["parent"]["kode"] == kode_kabupaten
-
-    def desa_in_kecamatan(self, kode_desa: int, kode_kecamatan: int) -> bool:
-        item = self._desa_idx.get(kode_desa)
-        return item is not None and item["parent"]["kode"] == kode_kecamatan
-
-    def has_children(self, kode: int, tingkat: int) -> bool:
-        if tingkat == 1:
-            return bool(self._kabupaten_by_prov.get(kode))
-        if tingkat == 2:
-            return bool(self._kecamatan_by_kab.get(kode))
-        if tingkat == 3:
-            return bool(self._desa_by_kec.get(kode))
-        return False
-
-    def kabupaten_by_provinsi(
-        self,
-        kode_provinsi: int,
-        include_parent: bool = False,
-    ) -> list[dict[str, Any]] | None:
-        if kode_provinsi not in self._provinsi_idx:
-            return None
-        result = self._kabupaten_by_prov.get(kode_provinsi, [])
-        if include_parent:
-            return result
-        return self._remove_parent_from_list(result)
-
-    def kecamatan_by_kabupaten(
-        self,
-        kode_kabupaten: int,
-        kode_provinsi: int | None = None,
-        include_parent: bool = False,
-    ) -> list[dict[str, Any]] | None:
-        kabupaten_item = self._kabupaten_idx.get(kode_kabupaten)
-        if kabupaten_item is None:
-            return None
-        if kode_provinsi is not None and kabupaten_item["parent"]["kode"] != kode_provinsi:
-            return None
-        result = self._kecamatan_by_kab.get(kode_kabupaten, [])
-        if include_parent:
-            return result
-        return self._remove_parent_from_list(result)
-
-    def desa_by_kecamatan(
-        self,
-        kode_kecamatan: int,
-        kode_kabupaten: int | None = None,
-        include_parent: bool = False,
-    ) -> list[dict[str, Any]] | None:
-        kecamatan_item = self._kecamatan_idx.get(kode_kecamatan)
-        if kecamatan_item is None:
-            return None
-        if kode_kabupaten is not None and kecamatan_item["parent"]["kode"] != kode_kabupaten:
-            return None
-        result = self._desa_by_kec.get(kode_kecamatan, [])
-        if include_parent:
-            return result
-        return self._remove_parent_from_list(result)
-
-    def find_by_code(self, kode: int) -> dict[str, Any] | None:
-        return self._all_codes_idx.get(kode)
 
 
 @lru_cache(maxsize=1)

@@ -1,4 +1,4 @@
-"""Response helpers for handbook-compliant API envelopes."""
+"""Response helpers for the standard API envelope."""
 
 from datetime import datetime, timezone
 import time
@@ -9,28 +9,40 @@ from fastapi import Request
 from fastapi.responses import JSONResponse
 
 from app.core.config import get_settings
-
-
-def _base_url(request: Request) -> str:
-    return str(request.base_url).rstrip("/")
+from app.core.errors import ERRORS
 
 
 def _meta_from_request(request: Request) -> dict[str, Any]:
-    settings = get_settings()
     start_time = getattr(request.state, "start_time", time.perf_counter())
-    request_id = getattr(request.state, "request_id", str(uuid.uuid4()))
-
     return {
-        "api_version": settings.api_version,
+        "api_version": get_settings().api_version,
         "timestamp": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
-        "request_id": request_id,
+        "request_id": getattr(request.state, "request_id", str(uuid.uuid4())),
         "duration_ms": max(int((time.perf_counter() - start_time) * 1000), 0),
     }
 
 
-def build_pagination(total: int) -> dict[str, Any]:
-    """Create a stable pagination block for non-cursor list responses."""
-    return {
+def _envelope(request: Request, status_code: int, data: Any, error: dict[str, Any] | None) -> JSONResponse:
+    return JSONResponse(
+        status_code=status_code,
+        content={
+            "success": error is None,
+            "data": data,
+            "error": error,
+            "meta": _meta_from_request(request),
+        },
+    )
+
+
+def success_response(request: Request, data: Any) -> JSONResponse:
+    """Return a success envelope for object payloads."""
+    return _envelope(request, 200, data, None)
+
+
+def list_response(request: Request, items: list[dict[str, Any]]) -> JSONResponse:
+    """Return a success envelope for a complete, unpaginated list."""
+    total = len(items)
+    pagination = {
         "total": total,
         "per_page": total,
         "has_next": False,
@@ -38,66 +50,24 @@ def build_pagination(total: int) -> dict[str, Any]:
         "next_cursor": None,
         "prev_cursor": None,
     }
-
-
-def success_response(
-    request: Request,
-    data: Any,
-    status_code: int = 200,
-) -> JSONResponse:
-    """Return a success envelope for object payloads."""
-    return JSONResponse(
-        status_code=status_code,
-        content={
-            "success": True,
-            "data": data,
-            "error": None,
-            "meta": _meta_from_request(request),
-        },
-    )
-
-
-def list_response(
-    request: Request,
-    items: list[dict[str, Any]],
-    status_code: int = 200,
-) -> JSONResponse:
-    """Return a success envelope for list payloads with pagination."""
-    return success_response(
-        request=request,
-        status_code=status_code,
-        data={
-            "items": items,
-            "pagination": build_pagination(total=len(items)),
-        },
-    )
+    return _envelope(request, 200, {"items": items, "pagination": pagination}, None)
 
 
 def error_response(
     request: Request,
-    *,
-    status_code: int,
     code: str,
-    message: str,
     detail: str,
-    hint: str,
     fields: list[dict[str, Any]] | None = None,
+    status_code: int | None = None,
 ) -> JSONResponse:
-    """Return a handbook-compliant error envelope."""
-    docs_url = f"{_base_url(request)}/docs/errors#{code}"
-    return JSONResponse(
-        status_code=status_code,
-        content={
-            "success": False,
-            "data": None,
-            "error": {
-                "code": code,
-                "message": message,
-                "detail": detail,
-                "hint": hint,
-                "docs": docs_url,
-                "fields": fields,
-            },
-            "meta": _meta_from_request(request),
-        },
-    )
+    """Return an error envelope for a catalogued error code."""
+    spec = ERRORS[code]
+    error = {
+        "code": code,
+        "message": spec.message,
+        "detail": detail,
+        "hint": spec.hint,
+        "docs": f"{str(request.base_url).rstrip('/')}/docs/errors#{code}",
+        "fields": fields,
+    }
+    return _envelope(request, status_code or spec.status, None, error)

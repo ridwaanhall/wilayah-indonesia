@@ -1,5 +1,1 @@
-"""Compatibility package for deployment entrypoints."""
-
-from app.main import app
-
-__all__ = ["app"]
+"""Deployment entrypoint package; Vercel serves prod/main.py."""

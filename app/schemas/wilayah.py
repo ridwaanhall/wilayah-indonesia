@@ -41,4 +41,40 @@ class RegionListData(BaseModel):
     pagination: PaginationInfo
 
 
+class LevelCounts(BaseModel):
+    """Number of descendant regions at each level."""
+
+    province: int = Field(ge=0)
+    regency: int = Field(ge=0)
+    district: int = Field(ge=0)
+    village: int = Field(ge=0)
+
+
+class KindCounts(BaseModel):
+    """Descendant regencies split into kabupaten/kota, villages into desa/kelurahan/desa adat."""
+
+    kabupaten: int = Field(ge=0)
+    kota: int = Field(ge=0)
+    desa: int = Field(ge=0)
+    kelurahan: int = Field(ge=0)
+    desa_adat: int = Field(ge=0)
+
+
+class RegionStats(BaseModel):
+    """Descendant totals for one region."""
+
+    region: RegionResource
+    levels: LevelCounts
+    kinds: KindCounts
+
+
+class StatsData(BaseModel):
+    """Totals for a region (null region = Indonesia) and for each direct child."""
+
+    region: RegionResource | None
+    levels: LevelCounts
+    kinds: KindCounts
+    children: list[RegionStats]
+
+
 RegionParent.model_rebuild()

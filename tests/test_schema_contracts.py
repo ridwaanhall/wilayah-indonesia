@@ -8,7 +8,7 @@ from pydantic import TypeAdapter
 
 from app.api.endpoints.root import HealthData, RootData
 from app.schemas.common import ErrorResponse, SuccessResponse
-from app.schemas.wilayah import RegionListData, RegionResource
+from app.schemas.wilayah import RegionListData, RegionResource, StatsData
 from prod.main import app
 
 
@@ -45,6 +45,9 @@ def test_all_success_endpoints_match_declared_schema(client: TestClient) -> None
         ("/api/?parent=true", SuccessResponse[RootData]),
         ("/api/health?parent=false", SuccessResponse[HealthData]),
         ("/api/health?parent=true", SuccessResponse[HealthData]),
+        ("/api/stats/0", SuccessResponse[StatsData]),
+        ("/api/stats/33", SuccessResponse[StatsData]),
+        ("/api/stats/3301012001", SuccessResponse[StatsData]),
     ]
 
     for path, model in checks:
@@ -60,6 +63,8 @@ def test_error_endpoints_match_declared_schema(client: TestClient) -> None:
         "/api/11/1",            # invalid segment length
         "/api/s/99/1/1",        # not found
         "/api/s/11/1/1/10000",  # validation error by path constraint
+        "/api/stats/123",       # invalid code length
+        "/nope",                # unknown path
     ]
 
     for path in checks:

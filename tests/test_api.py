@@ -53,16 +53,48 @@ def assert_error_shape(error: dict[str, object], expected_code: str) -> None:
 
 
 class TestRootAndOpenAPITags:
-    def test_landing_page_contains_tailwind_and_seo(self, client: TestClient) -> None:
+    def test_landing_page_is_server_rendered_with_seo(self, client: TestClient) -> None:
         response = client.get("/")
         assert response.status_code == 200
         assert "text/html" in response.headers["content-type"]
+        assert "script-src 'self'" in response.headers["content-security-policy"]
 
         body = response.text
-        assert "@tailwindcss/browser@4" in body
-        assert "https://rone.dev/static/img/favicon/favicon.ico" in body
-        assert "<meta name=\"description\"" in body
-        assert "<meta property=\"og:title\"" in body
+        assert '<meta name="description"' in body
+        assert '<meta property="og:title"' in body
+        assert '<link rel="canonical" href="https://wilayah.rone.dev/">' in body
+        assert '"@type": "Dataset"' in body
+        assert "83,731" in body  # totals are rendered on the server, not by JavaScript
+        assert "/api/kode/3301012001" in body  # reference table uses the endpoint examples
+        assert body.count('role="combobox"') == 4
+
+    def test_static_assets_are_served(self, client: TestClient) -> None:
+        assert client.get("/static/app.css").status_code == 200
+        assert "javascript" in client.get("/static/app.js").headers["content-type"]
+
+    def test_error_catalog_page_has_anchor_per_code(self, client: TestClient) -> None:
+        response = client.get("/docs/errors")
+        assert response.status_code == 200
+        for code in ("INVALID_REGION_CODE", "REGION_NOT_FOUND", "VILLAGE_NOT_FOUND", "VALIDATION_FAILED"):
+            assert f'id="{code}"' in response.text
+
+    def test_robots_and_sitemap(self, client: TestClient) -> None:
+        robots = client.get("/robots.txt")
+        assert robots.status_code == 200
+        assert "Sitemap: https://wilayah.rone.dev/sitemap.xml" in robots.text
+
+        sitemap = client.get("/sitemap.xml")
+        assert sitemap.headers["content-type"].startswith("application/xml")
+        assert "<loc>https://wilayah.rone.dev/docs/errors</loc>" in sitemap.text
+
+    def test_unknown_path_and_method_use_generic_codes(self, client: TestClient) -> None:
+        missing = client.get("/nope")
+        assert missing.status_code == 404
+        assert_error_shape(missing.json()["error"], "RESOURCE_NOT_FOUND")
+
+        wrong_method = client.post("/api/0")
+        assert wrong_method.status_code == 405
+        assert_error_shape(wrong_method.json()["error"], "METHOD_NOT_ALLOWED")
 
     def test_root_groups_are_exposed(self, client: TestClient) -> None:
         response = client.get("/api/")
@@ -79,6 +111,7 @@ class TestRootAndOpenAPITags:
         assert "search" in data["groups"]
         assert "wilayah" in data["groups"]
         assert "simple" in data["groups"]
+        assert "/api/stats/{kode}" in data["groups"]["stats"]
 
     def test_health_endpoint(self, client: TestClient) -> None:
         response = client.get("/api/health")
@@ -95,7 +128,7 @@ class TestRootAndOpenAPITags:
 
         payload = response.json()
         tag_names = {tag["name"] for tag in payload.get("tags", [])}
-        assert {"root", "search", "wilayah", "simple"}.issubset(tag_names)
+        assert {"root", "search", "stats", "wilayah", "simple"}.issubset(tag_names)
 
 
 class TestWilayahLegacyRules:
@@ -353,3 +386,40 @@ class TestSimpleRules:
             assert data_with["parent"] is not None
         else:
             assert data_with["parent"] is None
+
+
+class TestStatsRules:
+    def test_national_stats(self, client: TestClient) -> None:
+        response = client.get("/api/stats/0")
+        assert response.status_code == 200
+
+        payload = response.json()
+        assert_envelope(payload, success=True)
+        data = payload["data"]
+        assert data["region"] is None
+        assert data["levels"] == {"province": 38, "regency": 514, "district": 7277, "village": 83731}
+        assert len(data["children"]) == 38
+        assert sum(child["levels"]["village"] for child in data["children"]) == 83731
+
+    def test_province_stats_children_sum_to_parent(self, client: TestClient) -> None:
+        data = client.get("/api/stats/33").json()["data"]
+        assert data["region"]["code"] == 33
+        assert data["levels"]["province"] == 0
+        assert data["kinds"]["kabupaten"] + data["kinds"]["kota"] == data["levels"]["regency"]
+        for level in ("district", "village"):
+            assert sum(child["levels"][level] for child in data["children"]) == data["levels"][level]
+        assert_region_shape(data["children"][0]["region"])
+
+    def test_region_stats_carry_full_parent_chain(self, client: TestClient) -> None:
+        data = client.get("/api/stats/330101").json()["data"]
+        assert data["region"]["parent"]["parent"]["code"] == 33
+        assert all(child["region"]["type"] == "village" for child in data["children"])
+
+    def test_stats_invalid_and_missing_codes(self, client: TestClient) -> None:
+        invalid = client.get("/api/stats/123")
+        assert invalid.status_code == 422
+        assert_error_shape(invalid.json()["error"], "INVALID_REGION_CODE")
+
+        missing = client.get("/api/stats/99")
+        assert missing.status_code == 404
+        assert_error_shape(missing.json()["error"], "REGION_NOT_FOUND")

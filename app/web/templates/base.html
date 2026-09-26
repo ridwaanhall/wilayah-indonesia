@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}{% endblock %}</title>
+  <meta name="description" content="{% block description %}{% endblock %}">
+  <link rel="canonical" href="{{ site_url }}{{ request.url.path }}">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#f7f5f0" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#131412" media="(prefers-color-scheme: dark)">
+  <link rel="icon" href="https://rone.dev/static/img/favicon/favicon.ico">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="{{ settings.app_name }}">
+  <meta property="og:title" content="{{ self.title() }}">
+  <meta property="og:description" content="{{ self.description() }}">
+  <meta property="og:url" content="{{ site_url }}{{ request.url.path }}">
+  <meta name="twitter:card" content="summary">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Schibsted+Grotesk:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="{{ asset_url('app.css') }}">
+  {% block head %}{% endblock %}
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="masthead">
+    <div class="wrap masthead-inner">
+      <a class="wordmark" href="/" aria-label="{{ settings.app_name }} home">
+        <span class="wordmark-code" aria-hidden="true">33/01</span>
+        <span>Wilayah Indonesia</span>
+      </a>
+      <nav class="nav" aria-label="Primary">
+        <a href="/#explorer">Explorer</a>
+        <a href="/#analytics">Analytics</a>
+        <a href="/#reference">Reference</a>
+        <a href="/docs">Swagger</a>
+        <a href="{{ settings.repository_url }}" rel="noopener">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    {% block main %}{% endblock %}
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <p>
+        Independent and community-maintained. Not affiliated with any Indonesian government body.
+        The dataset is a snapshot of the official register: for anything with legal or administrative
+        consequence, check the official source.
+      </p>
+      <p class="footer-links">
+        <a href="{{ settings.repository_url }}/blob/main/HOSTED_API_TERMS.md" rel="noopener">API terms</a>
+        <a href="/docs/errors">Error codes</a>
+        <a href="/redoc">ReDoc</a>
+        <a href="/openapi.json">OpenAPI</a>
+        <a href="https://rone.dev" rel="noopener">RoneAI</a>
+        <span>{{ settings.api_version }} · {{ settings.app_version }}</span>
+      </p>
+    </div>
+  </footer>
+</body>
+</html>

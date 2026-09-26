@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Request
 from pydantic import BaseModel
 
+from app.api.catalog import public_routes
 from app.core.config import get_settings
 from app.core.responses import success_response
 from app.schemas.common import SuccessResponse
@@ -14,18 +15,11 @@ class DocsLinks(BaseModel):
     openapi: str
 
 
-class EndpointGroups(BaseModel):
-    root: list[str]
-    search: list[str]
-    wilayah: list[str]
-    simple: list[str]
-
-
 class RootData(BaseModel):
     name: str
     version: str
     docs: DocsLinks
-    groups: EndpointGroups
+    groups: dict[str, list[str]]
 
 
 class HealthData(BaseModel):
@@ -37,12 +31,15 @@ class HealthData(BaseModel):
 @router.get(
     "/",
     summary="API Root",
-    description="Endpoint utama API dengan informasi versi dan tautan dokumentasi.",
+    description="Informasi versi, tautan dokumentasi, dan daftar endpoint per grup.",
     response_model=SuccessResponse[RootData],
 )
 def api_root(request: Request) -> object:
-    """Return API index and grouped endpoint catalog."""
     base_url = str(request.base_url).rstrip("/")
+    groups: dict[str, list[str]] = {}
+    for route in public_routes(request.app):
+        groups.setdefault(str(route.tags[0]), []).append(route.path)
+
     payload = {
         "name": request.app.title,
         "version": request.app.version,
@@ -51,22 +48,7 @@ def api_root(request: Request) -> object:
             "redoc": f"{base_url}/redoc",
             "openapi": f"{base_url}/openapi.json",
         },
-        "groups": {
-            "root": ["/api/"],
-            "search": ["/api/kode/{kode}"],
-            "wilayah": [
-                "/api/0",
-                "/api/{kode_provinsi}",
-                "/api/{kode_provinsi}/{kode_kabupaten}",
-                "/api/{kode_provinsi}/{kode_kabupaten}/{kode_kecamatan}",
-            ],
-            "simple": [
-                "/api/s/{kode_provinsi}",
-                "/api/s/{kode_provinsi}/{nomor_kabupaten}",
-                "/api/s/{kode_provinsi}/{nomor_kabupaten}/{nomor_kecamatan}",
-                "/api/s/{kode_provinsi}/{nomor_kabupaten}/{nomor_kecamatan}/{nomor_desa}",
-            ],
-        },
+        "groups": groups,
     }
     return success_response(request, payload)
 
@@ -74,17 +56,11 @@ def api_root(request: Request) -> object:
 @router.get(
     "/health",
     summary="Health Check",
-    description="Endpoint status kesehatan layanan.",
+    description="Status kesehatan layanan.",
     response_model=SuccessResponse[HealthData],
 )
 def health_check(request: Request) -> object:
-    """Return a standardized health status payload."""
-    settings = get_settings()
     return success_response(
         request,
-        {
-            "status": "ok",
-            "version": settings.api_version,
-            "database": "connected",
-        },
+        {"status": "ok", "version": get_settings().api_version, "database": "connected"},
     )

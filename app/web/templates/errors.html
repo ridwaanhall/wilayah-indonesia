@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}Error codes · Wilayah Indonesia API{% endblock %}
+{% block description %}Every error code the Wilayah Indonesia API returns, with its HTTP status, meaning and how to fix the request.{% endblock %}
+
+{% block main %}
+<section class="section wrap" aria-labelledby="errors-title">
+  <header class="section-head">
+    <p class="eyebrow">Reference</p>
+    <h1 id="errors-title">Error codes</h1>
+    <p>
+      Failed requests return <code>"success": false</code> and an <code>error</code> object.
+      Branch on <code>error.code</code>: it is stable. <code>message</code> and <code>hint</code> are for people,
+      <code>detail</code> names the exact value, and <code>fields</code> lists each invalid parameter.
+    </p>
+  </header>
+
+  <div class="table-scroll">
+    <table class="table errors">
+      <thead>
+        <tr><th scope="col">Code</th><th scope="col">HTTP</th><th scope="col">When it happens</th><th scope="col">What to do</th></tr>
+      </thead>
+      <tbody>
+        {% for code, spec in errors.items() %}
+        <tr id="{{ code }}">
+          <td><a class="link mono" href="#{{ code }}">{{ code }}</a></td>
+          <td class="mono">{{ spec.status }}</td>
+          <td>{{ spec.description }}</td>
+          <td class="muted">{{ spec.hint }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+{% endblock %}
