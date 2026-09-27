@@ -12,7 +12,12 @@ Free JSON API for Indonesian administrative region codes: 38 provinces, 514 rege
 curl https://wilayah.rone.dev/api/code/3301012001
 ```
 
-![Explorer: cascading province, regency, district and village pickers beside the live API response](docs/screenshot-explorer.png)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/screenshot-explorer-dark.png">
+  <img src="docs/screenshot-explorer.png" alt="Explorer: cascading province, regency, district and village pickers beside the live API response">
+</picture>
+
+<sub>Follows your GitHub theme. Open the [light](docs/screenshot-explorer.png) or [dark](docs/screenshot-explorer-dark.png) version.</sub>
 
 ## The demo site
 
@@ -27,7 +32,12 @@ The landing page at `/` is a working client for the API, not a brochure:
   whatever is selected, all from `GET /api/stats/{code}`. Select a row to drill down.
 - **Reference**: generated from the registered routes, so it cannot drift from the API.
 
-![Analytics for Central Java: totals, regency and city split, village status, ranked regencies](docs/screenshot-analytics.png)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/screenshot-analytics-dark.png">
+  <img src="docs/screenshot-analytics.png" alt="Analytics for Central Java: totals, regency and city split, village status, ranked regencies">
+</picture>
+
+<sub>Follows your GitHub theme. Open the [light](docs/screenshot-analytics.png) or [dark](docs/screenshot-analytics-dark.png) version.</sub>
 
 It is server-rendered with Jinja2 and uses one hand-written stylesheet and two small scripts.
 There is no build step and no frontend dependency. Light theme by default, with a switch for dark
@@ -137,7 +147,7 @@ Then open <http://127.0.0.1:8000/>. On Windows consoles that cannot print emoji,
 `uv run uvicorn app.main:app --reload` instead. `.claude/launch.json` holds the same command for
 the Claude Code preview browser.
 
-The screenshots in `docs/` are 1440px-wide renders of the running site, resized to 1200px.
+The screenshots in `docs/` are 1440px-wide renders of the running site in both themes, resized to 1200px.
 
 Settings come from environment variables or `.env`:
 
