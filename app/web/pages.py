@@ -6,7 +6,7 @@ from pathlib import Path
 from typing import Any
 
 from fastapi import APIRouter, Request
-from fastapi.responses import HTMLResponse, PlainTextResponse, Response
+from fastapi.responses import FileResponse, HTMLResponse, PlainTextResponse, Response
 from fastapi.routing import APIRoute
 from fastapi.templating import Jinja2Templates
 
@@ -29,13 +29,14 @@ def asset_url(name: str) -> str:
 
 templates.env.globals["asset_url"] = asset_url
 
-LEVEL_LABELS: dict[int, tuple[str, str]] = {
-    1: ("Provinsi", "Province"),
-    2: ("Kabupaten / Kota", "Regency or city"),
-    3: ("Kecamatan", "District"),
-    4: ("Desa / Kelurahan", "Village"),
+# The site is in English; the official Indonesian term is shown beside each level as a reference.
+LEVEL_LABELS: dict[int, tuple[str, str, str]] = {
+    1: ("Province", "Provinces", "provinsi"),
+    2: ("Regency / city", "Regencies and cities", "kabupaten / kota"),
+    3: ("District", "Districts", "kecamatan"),
+    4: ("Village", "Villages", "desa / kelurahan"),
 }
-# (depth, API type, Indonesian label, English label). Rendered into the page; app.js reads labels back from it.
+# (depth, API type, label, plural, official term). Rendered into the page; app.js reads labels back from it.
 LEVELS = tuple((depth, level_type, *LEVEL_LABELS[depth]) for depth, level_type in LEVEL_TYPES.items())
 
 PAGE_PATHS = ("/", "/docs/errors")
@@ -46,7 +47,7 @@ CONTENT_SECURITY_POLICY = "; ".join(
         "script-src 'self'",
         "style-src 'self' https://fonts.googleapis.com",
         "font-src https://fonts.gstatic.com",
-        "img-src 'self' https://rone.dev data:",
+        "img-src 'self' data:",
         "connect-src 'self'",
         "base-uri 'self'",
         "form-action 'self'",
@@ -94,6 +95,12 @@ def landing_page(request: Request) -> HTMLResponse:
 @router.get("/docs/errors", response_class=HTMLResponse)
 def error_catalog(request: Request) -> HTMLResponse:
     return _render(request, "errors.html", errors=ERRORS)
+
+
+@router.get("/favicon.ico")
+def favicon() -> FileResponse:
+    """Browsers request /favicon.ico directly, whatever the page links to."""
+    return FileResponse(STATIC_DIR / "favicon.ico", media_type="image/x-icon")
 
 
 @router.get("/robots.txt", response_class=PlainTextResponse)

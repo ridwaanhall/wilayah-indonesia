@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Wilayah Indonesia API: kode provinsi, kabupaten, kecamatan dan desa{% endblock %}
+{% block title %}Wilayah Indonesia API: region codes from province to village{% endblock %}
 {% block description %}Free JSON API for Indonesian administrative region codes. {{ "{:,}".format(totals.province) }} provinces, {{ "{:,}".format(totals.regency) }} regencies and cities, {{ "{:,}".format(totals.district) }} districts and {{ "{:,}".format(totals.village) }} villages with full parent chains. No API key.{% endblock %}
 
 {% block head %}
@@ -41,9 +41,9 @@
     Try it below: every control on this page is a real API call.
   </p>
   <dl class="totals">
-    {% for depth, level_type, id_name, en_name in levels %}
+    {% for depth, level_type, label, plural, term in levels %}
     <div>
-      <dt>{{ id_name }}</dt>
+      <dt>{{ plural }}</dt>
       <dd>{{ "{:,}".format(totals[level_type]) }}</dd>
     </div>
     {% endfor %}
@@ -74,13 +74,13 @@
       </form>
 
       <div class="levels">
-        {% for depth, level_type, id_name, en_name in levels %}
-        <div class="field" data-level="{{ depth }}" data-type="{{ level_type }}" data-label="{{ id_name }}">
-          <label for="level-{{ depth }}" id="level-{{ depth }}-label">{{ id_name }} <span>{{ en_name }}</span></label>
+        {% for depth, level_type, label, plural, term in levels %}
+        <div class="field" data-level="{{ depth }}" data-type="{{ level_type }}" data-label="{{ label }}" data-plural="{{ plural }}">
+          <label for="level-{{ depth }}" id="level-{{ depth }}-label">{{ label }} <span lang="id">{{ term }}</span></label>
           <div class="combo">
             <input id="level-{{ depth }}" class="input" type="text" role="combobox" autocomplete="off" spellcheck="false"
                    aria-autocomplete="list" aria-expanded="false" aria-controls="level-{{ depth }}-list"
-                   placeholder="{{ 'Loading…' if depth == 1 else 'Choose ' ~ levels[depth - 2][2] ~ ' first' }}" disabled>
+                   placeholder="{{ 'Loading…' if depth == 1 else 'Select ' ~ levels[depth - 2][2]|lower ~ ' first' }}" disabled>
             <span class="combo-caret" aria-hidden="true"></span>
             <ul id="level-{{ depth }}-list" class="combo-list" role="listbox" aria-labelledby="level-{{ depth }}-label" hidden></ul>
           </div>
@@ -152,7 +152,7 @@
         <tr>
           <td><code>{{ endpoint.path }}</code></td>
           <td>{{ endpoint.summary }}</td>
-          <td class="muted">{{ endpoint.tag }}</td>
+          <td class="muted table-tag">{{ endpoint.tag }}</td>
           <td><a class="link" href="{{ endpoint.example }}">{{ endpoint.example }}</a></td>
         </tr>
         {% endfor %}
@@ -171,7 +171,7 @@
     </div>
     <div>
       <dt>Kinds</dt>
-      <dd>Regency segments 71–99 are cities (kota). A village segment starting with 1 is a kelurahan, 2 a desa, 3 a desa adat.</dd>
+      <dd>Regency segments 71–99 are cities (<i lang="id">kota</i>), the rest regencies (<i lang="id">kabupaten</i>). A village segment starting with 1 is an urban village (<i lang="id">kelurahan</i>), 2 a village (<i lang="id">desa</i>), 3 a customary village (<i lang="id">desa adat</i>).</dd>
     </div>
     <div>
       <dt>Bulk data</dt>

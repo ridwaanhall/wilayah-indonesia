@@ -31,7 +31,7 @@ class HealthData(BaseModel):
 @router.get(
     "/",
     summary="API Root",
-    description="Informasi versi, tautan dokumentasi, dan daftar endpoint per grup.",
+    description="Version, documentation links and every endpoint grouped by tag.",
     response_model=SuccessResponse[RootData],
 )
 def api_root(request: Request) -> object:
@@ -56,7 +56,7 @@ def api_root(request: Request) -> object:
 @router.get(
     "/health",
     summary="Health Check",
-    description="Status kesehatan layanan.",
+    description="Service health status.",
     response_model=SuccessResponse[HealthData],
 )
 def health_check(request: Request) -> object:

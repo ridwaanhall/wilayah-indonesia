@@ -113,15 +113,15 @@ _VALIDATION_EXAMPLE = _error(
 def responses(example: dict[str, Any]) -> dict[int | str, dict[str, Any]]:
     """Declare the success example plus the shared 404 and 422 error envelopes."""
     return {
-        200: {"description": "Berhasil.", "content": {"application/json": {"example": example}}},
+        200: {"description": "Success.", "content": {"application/json": {"example": example}}},
         404: {
             "model": ErrorResponse,
-            "description": "Wilayah tidak ditemukan.",
+            "description": "Region not found.",
             "content": {"application/json": {"example": _NOT_FOUND_EXAMPLE}},
         },
         422: {
             "model": ErrorResponse,
-            "description": "Kode atau parameter tidak valid.",
+            "description": "Invalid code or parameter.",
             "content": {"application/json": {"example": _VALIDATION_EXAMPLE}},
         },
     }

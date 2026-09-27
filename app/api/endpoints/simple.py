@@ -16,15 +16,15 @@ router = APIRouter(
     responses=responses(REGION_EXAMPLE),
 )
 
-Provinsi = Annotated[int, Path(ge=1, le=99, description="Kode provinsi 2 digit", examples=[33])]
-Kabupaten = Annotated[int, Path(ge=1, le=99, description="Nomor kabupaten/kota, 1-99", examples=[1])]
-Kecamatan = Annotated[int, Path(ge=1, le=99, description="Nomor kecamatan, 1-99", examples=[1])]
-Desa = Annotated[int, Path(ge=1, le=9999, description="Nomor desa/kelurahan, 1-9999", examples=[2001])]
+Provinsi = Annotated[int, Path(ge=1, le=99, description="2-digit province code", examples=[33])]
+Kabupaten = Annotated[int, Path(ge=1, le=99, description="Regency or city number within the province, 1-99", examples=[1])]
+Kecamatan = Annotated[int, Path(ge=1, le=99, description="District number within the regency, 1-99", examples=[1])]
+Desa = Annotated[int, Path(ge=1, le=9999, description="Village number within the district, 1-9999", examples=[2001])]
 
 
 @router.get(
     "/{kode_provinsi}",
-    summary="Simple Tingkat 1 (Provinsi)",
+    summary="Shorthand: province",
     response_model=SuccessResponse[RegionResource],
 )
 def simple_provinsi(request: Request, kode_provinsi: Provinsi, service: Service, parent: ChainParent = True) -> object:
@@ -33,7 +33,7 @@ def simple_provinsi(request: Request, kode_provinsi: Provinsi, service: Service,
 
 @router.get(
     "/{kode_provinsi}/{nomor_kabupaten}",
-    summary="Simple Tingkat 2 (Kabupaten/Kota)",
+    summary="Shorthand: regency or city",
     response_model=SuccessResponse[RegionResource],
 )
 def simple_kabupaten(
@@ -49,7 +49,7 @@ def simple_kabupaten(
 
 @router.get(
     "/{kode_provinsi}/{nomor_kabupaten}/{nomor_kecamatan}",
-    summary="Simple Tingkat 3 (Kecamatan)",
+    summary="Shorthand: district",
     response_model=SuccessResponse[RegionResource],
 )
 def simple_kecamatan(
@@ -66,7 +66,7 @@ def simple_kecamatan(
 
 @router.get(
     "/{kode_provinsi}/{nomor_kabupaten}/{nomor_kecamatan}/{nomor_desa}",
-    summary="Simple Tingkat 4 (Desa/Kelurahan)",
+    summary="Shorthand: village",
     response_model=SuccessResponse[RegionResource],
 )
 def simple_desa(

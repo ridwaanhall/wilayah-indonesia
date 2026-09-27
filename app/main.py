@@ -18,22 +18,18 @@ def create_app() -> FastAPI:
         title=settings.app_name,
         version=settings.app_version,
         description=(
-            "API data wilayah administratif Indonesia untuk level provinsi, "
-            "kabupaten/kota, kecamatan, dan desa/kelurahan."
+            "Indonesian administrative regions, from province (provinsi) through regency or city "
+            "(kabupaten/kota) and district (kecamatan) to village (desa/kelurahan)."
         ),
         openapi_tags=[
-            {"name": "root", "description": "Informasi dasar API pada namespace /api."},
-            {"name": "search", "description": "Pencarian wilayah berdasarkan kode penuh pada /api/kode/{kode}."},
-            {"name": "stats", "description": "Jumlah wilayah turunan per level dan per jenis pada /api/stats/{kode}."},
+            {"name": "root", "description": "API index and health check."},
+            {"name": "search", "description": "Look up any region by its full code."},
+            {"name": "stats", "description": "Descendant counts per level and per kind, for analytics."},
             {
                 "name": "simple",
-                "description": (
-                    "Endpoint shorthand pada /api/s. "
-                    "Tingkat 1 = provinsi, tingkat 2 = kabupaten/kota, "
-                    "tingkat 3 = kecamatan, tingkat 4 = desa/kelurahan."
-                ),
+                "description": "Shorthand lookups by segment: /api/s/{province}/{regency}/{district}/{village}.",
             },
-            {"name": "wilayah", "description": "Endpoint hierarki kode penuh pada namespace /api."},
+            {"name": "wilayah", "description": "List the children of a region, one level per path segment."},
         ],
     )
 

@@ -15,14 +15,14 @@ router = APIRouter(tags=["search"])
 
 @router.get(
     "/kode/{kode}",
-    summary="Cari Wilayah berdasarkan Kode",
-    description="Cari wilayah pada level apa pun dengan kode penuh 2, 4, 6, atau 10 digit.",
+    summary="Look up a region by code",
+    description="Find a region at any level by its full 2, 4, 6 or 10-digit code.",
     response_model=SuccessResponse[RegionResource],
     responses=responses(REGION_EXAMPLE),
 )
 def search_by_code(
     request: Request,
-    kode: Annotated[int, Path(gt=0, description="Kode wilayah administratif", examples=[3301012001])],
+    kode: Annotated[int, Path(gt=0, description="Full region code", examples=[3301012001])],
     service: Service,
     parent: ChainParent = True,
 ) -> object:

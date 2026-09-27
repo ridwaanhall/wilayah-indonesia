@@ -15,18 +15,18 @@ router = APIRouter(tags=["stats"])
 
 @router.get(
     "/stats/{kode}",
-    summary="Statistik Wilayah",
+    summary="Region statistics",
     description=(
-        "Jumlah wilayah turunan per level (levels) dan per jenis (kinds: kabupaten/kota, "
-        "desa/kelurahan/desa adat) untuk satu wilayah beserta setiap anak langsungnya. "
-        "Gunakan kode 0 untuk seluruh Indonesia."
+        "Descendant counts per level (levels) and per kind (kinds: kabupaten/kota, "
+        "desa/kelurahan/desa adat) for one region and each of its direct children. "
+        "Use code 0 for the whole of Indonesia."
     ),
     response_model=SuccessResponse[StatsData],
     responses=responses(STATS_EXAMPLE),
 )
 def region_stats(
     request: Request,
-    kode: Annotated[int, Path(ge=0, description="Kode wilayah, atau 0 untuk Indonesia", examples=[33])],
+    kode: Annotated[int, Path(ge=0, description="Full region code, or 0 for Indonesia", examples=[33])],
     service: Service,
 ) -> object:
     return success_response(request, service.stats(kode))

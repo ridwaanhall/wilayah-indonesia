@@ -25,8 +25,12 @@ The landing page at `/` is a working client for the API, not a brochure:
   whatever is selected, all from `GET /api/stats/{kode}`. Select a row to drill down.
 - **Reference**: generated from the registered routes, so it cannot drift from the API.
 
-It is server-rendered with Jinja2 and uses one hand-written stylesheet and one ES module.
-There is no build step and no frontend dependency.
+It is server-rendered with Jinja2 and uses one hand-written stylesheet and two small scripts.
+There is no build step and no frontend dependency. Dark theme by default, with a toggle that
+remembers your choice. The site is in English, with the official Indonesian term shown beside
+each level (province, *provinsi*).
+
+Icons are generated from one definition: `uv run --with pillow python scripts/build_icons.py`.
 
 ## Endpoints
 

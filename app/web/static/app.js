@@ -26,11 +26,20 @@ function fill(element, ...children) {
 const fields = [...document.querySelectorAll(".field[data-level]")];
 const TYPES = fields.map((field) => field.dataset.type);
 const LABELS = Object.fromEntries(fields.map((field) => [field.dataset.type, field.dataset.label]));
+const PLURALS = Object.fromEntries(fields.map((field) => [field.dataset.type, field.dataset.plural]));
+const lower = (type) => LABELS[type].toLowerCase();
 const COMPOSITIONS = [
-  { title: "Kabupaten and kota", keys: ["kabupaten", "kota"], below: 2 },
-  { title: "Desa and kelurahan", keys: ["desa", "kelurahan", "desa_adat"], below: 4 },
+  { title: "Regencies and cities", keys: ["kabupaten", "kota"], below: 2 },
+  { title: "Village status", keys: ["desa", "kelurahan", "desa_adat"], below: 4 },
 ];
-const KIND_LABELS = { kabupaten: "Kabupaten", kota: "Kota", desa: "Desa", kelurahan: "Kelurahan", desa_adat: "Desa adat" };
+// API kind keys: English name first, the official Indonesian term beside it.
+const KIND_LABELS = {
+  kabupaten: ["Regency", "kabupaten"],
+  kota: ["City", "kota"],
+  desa: ["Village", "desa"],
+  kelurahan: ["Urban village", "kelurahan"],
+  desa_adat: ["Customary village", "desa adat"],
+};
 const RANK_LIMIT = 12;
 
 /* ---------- API client with a visible request log ---------- */
@@ -223,7 +232,7 @@ async function navigate(regions) {
   const last = path.at(-1);
   const loads = pickers.map((picker, index) => {
     if (index > path.length || (index === path.length && last && !last.has_children)) {
-      picker.load([], `Select ${LABELS[TYPES[index - 1]]} first`);
+      picker.load([], `Select ${lower(TYPES[index - 1])} first`);
       return null;
     }
     return loadPicker(index, current);
@@ -238,7 +247,7 @@ async function loadPicker(index, current) {
   const entry = await request(listPath(path.slice(0, index)));
   if (current !== version) return;
   const items = entry.body.success ? entry.body.data.items : [];
-  pickers[index].load(items, `Select ${LABELS[TYPES[index]]} (${items.length})`);
+  pickers[index].load(items, `Select ${lower(TYPES[index])} (${items.length})`);
   pickers[index].select(items.find((item) => item.code === path[index]?.code) ?? null);
   if (!path.length && index === 0) show(entry);
 }
@@ -276,7 +285,7 @@ function renderDetail() {
   const calls = [
     [`/api/kode/${region.code}?parent=true`, "Lookup with the full parent chain"],
     [`/api/s/${region.short_code}`, "Same region through the shorthand route"],
-    region.has_children && [`${listPath(path)}?parent=true`, `List every ${LABELS[TYPES[region.depth]]} inside`],
+    region.has_children && [`${listPath(path)}?parent=true`, `List every ${lower(TYPES[region.depth])} inside`],
     region.has_children && [`/api/stats/${region.code}`, "Descendant totals used by the analytics"],
   ].filter(Boolean);
 
@@ -333,7 +342,7 @@ async function renderAnalytics(current) {
   if (!metrics.includes(metric)) metric = metrics.at(-1);
 
   fill(body,
-    h("dl", { className: "figures" }, TYPES.slice(depth).map((type) => fact(LABELS[type], number.format(levels[type])))),
+    h("dl", { className: "figures" }, TYPES.slice(depth).map((type) => fact(PLURALS[type], number.format(levels[type])))),
     h("div", { className: "splits" },
       COMPOSITIONS.filter((composition) => depth < composition.below).map((composition) => split(composition, kinds)),
     ),
@@ -347,14 +356,16 @@ function split({ title, keys }, kinds) {
   const share = (value) => `${((value / total) * 100).toFixed(value / total < 0.01 ? 2 : 1)}%`;
   return h("figure", {},
     h("figcaption", {}, h("h3", {}, title)),
-    h("div", { className: "split-bar", role: "img", "aria-label": parts.map((part) => `${KIND_LABELS[part.key]} ${number.format(part.value)}`).join(", ") },
-      parts.map((part) => h("span", { "--value": part.value, "--color": part.color, title: `${KIND_LABELS[part.key]}: ${number.format(part.value)} (${share(part.value)})` })),
+    h("div", { className: "split-bar", role: "img", "aria-label": parts.map((part) => `${KIND_LABELS[part.key][0]} ${number.format(part.value)}`).join(", ") },
+      parts.map((part) => h("span", { "--value": part.value, "--color": part.color, title: `${KIND_LABELS[part.key].join(", ")}: ${number.format(part.value)} (${share(part.value)})` })),
     ),
     h("ul", { className: "legend" },
       parts.map((part) =>
         h("li", {},
           h("span", { className: "swatch", "--color": part.color, "aria-hidden": "true" }),
-          `${KIND_LABELS[part.key]} `,
+          `${KIND_LABELS[part.key][0]} `,
+          h("i", { lang: "id", className: "term" }, KIND_LABELS[part.key][1]),
+          " ",
           h("span", { className: "value" }, `${number.format(part.value)} · ${share(part.value)}`),
         ),
       ),
@@ -370,20 +381,20 @@ function ranking(children, depth, metrics, scopePath, current) {
 
   return h("div", {},
     h("div", { className: "ranking-head" },
-      h("h3", {}, `${LABELS[TYPES[depth]]} ranked by ${LABELS[metric]} count`),
+      h("h3", {}, `${PLURALS[TYPES[depth]]} ranked by ${lower(metric)} count`),
       metrics.length > 1 && h("fieldset", { className: "segmented" },
         h("legend", { className: "sr-only" }, "Rank by"),
         metrics.map((type) =>
           h("label", {},
             h("input", { type: "radio", name: "metric", value: type, checked: type === metric, onchange: () => { metric = type; rerender(); } }),
-            h("span", {}, LABELS[type]),
+            h("span", {}, PLURALS[type]),
           ),
         ),
       ),
     ),
     h("ol", { className: "bars" },
       visible.map(({ region, levels }) =>
-        h("li", { title: metrics.map((type) => `${LABELS[type]}: ${number.format(levels[type])}`).join("\n") },
+        h("li", { title: metrics.map((type) => `${PLURALS[type]}: ${number.format(levels[type])}`).join("\n") },
           h("button", { className: "bar-name", type: "button", onclick: () => navigate([...scopePath, region]) }, region.name),
           h("span", { className: "bar-track", "aria-hidden": "true" }, h("span", { className: "bar-fill", "--share": `${(levels[metric] / max) * 100}%` })),
           h("span", { className: "bar-value" }, number.format(levels[metric])),

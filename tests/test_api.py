@@ -67,10 +67,23 @@ class TestRootAndOpenAPITags:
         assert "83,731" in body  # totals are rendered on the server, not by JavaScript
         assert "/api/kode/3301012001" in body  # reference table uses the endpoint examples
         assert body.count('role="combobox"') == 4
+        assert '<html lang="en" data-theme="dark">' in body  # dark is the default theme
+        assert "data-theme-toggle" in body
+        assert "rone.dev/static" not in body  # icons are served locally
+
+    def test_favicon_is_served_locally(self, client: TestClient) -> None:
+        response = client.get("/favicon.ico")
+        assert response.status_code == 200
+        assert response.headers["content-type"] == "image/x-icon"
+        assert response.content[:4] == bytes([0, 0, 1, 0])  # ICO header
+        assert client.get("/static/favicon.svg").status_code == 200
+        assert client.get("/static/apple-touch-icon.png").status_code == 200
+        assert "https://rone.dev" not in client.get("/").headers["content-security-policy"]
 
     def test_static_assets_are_served(self, client: TestClient) -> None:
         assert client.get("/static/app.css").status_code == 200
         assert "javascript" in client.get("/static/app.js").headers["content-type"]
+        assert "javascript" in client.get("/static/theme.js").headers["content-type"]
 
     def test_error_catalog_page_has_anchor_per_code(self, client: TestClient) -> None:
         response = client.get("/docs/errors")

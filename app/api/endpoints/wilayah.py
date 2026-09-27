@@ -15,15 +15,15 @@ router = APIRouter(
     responses=responses(LIST_EXAMPLE),
 )
 
-Provinsi = Annotated[int, Path(gt=0, description="Kode provinsi 2 digit", examples=[33])]
-Kabupaten = Annotated[int, Path(gt=0, description="Kode kabupaten/kota 4 digit", examples=[3301])]
-Kecamatan = Annotated[int, Path(gt=0, description="Kode kecamatan 6 digit", examples=[330101])]
+Provinsi = Annotated[int, Path(gt=0, description="2-digit province code", examples=[33])]
+Kabupaten = Annotated[int, Path(gt=0, description="4-digit regency or city code", examples=[3301])]
+Kecamatan = Annotated[int, Path(gt=0, description="6-digit district code", examples=[330101])]
 
 
 @router.get(
     "/0",
-    summary="Daftar Provinsi",
-    description="Daftar seluruh provinsi di Indonesia.",
+    summary="List provinces",
+    description="Every province in Indonesia.",
     response_model=SuccessResponse[RegionListData],
 )
 def list_provinsi(request: Request, service: Service) -> object:
@@ -32,8 +32,8 @@ def list_provinsi(request: Request, service: Service) -> object:
 
 @router.get(
     "/{kode_provinsi}",
-    summary="Daftar Kabupaten/Kota",
-    description="Daftar kabupaten/kota pada provinsi tertentu.",
+    summary="List regencies and cities",
+    description="Regencies and cities in a province.",
     response_model=SuccessResponse[RegionListData],
 )
 def list_kabupaten(request: Request, kode_provinsi: Provinsi, service: Service, parent: ItemParent = False) -> object:
@@ -42,8 +42,8 @@ def list_kabupaten(request: Request, kode_provinsi: Provinsi, service: Service, 
 
 @router.get(
     "/{kode_provinsi}/{kode_kabupaten}",
-    summary="Daftar Kecamatan",
-    description="Daftar kecamatan pada kabupaten/kota tertentu.",
+    summary="List districts",
+    description="Districts in a regency or city.",
     response_model=SuccessResponse[RegionListData],
 )
 def list_kecamatan(
@@ -59,8 +59,8 @@ def list_kecamatan(
 
 @router.get(
     "/{kode_provinsi}/{kode_kabupaten}/{kode_kecamatan}",
-    summary="Daftar Desa/Kelurahan",
-    description="Daftar desa/kelurahan pada kecamatan tertentu.",
+    summary="List villages",
+    description="Villages in a district.",
     response_model=SuccessResponse[RegionListData],
 )
 def list_desa(

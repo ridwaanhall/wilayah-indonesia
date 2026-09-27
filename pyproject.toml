@@ -1,7 +1,7 @@
 [project]
 name = "wilayah-indonesia"
 version = "3.0.0"
-description = "FastAPI API untuk data wilayah administratif Indonesia"
+description = "JSON API for Indonesian administrative region codes, from province to village"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [

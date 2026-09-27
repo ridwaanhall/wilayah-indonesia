@@ -39,7 +39,8 @@ app/
   web/
     pages.py              /, /docs/errors, /robots.txt, /sitemap.xml, CSP, asset fingerprints
     templates/            base.html, index.html, errors.html (Jinja2)
-    static/               app.css, app.js (no build step)
+    static/               app.css, app.js, theme.js, icons (no build step)
+scripts/build_icons.py    regenerates favicon.svg/.ico and apple-touch-icon.png from one geometry
 prod/main.py              Vercel entrypoint (vercel.json routes everything here)
 tests/                    pytest suite
 ```
@@ -63,8 +64,15 @@ tests/                    pytest suite
 - Plain Jinja2 + one CSS file + one ES module. No framework, no bundler, no CDN scripts.
 - The Content-Security-Policy allows only same-origin scripts and Google Fonts. No inline scripts,
   no inline `style` attributes (set CSS custom properties from JS through `element.style`).
-- Colours are tokens on `:root` with a dark-mode override. The three `--series-*` colours were
-  checked for colour-blind separation in both modes; re-check them if you change them.
+- Dark is the default theme. Tokens on `:root` are the dark theme; `:root[data-theme="light"]`
+  overrides them. `theme.js` loads blocking in `<head>` (after the stylesheet) so the saved choice
+  applies before first paint. The three `--series-*` colours were checked for colour-blind
+  separation in both themes; re-check them if you change them.
+- Icons are local. Edit the geometry in `scripts/build_icons.py` and run
+  `uv run --with pillow python scripts/build_icons.py`; never hand-edit the generated files.
+- Scrollbars are 6px and themed: `::-webkit-scrollbar` for Blink/WebKit, standard
+  `scrollbar-width`/`scrollbar-color` only for Firefox (setting them in Chrome disables the pseudo-elements).
+- Tables stack into blocks below 720px; check new tables at 375px.
 - Level labels are defined once in `LEVEL_LABELS` (`app/web/pages.py`), rendered as `data-*`
   attributes and read back by `app.js`. Do not duplicate them in JavaScript.
 - The reference table is generated from `public_routes()` and each path parameter's `examples`.
@@ -75,7 +83,8 @@ tests/                    pytest suite
 ## Conventions
 
 - Python 3.12+, type hints everywhere, `Annotated` parameters.
-- OpenAPI summaries and descriptions are in Indonesian; the demo site, README and code comments
-  are in English.
+- One language: English everywhere (site, OpenAPI docs, README, comments). Official Indonesian
+  terms (provinsi, kabupaten/kota, kecamatan, desa/kelurahan, desa adat) appear only beside their
+  English name, marked `lang="id"`. API paths, parameters and JSON keys keep their existing names.
 - Remove code that becomes unused. Prefer one parameterised path over near-copies.
 - Commit messages start with an emoji and a conventional type, e.g. `✨feat: …`, `🐛fix: …`, `📝docs: …`.

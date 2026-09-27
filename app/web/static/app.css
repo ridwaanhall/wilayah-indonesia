@@ -1,6 +1,35 @@
-/* Wilayah Indonesia: one stylesheet, tokens first. Series colors validated for CVD separation in both modes. */
+/* Wilayah Indonesia: one stylesheet, tokens first. Dark is the default theme; theme.js switches data-theme.
+   Series colours were validated for colour-blind separation in both themes. */
 
 :root {
+  --bg: #131412;
+  --surface: #1b1c1a;
+  --sunken: #1f201d;
+  --ink: #ecebe6;
+  --ink-2: #c4c2bb;
+  --muted: #9b9992;
+  --rule: #2b2c29;
+  --rule-strong: #43443f;
+  --accent: #d4663a;
+  --accent-text: #ec8a5f;
+  --accent-soft: rgb(212 102 58 / 0.16);
+  --ok: #5fbf7f;
+  --error: #f07b6c;
+  --series-1: #d4663a;
+  --series-2: #15a092;
+  --series-3: #ac8820;
+  --shadow: 0 12px 32px -12px rgb(0 0 0 / 0.6);
+
+  --font-sans: "Schibsted Grotesk", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  --gutter: clamp(1rem, 4vw, 2.5rem);
+  --radius: 6px;
+  --control-height: 2.75rem;
+
+  color-scheme: dark;
+}
+
+:root[data-theme="light"] {
   --bg: #f7f5f0;
   --surface: #fffdf9;
   --sunken: #efece5;
@@ -19,35 +48,7 @@
   --series-3: #a07c12;
   --shadow: 0 12px 32px -12px rgb(23 24 26 / 0.22);
 
-  --font-sans: "Schibsted Grotesk", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
-  --gutter: clamp(1rem, 4vw, 2.5rem);
-  --radius: 6px;
-  --control-height: 2.75rem;
-
-  color-scheme: light dark;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #131412;
-    --surface: #1b1c1a;
-    --sunken: #1f201d;
-    --ink: #ecebe6;
-    --ink-2: #c4c2bb;
-    --muted: #9b9992;
-    --rule: #2b2c29;
-    --rule-strong: #43443f;
-    --accent: #d4663a;
-    --accent-text: #ec8a5f;
-    --accent-soft: rgb(212 102 58 / 0.16);
-    --ok: #5fbf7f;
-    --error: #f07b6c;
-    --series-1: #d4663a;
-    --series-2: #15a092;
-    --series-3: #ac8820;
-    --shadow: 0 12px 32px -12px rgb(0 0 0 / 0.6);
-  }
+  color-scheme: light;
 }
 
 /* Base */
@@ -87,6 +88,16 @@ code, .mono { font-family: var(--font-mono); font-size: 0.875em; }
 
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
+/* Scrollbars: 6px and themed. Blink/WebKit use the pseudo-elements; Firefox only supports the standard properties. */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--rule-strong); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--muted); }
+::-webkit-scrollbar-corner { background: transparent; }
+@supports not selector(::-webkit-scrollbar) {
+  * { scrollbar-width: thin; scrollbar-color: var(--rule-strong) transparent; }
+}
+
 .sr-only {
   position: absolute; width: 1px; height: 1px; overflow: hidden;
   clip-path: inset(50%); white-space: nowrap;
@@ -116,23 +127,27 @@ code, .mono { font-family: var(--font-mono); font-size: 0.875em; }
 /* Masthead and footer */
 
 .masthead { border-bottom: 1px solid var(--rule); }
-.masthead-inner { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; min-height: 4rem; }
+.masthead-inner { display: flex; flex-wrap: wrap; align-items: center; gap: 0.25rem 1.5rem; min-height: 4rem; }
 
-.wordmark { display: inline-flex; align-items: center; gap: 0.65rem; font-weight: 600; text-decoration: none; white-space: nowrap; }
-.wordmark-code {
-  padding: 0.15rem 0.4rem; border-radius: 4px;
-  background: var(--accent); color: #fff;
-  font: 500 0.75rem/1.3 var(--font-mono);
-}
+.wordmark { display: inline-flex; align-items: center; gap: 0.6rem; font-weight: 600; text-decoration: none; white-space: nowrap; }
+.wordmark img { display: block; border-radius: 5px; }
 
-.nav { display: flex; gap: 1.25rem; overflow-x: auto; scrollbar-width: none; font-size: 0.9375rem; }
-.nav::-webkit-scrollbar { display: none; }
+.nav { order: 1; margin-left: auto; display: flex; flex-wrap: wrap; gap: 0 1.25rem; font-size: 0.9375rem; }
 .nav a { color: var(--ink-2); text-decoration: none; white-space: nowrap; padding-block: 0.5rem; }
 .nav a:hover { color: var(--ink); }
 
+.theme-toggle {
+  order: 2; display: grid; place-items: center; width: 2.25rem; height: 2.25rem; padding: 0;
+  border: 1px solid var(--rule); border-radius: var(--radius); background: none; color: var(--ink-2);
+}
+.theme-toggle:hover { color: var(--ink); border-color: var(--rule-strong); }
+.theme-toggle svg { width: 1.1rem; height: 1.1rem; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+:root[data-theme="light"] .icon-sun, :root:not([data-theme="light"]) .icon-moon { display: none; }
+
 @media (max-width: 719px) {
-  .masthead-inner { flex-direction: column; align-items: flex-start; gap: 0.25rem; padding-block: 0.9rem 0.4rem; }
-  .nav { width: 100%; }
+  .masthead-inner { padding-block: 0.75rem 0.25rem; }
+  .theme-toggle { order: 0; margin-left: auto; }
+  .nav { order: 1; flex-basis: 100%; margin-left: 0; gap: 0 1rem; font-size: 0.875rem; }
 }
 
 .footer { border-top: 1px solid var(--rule); padding-block: 2.5rem 3rem; color: var(--muted); font-size: 0.875rem; }
@@ -348,6 +363,7 @@ label > span:not([class]) { font-weight: 400; color: var(--muted); }
 .legend li { display: flex; align-items: center; gap: 0.5rem; }
 .legend .swatch { width: 0.625rem; height: 0.625rem; border-radius: 2px; background: var(--color); }
 .legend .value { color: var(--muted); }
+.term { color: var(--muted); }
 
 .ranking-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.75rem 1.5rem; margin-bottom: 1.25rem; }
 
@@ -380,6 +396,18 @@ label > span:not([class]) { font-weight: 400; color: var(--muted); }
 .table td:first-child code { background: none; padding: 0; color: var(--ink); }
 .table td .link { font-family: var(--font-mono); font-size: 0.8125rem; white-space: nowrap; }
 .errors tr:target td { background: var(--accent-soft); }
+
+/* Small screens: each table row becomes a stacked block instead of a sideways-scrolling grid. */
+@media (max-width: 719px) {
+  .table-scroll { overflow: visible; }
+  .table thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  .table, .table tbody, .table tr, .table td { display: block; }
+  .table tr { padding-block: 0.8rem; border-top: 1px solid var(--rule); }
+  .table td { padding: 0.1rem 0; border: 0; }
+  .table td:first-child code, .table td .link { white-space: normal; overflow-wrap: anywhere; }
+  .errors td:nth-child(2)::before { content: "HTTP "; }
+  .table .table-tag { display: none; }
+}
 .errors td:first-child { white-space: nowrap; }
 
 .notes { display: grid; gap: 1.5rem 3rem; margin-top: clamp(2.5rem, 5vw, 3.5rem); }
