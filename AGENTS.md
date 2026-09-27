@@ -51,8 +51,6 @@ tests/                    pytest suite
   clients. Additive changes only; never rename or remove a field. Tests pin the contract.
 - **Router order.** `hierarchy.router` has `/{province_code}` and must stay registered last, or it
   captures `/code`, `/stats` and `/s`.
-- **Legacy path.** `/api/kode/{code}` is a hidden, deprecated alias of `/api/code/{code}` (a second
-  decorator on the same handler). Keep it until clients have moved.
 - **Errors come from the catalog.** Raise `ApiException("CODE", detail, fields)`; add new codes to
   `ERRORS` in `app/core/errors.py`. The `/docs/errors` page and every `error.docs` link read from it.
 - **Region rules live in `RegionService`.** Endpoints stay thin. `_resolve_chain` is the one place

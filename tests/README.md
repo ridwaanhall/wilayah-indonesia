@@ -4,7 +4,7 @@
 uv run --group dev pytest tests -q
 ```
 
-- `test_api.py`: every endpoint group (`root`, `lookup`, `stats`, `shorthand`, `hierarchy`) and the legacy `/api/kode` alias, the demo
+- `test_api.py`: every endpoint group (`root`, `lookup`, `stats`, `shorthand`, `hierarchy`), the demo
   pages, `robots.txt`, `sitemap.xml`, static assets and generic 404/405 errors.
 - `test_schema_contracts.py`: success and error payloads validated against the declared Pydantic models.
 - `test_loader.py`: the in-memory index, national counts and the regency/city and village-kind rules.

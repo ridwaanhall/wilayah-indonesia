@@ -52,9 +52,6 @@ All endpoints are `GET`.
 | `/api/s/{province_code}/{regency_number}/{district_number}/{village_number}` | Shorthand lookup, 1 to 4 segments, e.g. `/api/s/33/1/1/2001` |
 | `/api/stats/{code}` | Descendant totals for a region and each direct child; `0` means Indonesia |
 
-`/api/kode/{code}`, the previous name of the lookup route, still works but is deprecated and
-hidden from the docs. Use `/api/code/{code}`.
-
 Query parameter `parent`:
 
 - Lookups (`/api/code`, `/api/s`) default to `parent=true` and return the full chain up to the province.

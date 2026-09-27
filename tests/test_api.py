@@ -126,7 +126,7 @@ class TestRootAndOpenAPITags:
         assert "groups" in data
         assert "root" in data["groups"]
         assert set(data["groups"]) == {"root", "lookup", "stats", "shorthand", "hierarchy"}
-        assert data["groups"]["lookup"] == ["/api/code/{code}"]  # the legacy /api/kode alias stays hidden
+        assert data["groups"]["lookup"] == ["/api/code/{code}"]
         assert "/api/stats/{code}" in data["groups"]["stats"]
 
     def test_health_endpoint(self, client: TestClient) -> None:
@@ -289,11 +289,10 @@ class TestLookupRules:
         assert_envelope(payload, success=False)
         assert_error_shape(payload["error"], "REGION_NOT_FOUND")
 
-    def test_legacy_kode_path_still_works(self, client: TestClient) -> None:
-        legacy = client.get("/api/kode/3301012001").json()
-        current = client.get("/api/code/3301012001").json()
-        assert legacy["data"] == current["data"]
-        assert "/api/kode/{code}" not in client.get("/openapi.json").json()["paths"]
+    def test_removed_kode_path_no_longer_resolves(self, client: TestClient) -> None:
+        response = client.get("/api/kode/3301012001")
+        assert response.status_code == 422
+        assert response.json()["success"] is False
 
     def test_invalid_code_reports_english_field(self, client: TestClient) -> None:
         fields = client.get("/api/11/1").json()["error"]["fields"]

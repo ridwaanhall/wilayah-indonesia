@@ -20,8 +20,6 @@ router = APIRouter(tags=["lookup"])
     response_model=SuccessResponse[RegionResource],
     responses=responses(REGION_EXAMPLE),
 )
-# The pre-English path, kept so existing clients keep working. Hidden from the docs.
-@router.get("/kode/{code}", deprecated=True, include_in_schema=False)
 def lookup_by_code(
     request: Request,
     code: Annotated[int, Path(gt=0, description="Full region code", examples=[3301012001])],
