@@ -28,13 +28,13 @@ app/
     http.py               security + cache headers, exception handlers
   services/
     data_loader.py        DataLoader: regions, children, descendant counts; region_kind()
-    wilayah.py            WilayahService: every lookup, list, shorthand and stats rule
+    regions.py            RegionService: every lookup, list, shorthand and stats rule
   api/
     catalog.py            API_PREFIX, public_routes()
     router.py             include order matters (see below)
     deps.py               Service / parent query aliases
     examples.py           OpenAPI examples + shared responses()
-    endpoints/            root, search, stats, simple, wilayah
+    endpoints/            root, lookup, stats, shorthand, hierarchy (one module per OpenAPI tag)
   schemas/                Pydantic response models
   web/
     pages.py              /, /docs/errors, /robots.txt, /sitemap.xml, CSP, asset fingerprints
@@ -49,14 +49,17 @@ tests/                    pytest suite
 
 - **Public API contract.** Paths, response shapes, field names and error codes are relied on by
   clients. Additive changes only; never rename or remove a field. Tests pin the contract.
-- **Router order.** `wilayah.router` has `/{kode_provinsi}` and must stay registered last, or it
-  captures `/kode`, `/stats` and `/s`.
+- **Router order.** `hierarchy.router` has `/{province_code}` and must stay registered last, or it
+  captures `/code`, `/stats` and `/s`.
+- **Legacy path.** `/api/kode/{code}` is a hidden, deprecated alias of `/api/code/{code}` (a second
+  decorator on the same handler). Keep it until clients have moved.
 - **Errors come from the catalog.** Raise `ApiException("CODE", detail, fields)`; add new codes to
   `ERRORS` in `app/core/errors.py`. The `/docs/errors` page and every `error.docs` link read from it.
-- **Region rules live in `WilayahService`.** Endpoints stay thin. `_resolve_chain` is the one place
+- **Region rules live in `RegionService`.** Endpoints stay thin. `_resolve_chain` is the one place
   that validates code length and parent membership for lists and shorthand lookups.
-- **Kinds are derived from codes, not names.** Regency segment >= 71 is a kota; the village
-  segment's first digit is 1 kelurahan, 2 desa, 3 desa adat. See `region_kind()`.
+- **Kinds are derived from codes, not names.** Regency segment >= 71 is a `city` (kota), else a
+  `regency` (kabupaten); the village segment's first digit is 1 `urban_village` (kelurahan),
+  2 `rural_village` (desa), 3 `customary_village` (desa adat). See `region_kind()`.
 - **Code 0 is Indonesia.** `/api/0` lists provinces and `/api/stats/0` returns national totals.
 
 ## Frontend
@@ -64,8 +67,9 @@ tests/                    pytest suite
 - Plain Jinja2 + one CSS file + one ES module. No framework, no bundler, no CDN scripts.
 - The Content-Security-Policy allows only same-origin scripts and Google Fonts. No inline scripts,
   no inline `style` attributes (set CSS custom properties from JS through `element.style`).
-- Dark is the default theme. Tokens on `:root` are the dark theme; `:root[data-theme="light"]`
-  overrides them. `theme.js` loads blocking in `<head>` (after the stylesheet) so the saved choice
+- Light is the default theme. Tokens on `:root` are the light theme; `:root[data-theme="dark"]`
+  overrides them. The header control is a WAI-ARIA switch (`role="switch"`, `aria-checked`, fixed
+  label "Dark theme"); animate it with transform and opacity only. `theme.js` loads blocking in `<head>` (after the stylesheet) so the saved choice
   applies before first paint. The three `--series-*` colours were checked for colour-blind
   separation in both themes; re-check them if you change them.
 - Icons are local. Edit the geometry in `scripts/build_icons.py` and run
@@ -83,8 +87,9 @@ tests/                    pytest suite
 ## Conventions
 
 - Python 3.12+, type hints everywhere, `Annotated` parameters.
-- One language: English everywhere (site, OpenAPI docs, README, comments). Official Indonesian
-  terms (provinsi, kabupaten/kota, kecamatan, desa/kelurahan, desa adat) appear only beside their
-  English name, marked `lang="id"`. API paths, parameters and JSON keys keep their existing names.
+- One language: English everywhere, including paths, parameters, JSON keys, OpenAPI docs and
+  Python names. Official Indonesian terms (provinsi, kabupaten/kota, kecamatan, desa/kelurahan,
+  desa adat) appear only beside their English name, marked `lang="id"` in HTML. The exception is
+  the dataset in `data/`, whose keys (`kode`, `nama`, `tingkat`) only the loader reads.
 - Remove code that becomes unused. Prefer one parameterised path over near-copies.
 - Commit messages start with an emoji and a conventional type, e.g. `✨feat: …`, `🐛fix: …`, `📝docs: …`.

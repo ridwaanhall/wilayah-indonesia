@@ -65,10 +65,10 @@ class TestRootAndOpenAPITags:
         assert '<link rel="canonical" href="https://wilayah.rone.dev/">' in body
         assert '"@type": "Dataset"' in body
         assert "83,731" in body  # totals are rendered on the server, not by JavaScript
-        assert "/api/kode/3301012001" in body  # reference table uses the endpoint examples
+        assert "/api/code/3301012001" in body  # reference table uses the endpoint examples
         assert body.count('role="combobox"') == 4
-        assert '<html lang="en" data-theme="dark">' in body  # dark is the default theme
-        assert "data-theme-toggle" in body
+        assert '<html lang="en" data-theme="light">' in body  # light is the default theme
+        assert 'role="switch" aria-checked="false" aria-label="Dark theme"' in body
         assert "rone.dev/static" not in body  # icons are served locally
 
     def test_favicon_is_served_locally(self, client: TestClient) -> None:
@@ -79,6 +79,10 @@ class TestRootAndOpenAPITags:
         assert client.get("/static/favicon.svg").status_code == 200
         assert client.get("/static/apple-touch-icon.png").status_code == 200
         assert "https://rone.dev" not in client.get("/").headers["content-security-policy"]
+
+    def test_pages_answer_head_requests(self, client: TestClient) -> None:
+        for path in ("/", "/docs/errors"):
+            assert client.head(path).status_code == 200
 
     def test_static_assets_are_served(self, client: TestClient) -> None:
         assert client.get("/static/app.css").status_code == 200
@@ -121,10 +125,9 @@ class TestRootAndOpenAPITags:
         assert data["version"] == "3.0.0"
         assert "groups" in data
         assert "root" in data["groups"]
-        assert "search" in data["groups"]
-        assert "wilayah" in data["groups"]
-        assert "simple" in data["groups"]
-        assert "/api/stats/{kode}" in data["groups"]["stats"]
+        assert set(data["groups"]) == {"root", "lookup", "stats", "shorthand", "hierarchy"}
+        assert data["groups"]["lookup"] == ["/api/code/{code}"]  # the legacy /api/kode alias stays hidden
+        assert "/api/stats/{code}" in data["groups"]["stats"]
 
     def test_health_endpoint(self, client: TestClient) -> None:
         response = client.get("/api/health")
@@ -141,10 +144,10 @@ class TestRootAndOpenAPITags:
 
         payload = response.json()
         tag_names = {tag["name"] for tag in payload.get("tags", [])}
-        assert {"root", "search", "stats", "wilayah", "simple"}.issubset(tag_names)
+        assert {"root", "lookup", "stats", "shorthand", "hierarchy"}.issubset(tag_names)
 
 
-class TestWilayahLegacyRules:
+class TestHierarchyRules:
     def test_provinsi_listing(self, client: TestClient) -> None:
         response = client.get("/api/0")
         assert response.status_code == 200
@@ -160,7 +163,7 @@ class TestWilayahLegacyRules:
         assert data["items"][0]["depth"] == 1
         assert data["items"][0]["parent"] is None
 
-    def test_kabupaten_listing(self, client: TestClient) -> None:
+    def test_regency_listing(self, client: TestClient) -> None:
         response = client.get("/api/11")
         assert response.status_code == 200
 
@@ -217,7 +220,7 @@ class TestWilayahLegacyRules:
             assert items[0]["parent"]["depth"] == 2
             assert items[0]["parent"]["parent"] is None
 
-    def test_desa_listing(self, client: TestClient) -> None:
+    def test_village_listing(self, client: TestClient) -> None:
         response = client.get("/api/11/1101/110101?parent=true")
         assert response.status_code == 200
 
@@ -230,7 +233,7 @@ class TestWilayahLegacyRules:
             assert items[0]["parent"]["depth"] == 3
             assert items[0]["parent"]["parent"] is None
 
-    def test_invalid_wilayah_segment_returns_422(self, client: TestClient) -> None:
+    def test_invalid_hierarchy_segment_returns_422(self, client: TestClient) -> None:
         response = client.get("/api/11/1")
         assert response.status_code == 422
 
@@ -240,9 +243,9 @@ class TestWilayahLegacyRules:
         assert payload["error"]["fields"] is not None
 
 
-class TestSearchRules:
-    def test_search_by_code_success(self, client: TestClient) -> None:
-        response = client.get("/api/kode/110101")
+class TestLookupRules:
+    def test_lookup_by_code_success(self, client: TestClient) -> None:
+        response = client.get("/api/code/110101")
         assert response.status_code == 200
 
         payload = response.json()
@@ -255,8 +258,8 @@ class TestSearchRules:
         assert data["parent"]["parent"]["code"] == 11
         assert data["parent"]["parent"]["parent"] is None
 
-    def test_search_village_full_chain(self, client: TestClient) -> None:
-        response = client.get("/api/kode/1101012001")
+    def test_lookup_village_full_chain(self, client: TestClient) -> None:
+        response = client.get("/api/code/1101012001")
         assert response.status_code == 200
 
         payload = response.json()
@@ -269,8 +272,8 @@ class TestSearchRules:
         assert data["parent"]["parent"]["parent"]["depth"] == 1
         assert data["parent"]["parent"]["parent"]["parent"] is None
 
-    def test_search_invalid_code_length(self, client: TestClient) -> None:
-        response = client.get("/api/kode/123")
+    def test_lookup_invalid_code_length(self, client: TestClient) -> None:
+        response = client.get("/api/code/123")
         assert response.status_code == 422
 
         payload = response.json()
@@ -278,17 +281,27 @@ class TestSearchRules:
         assert_error_shape(payload["error"], "INVALID_REGION_CODE")
         assert payload["error"]["fields"] is not None
 
-    def test_search_not_found(self, client: TestClient) -> None:
-        response = client.get("/api/kode/9999999999")
+    def test_lookup_not_found(self, client: TestClient) -> None:
+        response = client.get("/api/code/9999999999")
         assert response.status_code == 404
 
         payload = response.json()
         assert_envelope(payload, success=False)
         assert_error_shape(payload["error"], "REGION_NOT_FOUND")
 
-    def test_search_parent_query_flag(self, client: TestClient) -> None:
-        without_parent = client.get("/api/kode/110101?parent=false")
-        with_parent = client.get("/api/kode/110101?parent=true")
+    def test_legacy_kode_path_still_works(self, client: TestClient) -> None:
+        legacy = client.get("/api/kode/3301012001").json()
+        current = client.get("/api/code/3301012001").json()
+        assert legacy["data"] == current["data"]
+        assert "/api/kode/{code}" not in client.get("/openapi.json").json()["paths"]
+
+    def test_invalid_code_reports_english_field(self, client: TestClient) -> None:
+        fields = client.get("/api/11/1").json()["error"]["fields"]
+        assert fields[0]["field"] == "regency_code"
+
+    def test_lookup_parent_query_flag(self, client: TestClient) -> None:
+        without_parent = client.get("/api/code/110101?parent=false")
+        with_parent = client.get("/api/code/110101?parent=true")
 
         assert without_parent.status_code == 200
         assert with_parent.status_code == 200
@@ -301,8 +314,8 @@ class TestSearchRules:
         assert data_with["parent"] is not None
 
 
-class TestSimpleRules:
-    def test_simple_prefix_tingkat_1(self, client: TestClient) -> None:
+class TestShorthandRules:
+    def test_shorthand_province(self, client: TestClient) -> None:
         response = client.get("/api/s/11")
         assert response.status_code == 200
 
@@ -313,7 +326,7 @@ class TestSimpleRules:
         assert payload["data"]["short_code"] == "11"
         assert payload["data"]["parent"] is None
 
-    def test_simple_prefix_tingkat_2(self, client: TestClient) -> None:
+    def test_shorthand_regency(self, client: TestClient) -> None:
         response = client.get("/api/s/11/1")
         assert response.status_code == 200
 
@@ -325,7 +338,7 @@ class TestSimpleRules:
         assert payload["data"]["parent"]["code"] == 11
         assert payload["data"]["parent"]["parent"] is None
 
-    def test_simple_prefix_tingkat_3(self, client: TestClient) -> None:
+    def test_shorthand_district(self, client: TestClient) -> None:
         response = client.get("/api/s/11/1/1")
         assert response.status_code == 200
 
@@ -338,7 +351,7 @@ class TestSimpleRules:
         assert payload["data"]["parent"]["parent"]["depth"] == 1
         assert payload["data"]["parent"]["parent"]["parent"] is None
 
-    def test_simple_prefix_tingkat_4(self, client: TestClient) -> None:
+    def test_shorthand_village(self, client: TestClient) -> None:
         response = client.get("/api/s/11/1/1/2001")
         assert response.status_code == 200
 
@@ -351,7 +364,7 @@ class TestSimpleRules:
         assert payload["data"]["parent"]["parent"]["depth"] == 2
         assert payload["data"]["parent"]["parent"]["parent"]["depth"] == 1
 
-    def test_simple_not_found_response(self, client: TestClient) -> None:
+    def test_shorthand_not_found_response(self, client: TestClient) -> None:
         response = client.get("/api/s/99/1/1")
         assert response.status_code == 404
 
@@ -359,7 +372,7 @@ class TestSimpleRules:
         assert_envelope(payload, success=False)
         assert_error_shape(payload["error"], "PROVINCE_NOT_FOUND")
 
-    def test_simple_validation_response(self, client: TestClient) -> None:
+    def test_shorthand_validation_response(self, client: TestClient) -> None:
         response = client.get("/api/s/11/1/1/10000")
         assert response.status_code == 422
 
@@ -377,7 +390,7 @@ class TestSimpleRules:
             ("/api/s/11/1/1/2001", True),
         ],
     )
-    def test_simple_parent_query_flag(
+    def test_shorthand_parent_query_flag(
         self,
         client: TestClient,
         path: str,
@@ -418,7 +431,7 @@ class TestStatsRules:
         data = client.get("/api/stats/33").json()["data"]
         assert data["region"]["code"] == 33
         assert data["levels"]["province"] == 0
-        assert data["kinds"]["kabupaten"] + data["kinds"]["kota"] == data["levels"]["regency"]
+        assert data["kinds"]["regency"] + data["kinds"]["city"] == data["levels"]["regency"]
         for level in ("district", "village"):
             assert sum(child["levels"][level] for child in data["children"]) == data["levels"][level]
         assert_region_shape(data["children"][0]["region"])

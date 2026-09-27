@@ -1,12 +1,12 @@
 <!doctype html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{% block title %}{% endblock %}</title>
   <meta name="description" content="{% block description %}{% endblock %}">
   <link rel="canonical" href="{{ site_url }}{{ request.url.path }}">
-  <meta name="theme-color" content="#131412">
+  <meta name="theme-color" content="#f7f5f0">
   <link rel="icon" href="/favicon.ico" sizes="48x48">
   <link rel="icon" href="{{ asset_url('favicon.svg') }}" type="image/svg+xml">
   <link rel="apple-touch-icon" href="{{ asset_url('apple-touch-icon.png') }}">
@@ -33,9 +33,11 @@
         <img src="{{ asset_url('favicon.svg') }}" width="24" height="24" alt="">
         <span>Wilayah Indonesia</span>
       </a>
-      <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch theme">
-        <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
-        <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg>
+      <button class="theme-switch" type="button" role="switch" aria-checked="false" aria-label="Dark theme" data-theme-toggle>
+        <span class="theme-switch-thumb" aria-hidden="true">
+          <svg class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+          <svg class="icon-moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg>
+        </span>
       </button>
       <nav class="nav" aria-label="Primary">
         <a href="/#explorer">Explorer</a>
@@ -51,21 +53,42 @@
     {% block main %}{% endblock %}
   </main>
 
+  {% set repo = settings.repository_url %}
+  {% set footer_columns = [
+    ("Explore", [("Explorer", "/#explorer"), ("Analytics", "/#analytics"), ("Reference", "/#reference")]),
+    ("Docs", [("Swagger UI", "/docs"), ("ReDoc", "/redoc"), ("OpenAPI JSON", "/openapi.json"), ("Error codes", "/docs/errors")]),
+    ("Project", [("Source on GitHub", repo), ("Dataset files", repo ~ "/tree/main/data"), ("API terms", repo ~ "/blob/main/HOSTED_API_TERMS.md"), ("Report a correction", repo ~ "/issues")]),
+  ] %}
   <footer class="footer">
-    <div class="wrap footer-inner">
-      <p>
-        Independent and community-maintained. Not affiliated with any Indonesian government body.
-        The dataset is a snapshot of the official register: for anything with legal or administrative
-        consequence, check the official source.
-      </p>
-      <p class="footer-links">
-        <a href="{{ settings.repository_url }}/blob/main/HOSTED_API_TERMS.md" rel="noopener">API terms</a>
-        <a href="/docs/errors">Error codes</a>
-        <a href="/redoc">ReDoc</a>
-        <a href="/openapi.json">OpenAPI</a>
-        <a href="https://rone.dev" rel="noopener">RoneAI</a>
-        <span>{{ settings.api_version }} · {{ settings.app_version }}</span>
-      </p>
+    <div class="wrap">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="wordmark" href="/">
+            <img src="{{ asset_url('favicon.svg') }}" width="24" height="24" alt="">
+            <span>Wilayah Indonesia</span>
+          </a>
+          <p>Open JSON API for Indonesian region codes, from province to village. Free, no key, read-only.</p>
+          <p class="footer-version mono">API {{ settings.api_version }} · release {{ settings.app_version }}</p>
+        </div>
+        {% for title, links in footer_columns %}
+        <nav class="footer-column" aria-labelledby="footer-{{ loop.index }}">
+          <h2 id="footer-{{ loop.index }}">{{ title }}</h2>
+          <ul>
+            {% for label, href in links %}
+            <li><a href="{{ href }}"{% if href.startswith("http") %} rel="noopener"{% endif %}>{{ label }}</a></li>
+            {% endfor %}
+          </ul>
+        </nav>
+        {% endfor %}
+      </div>
+      <div class="footer-note">
+        <p>
+          Independent and community-maintained, not affiliated with any Indonesian government body.
+          The data is a snapshot of the official register; check the official source for anything with legal
+          or administrative consequence.
+        </p>
+        <p>Operated by <a href="https://rone.dev" rel="noopener">RoneAI</a></p>
+      </div>
     </div>
   </footer>
 </body>

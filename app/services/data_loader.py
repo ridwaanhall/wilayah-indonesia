@@ -13,20 +13,23 @@ DATA_FILES: tuple[str, ...] = ("provinsi.json", "kabupaten.json", "kecamatan.jso
 ROOT_CODE = 0
 
 LEVEL_TYPES: dict[int, str] = {1: "province", 2: "regency", 3: "district", 4: "village"}
-VILLAGE_KINDS: dict[str, str] = {"1": "kelurahan", "2": "desa", "3": "desa_adat"}
-KIND_KEYS: tuple[str, ...] = ("kabupaten", "kota", "desa", "kelurahan", "desa_adat")
+# Official terms: kabupaten = regency, kota = city, desa = rural village,
+# kelurahan = urban village, desa adat = customary village.
+VILLAGE_KINDS: dict[str, str] = {"1": "urban_village", "2": "rural_village", "3": "customary_village"}
+KIND_KEYS: tuple[str, ...] = ("regency", "city", "rural_village", "urban_village", "customary_village")
 
 
 def region_kind(code: int, depth: int) -> str | None:
     """Classify regencies and villages by the official code convention.
 
-    Regency segments 71-99 are cities (kota). The first digit of a village's
-    4-digit segment is 1 for kelurahan, 2 for desa and 3 for desa adat.
-    Names are not reliable for this: KOTAWARINGIN BARAT is a kabupaten.
+    Regency segments 71-99 are cities (kota), the rest regencies (kabupaten). The first
+    digit of a village's 4-digit segment is 1 for an urban village (kelurahan), 2 for a
+    rural village (desa) and 3 for a customary village (desa adat).
+    Names are not reliable for this: KOTAWARINGIN BARAT is a regency.
     """
     text = str(code)
     if depth == 2:
-        return "kota" if int(text[2:4]) >= 71 else "kabupaten"
+        return "city" if int(text[2:4]) >= 71 else "regency"
     if depth == 4:
         return VILLAGE_KINDS.get(text[6])
     return None

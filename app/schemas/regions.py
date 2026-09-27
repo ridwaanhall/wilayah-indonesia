@@ -51,13 +51,16 @@ class LevelCounts(BaseModel):
 
 
 class KindCounts(BaseModel):
-    """Descendant regencies split into kabupaten/kota, villages into desa/kelurahan/desa adat."""
+    """Descendant regency-level regions split into regencies and cities, villages by status.
 
-    kabupaten: int = Field(ge=0)
-    kota: int = Field(ge=0)
-    desa: int = Field(ge=0)
-    kelurahan: int = Field(ge=0)
-    desa_adat: int = Field(ge=0)
+    regency + city equals levels.regency; the three village kinds sum to levels.village.
+    """
+
+    regency: int = Field(ge=0, description="Kabupaten")
+    city: int = Field(ge=0, description="Kota")
+    rural_village: int = Field(ge=0, description="Desa")
+    urban_village: int = Field(ge=0, description="Kelurahan")
+    customary_village: int = Field(ge=0, description="Desa adat")
 
 
 class RegionStats(BaseModel):

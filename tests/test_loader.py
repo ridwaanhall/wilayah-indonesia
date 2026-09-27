@@ -47,8 +47,8 @@ def test_parent_code() -> None:
 def test_national_counts_match_dataset() -> None:
     counts = get_loader().counts(ROOT_CODE)
     assert counts["levels"] == {"province": 38, "regency": 514, "district": 7277, "village": 83731}
-    assert counts["kinds"]["kabupaten"] + counts["kinds"]["kota"] == 514
-    assert sum(counts["kinds"][key] for key in ("desa", "kelurahan", "desa_adat")) == 83731
+    assert counts["kinds"]["regency"] + counts["kinds"]["city"] == 514
+    assert sum(counts["kinds"][key] for key in ("rural_village", "urban_village", "customary_village")) == 83731
 
 
 def test_counts_for_leaf_are_zero() -> None:
@@ -58,9 +58,9 @@ def test_counts_for_leaf_are_zero() -> None:
 
 
 def test_region_kind_uses_codes_not_names() -> None:
-    assert region_kind(6201, 2) == "kabupaten"  # KOTAWARINGIN BARAT
-    assert region_kind(1171, 2) == "kota"
-    assert region_kind(1101012001, 4) == "desa"
-    assert region_kind(1171011001, 4) == "kelurahan"
-    assert region_kind(9103013007, 4) == "desa_adat"
+    assert region_kind(6201, 2) == "regency"  # KOTAWARINGIN BARAT
+    assert region_kind(1171, 2) == "city"
+    assert region_kind(1101012001, 4) == "rural_village"
+    assert region_kind(1171011001, 4) == "urban_village"
+    assert region_kind(9103013007, 4) == "customary_village"
     assert region_kind(11, 1) is None

@@ -8,16 +8,16 @@ from app.api.deps import ItemParent, Service
 from app.api.examples import LIST_EXAMPLE, responses
 from app.core.responses import list_response
 from app.schemas.common import SuccessResponse
-from app.schemas.wilayah import RegionListData
+from app.schemas.regions import RegionListData
 
 router = APIRouter(
-    tags=["wilayah"],
+    tags=["hierarchy"],
     responses=responses(LIST_EXAMPLE),
 )
 
-Provinsi = Annotated[int, Path(gt=0, description="2-digit province code", examples=[33])]
-Kabupaten = Annotated[int, Path(gt=0, description="4-digit regency or city code", examples=[3301])]
-Kecamatan = Annotated[int, Path(gt=0, description="6-digit district code", examples=[330101])]
+Province = Annotated[int, Path(gt=0, description="2-digit province code", examples=[33])]
+Regency = Annotated[int, Path(gt=0, description="4-digit regency or city code", examples=[3301])]
+District = Annotated[int, Path(gt=0, description="6-digit district code", examples=[330101])]
 
 
 @router.get(
@@ -26,50 +26,50 @@ Kecamatan = Annotated[int, Path(gt=0, description="6-digit district code", examp
     description="Every province in Indonesia.",
     response_model=SuccessResponse[RegionListData],
 )
-def list_provinsi(request: Request, service: Service) -> object:
+def list_provinces(request: Request, service: Service) -> object:
     return list_response(request, service.list_children([], include_parent=False))
 
 
 @router.get(
-    "/{kode_provinsi}",
+    "/{province_code}",
     summary="List regencies and cities",
     description="Regencies and cities in a province.",
     response_model=SuccessResponse[RegionListData],
 )
-def list_kabupaten(request: Request, kode_provinsi: Provinsi, service: Service, parent: ItemParent = False) -> object:
-    return list_response(request, service.list_children([kode_provinsi], include_parent=parent))
+def list_regencies(request: Request, province_code: Province, service: Service, parent: ItemParent = False) -> object:
+    return list_response(request, service.list_children([province_code], include_parent=parent))
 
 
 @router.get(
-    "/{kode_provinsi}/{kode_kabupaten}",
+    "/{province_code}/{regency_code}",
     summary="List districts",
     description="Districts in a regency or city.",
     response_model=SuccessResponse[RegionListData],
 )
-def list_kecamatan(
+def list_districts(
     request: Request,
-    kode_provinsi: Provinsi,
-    kode_kabupaten: Kabupaten,
+    province_code: Province,
+    regency_code: Regency,
     service: Service,
     parent: ItemParent = False,
 ) -> object:
-    codes = [kode_provinsi, kode_kabupaten]
+    codes = [province_code, regency_code]
     return list_response(request, service.list_children(codes, include_parent=parent))
 
 
 @router.get(
-    "/{kode_provinsi}/{kode_kabupaten}/{kode_kecamatan}",
+    "/{province_code}/{regency_code}/{district_code}",
     summary="List villages",
     description="Villages in a district.",
     response_model=SuccessResponse[RegionListData],
 )
-def list_desa(
+def list_villages(
     request: Request,
-    kode_provinsi: Provinsi,
-    kode_kabupaten: Kabupaten,
-    kode_kecamatan: Kecamatan,
+    province_code: Province,
+    regency_code: Regency,
+    district_code: District,
     service: Service,
     parent: ItemParent = False,
 ) -> object:
-    codes = [kode_provinsi, kode_kabupaten, kode_kecamatan]
+    codes = [province_code, regency_code, district_code]
     return list_response(request, service.list_children(codes, include_parent=parent))

@@ -3,14 +3,14 @@ from typing import Annotated
 from fastapi import Depends, Query
 
 from app.services.data_loader import DataLoader, get_loader
-from app.services.wilayah import WilayahService
+from app.services.regions import RegionService
 
 
-def get_wilayah_service(loader: Annotated[DataLoader, Depends(get_loader)]) -> WilayahService:
-    """Build a WilayahService instance from the cached loader."""
-    return WilayahService(loader)
+def get_region_service(loader: Annotated[DataLoader, Depends(get_loader)]) -> RegionService:
+    """Build a RegionService instance from the cached loader."""
+    return RegionService(loader)
 
 
-Service = Annotated[WilayahService, Depends(get_wilayah_service)]
+Service = Annotated[RegionService, Depends(get_region_service)]
 ChainParent = Annotated[bool, Query(description="Include the full parent chain up to the province (default true).")]
 ItemParent = Annotated[bool, Query(description="Include each item's direct parent (default false).")]

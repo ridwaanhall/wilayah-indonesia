@@ -23,13 +23,13 @@ def create_app() -> FastAPI:
         ),
         openapi_tags=[
             {"name": "root", "description": "API index and health check."},
-            {"name": "search", "description": "Look up any region by its full code."},
+            {"name": "lookup", "description": "Look up any region by its full code."},
             {"name": "stats", "description": "Descendant counts per level and per kind, for analytics."},
             {
-                "name": "simple",
+                "name": "shorthand",
                 "description": "Shorthand lookups by segment: /api/s/{province}/{regency}/{district}/{village}.",
             },
-            {"name": "wilayah", "description": "List the children of a region, one level per path segment."},
+            {"name": "hierarchy", "description": "List the children of a region, one level per path segment."},
         ],
     )
 

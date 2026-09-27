@@ -29,16 +29,16 @@ const LABELS = Object.fromEntries(fields.map((field) => [field.dataset.type, fie
 const PLURALS = Object.fromEntries(fields.map((field) => [field.dataset.type, field.dataset.plural]));
 const lower = (type) => LABELS[type].toLowerCase();
 const COMPOSITIONS = [
-  { title: "Regencies and cities", keys: ["kabupaten", "kota"], below: 2 },
-  { title: "Village status", keys: ["desa", "kelurahan", "desa_adat"], below: 4 },
+  { title: "Regencies and cities", keys: ["regency", "city"], below: 2 },
+  { title: "Village status", keys: ["rural_village", "urban_village", "customary_village"], below: 4 },
 ];
 // API kind keys: English name first, the official Indonesian term beside it.
 const KIND_LABELS = {
-  kabupaten: ["Regency", "kabupaten"],
-  kota: ["City", "kota"],
-  desa: ["Village", "desa"],
-  kelurahan: ["Urban village", "kelurahan"],
-  desa_adat: ["Customary village", "desa adat"],
+  regency: ["Regency", "kabupaten"],
+  city: ["City", "kota"],
+  rural_village: ["Rural village", "desa"],
+  urban_village: ["Urban village", "kelurahan"],
+  customary_village: ["Customary village", "desa adat"],
 };
 const RANK_LIMIT = 12;
 
@@ -57,7 +57,8 @@ async function send(path) {
   const started = performance.now();
   let entry;
   try {
-    const response = await fetch(path, { headers: { Accept: "application/json" } });
+    // Revalidate so a response cached by an older release never meets newer page code.
+    const response = await fetch(path, { cache: "no-cache", headers: { Accept: "application/json" } });
     entry = { path, status: response.status, body: await response.json() };
   } catch (error) {
     cache.delete(path);
@@ -216,14 +217,15 @@ let path = []; // Selected regions, province first.
 let version = 0; // Discards responses that arrive after a newer selection.
 
 const listPath = (regions) => (regions.length ? `/api/${regions.map((region) => region.code).join("/")}` : "/api/0");
-const lookupPath = (region) => `/api/kode/${region.code}?parent=${withParent.checked}`;
+const lookupPath = (region) => `/api/code/${region.code}?parent=${withParent.checked}`;
 
 async function navigate(regions) {
   path = regions;
   const current = ++version;
   const url = new URL(location.href);
-  if (path.length) url.searchParams.set("kode", path.at(-1).code);
-  else url.searchParams.delete("kode");
+  url.searchParams.delete("kode"); // Older links used ?kode=.
+  if (path.length) url.searchParams.set("code", path.at(-1).code);
+  else url.searchParams.delete("code");
   history.replaceState(null, "", url);
 
   renderTrail();
@@ -283,7 +285,7 @@ function renderDetail() {
   }
   const parent = path.at(-2);
   const calls = [
-    [`/api/kode/${region.code}?parent=true`, "Lookup with the full parent chain"],
+    [`/api/code/${region.code}?parent=true`, "Lookup with the full parent chain"],
     [`/api/s/${region.short_code}`, "Same region through the shorthand route"],
     region.has_children && [`${listPath(path)}?parent=true`, `List every ${lower(TYPES[region.depth])} inside`],
     region.has_children && [`/api/stats/${region.code}`, "Descendant totals used by the analytics"],
@@ -410,7 +412,7 @@ function ranking(children, depth, metrics, scopePath, current) {
 
 function jumpUrl(raw) {
   const value = raw.trim();
-  if (/^\d+$/.test(value)) return `/api/kode/${value}?parent=true`;
+  if (/^\d+$/.test(value)) return `/api/code/${value}?parent=true`;
   const segments = value.split(/[./\s-]+/).filter(Boolean);
   if (segments.length && segments.length <= 4 && segments.every((segment) => /^\d+$/.test(segment))) {
     return `/api/s/${segments.map(Number).join("/")}?parent=true`;
@@ -454,7 +456,8 @@ document.addEventListener("click", async (event) => {
   setTimeout(() => { button.textContent = label; }, 1500);
 });
 
-const initialCode = new URLSearchParams(location.search).get("kode");
-if (!initialCode || (await openLookup(`/api/kode/${encodeURIComponent(initialCode)}?parent=true`)).body.success === false) {
+const params = new URLSearchParams(location.search);
+const initialCode = params.get("code") ?? params.get("kode");
+if (!initialCode || (await openLookup(`/api/code/${encodeURIComponent(initialCode)}?parent=true`)).body.success === false) {
   navigate([]);
 }

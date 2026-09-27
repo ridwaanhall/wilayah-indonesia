@@ -1,4 +1,4 @@
-"""Service layer for wilayah lookups, hierarchy validation and statistics."""
+"""Service layer for region lookups, hierarchy validation and statistics."""
 
 from typing import Any
 
@@ -7,7 +7,7 @@ from app.services.data_loader import LEVEL_TYPES, ROOT_CODE, DataLoader
 
 CODE_LENGTHS: dict[int, int] = {1: 2, 2: 4, 3: 6, 4: 10}
 SEGMENT_WIDTHS: tuple[int, ...] = (2, 2, 2, 4)
-CHAIN_PARAMS: tuple[str, ...] = ("kode_provinsi", "kode_kabupaten", "kode_kecamatan", "kode_desa")
+CHAIN_PARAMS: tuple[str, ...] = ("province_code", "regency_code", "district_code", "village_code")
 LEVEL_NOT_FOUND: dict[int, str] = {
     1: "PROVINCE_NOT_FOUND",
     2: "REGENCY_NOT_FOUND",
@@ -31,7 +31,7 @@ def _invalid_code(name: str, value: int, rule: str, detail: str, message: str) -
     )
 
 
-class WilayahService:
+class RegionService:
     """Every endpoint resolves regions through this class, so the rules live in one place."""
 
     def __init__(self, loader: DataLoader) -> None:
@@ -92,16 +92,16 @@ class WilayahService:
             parent_code = code
         return parent_code
 
-    def _lookup(self, code: int) -> dict[str, Any]:
+    def _item(self, code: int) -> dict[str, Any]:
         """Return the raw item for a code; ROOT_CODE (Indonesia) returns an empty dict."""
         if code != ROOT_CODE and len(str(code)) not in CODE_LENGTHS.values():
             raise _invalid_code(
-                "kode",
+                "code",
                 code,
                 "digits:2|4|6|10",
-                "Parameter kode must use one of the supported code lengths: "
+                "Parameter code must use one of the supported code lengths: "
                 "2 (province), 4 (regency), 6 (district), or 10 (village).",
-                "kode must be 2, 4, 6, or 10 digits.",
+                "code must be 2, 4, 6, or 10 digits.",
             )
         item = self.loader.get(code)
         if item is None and code != ROOT_CODE:
@@ -126,15 +126,15 @@ class WilayahService:
         for segment, width in zip(segments, SEGMENT_WIDTHS):
             prefix += f"{segment:0{width}d}"
             codes.append(int(prefix))
-        return self.search_by_code(self._resolve_chain(codes), include_parent=include_parent)
+        return self.lookup(self._resolve_chain(codes), include_parent=include_parent)
 
-    def search_by_code(self, code: int, *, include_parent: bool) -> dict[str, Any]:
+    def lookup(self, code: int, *, include_parent: bool) -> dict[str, Any]:
         """Return any region by full code, with its complete parent chain when requested."""
-        return self._region(self._lookup(code), include_parent=include_parent, full_chain=True)
+        return self._region(self._item(code), include_parent=include_parent, full_chain=True)
 
     def stats(self, code: int) -> dict[str, Any]:
         """Return descendant totals for a region (0 = Indonesia) and for each direct child."""
-        item = self._lookup(code)
+        item = self._item(code)
         return {
             "region": self._region(item, include_parent=True, full_chain=True) if item else None,
             **self.loader.counts(code),

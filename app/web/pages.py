@@ -77,7 +77,7 @@ def _render(request: Request, name: str, **context: Any) -> HTMLResponse:
     return response
 
 
-@router.get("/", response_class=HTMLResponse)
+@router.api_route("/", methods=["GET", "HEAD"], response_class=HTMLResponse)
 def landing_page(request: Request) -> HTMLResponse:
     endpoints = [
         {"path": route.path, "summary": route.summary, "tag": route.tags[0], "example": _example_path(route)}
@@ -92,7 +92,7 @@ def landing_page(request: Request) -> HTMLResponse:
     )
 
 
-@router.get("/docs/errors", response_class=HTMLResponse)
+@router.api_route("/docs/errors", methods=["GET", "HEAD"], response_class=HTMLResponse)
 def error_catalog(request: Request) -> HTMLResponse:
     return _render(request, "errors.html", errors=ERRORS)
 

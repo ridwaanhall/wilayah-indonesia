@@ -8,7 +8,7 @@ from pydantic import TypeAdapter
 
 from app.api.endpoints.root import HealthData, RootData
 from app.schemas.common import ErrorResponse, SuccessResponse
-from app.schemas.wilayah import RegionListData, RegionResource, StatsData
+from app.schemas.regions import RegionListData, RegionResource, StatsData
 from prod.main import app
 
 
@@ -31,8 +31,8 @@ def test_all_success_endpoints_match_declared_schema(client: TestClient) -> None
         ("/api/11/1101?parent=true", SuccessResponse[RegionListData]),
         ("/api/11/1101/110101?parent=false", SuccessResponse[RegionListData]),
         ("/api/11/1101/110101?parent=true", SuccessResponse[RegionListData]),
-        ("/api/kode/110101?parent=false", SuccessResponse[RegionResource]),
-        ("/api/kode/110101?parent=true", SuccessResponse[RegionResource]),
+        ("/api/code/110101?parent=false", SuccessResponse[RegionResource]),
+        ("/api/code/110101?parent=true", SuccessResponse[RegionResource]),
         ("/api/s/11?parent=false", SuccessResponse[RegionResource]),
         ("/api/s/11?parent=true", SuccessResponse[RegionResource]),
         ("/api/s/11/1?parent=false", SuccessResponse[RegionResource]),
@@ -58,8 +58,8 @@ def test_all_success_endpoints_match_declared_schema(client: TestClient) -> None
 
 def test_error_endpoints_match_declared_schema(client: TestClient) -> None:
     checks = [
-        "/api/kode/123",        # invalid code length
-        "/api/kode/9999999999", # not found
+        "/api/code/123",        # invalid code length
+        "/api/code/9999999999", # not found
         "/api/11/1",            # invalid segment length
         "/api/s/99/1/1",        # not found
         "/api/s/11/1/1/10000",  # validation error by path constraint
@@ -113,15 +113,15 @@ def test_parent_flag_changes_parent_value_when_parent_exists(client: TestClient)
     assert kec_false["data"]["items"][0]["parent"] is None
     assert kec_true["data"]["items"][0]["parent"] is not None
 
-    desa_false = client.get("/api/11/1101/110101?parent=false").json()
-    desa_true = client.get("/api/11/1101/110101?parent=true").json()
-    assert desa_false["data"]["items"][0]["parent"] is None
-    assert desa_true["data"]["items"][0]["parent"] is not None
+    village_false = client.get("/api/11/1101/110101?parent=false").json()
+    village_true = client.get("/api/11/1101/110101?parent=true").json()
+    assert village_false["data"]["items"][0]["parent"] is None
+    assert village_true["data"]["items"][0]["parent"] is not None
 
 
 def test_parent_flag_changes_parent_value_for_single_object_routes(client: TestClient) -> None:
     checks = [
-        ("/api/kode/110101", "obj"),
+        ("/api/code/110101", "obj"),
         ("/api/s/11", "null"),
         ("/api/s/11/1", "obj"),
         ("/api/s/11/1/1", "obj"),

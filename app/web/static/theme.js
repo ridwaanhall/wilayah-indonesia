@@ -1,4 +1,4 @@
-// Theme: dark by default, light on request. Loaded blocking in <head>, after the stylesheet, so the
+// Theme: light by default, dark on request. Loaded blocking in <head>, after the stylesheet, so the
 // saved theme is applied before first paint and --bg can be read for the browser chrome colour.
 (() => {
   const root = document.documentElement;
@@ -11,16 +11,17 @@
     document.querySelector('meta[name="theme-color"]')?.setAttribute("content", chrome);
   };
 
-  apply(stored() === "light" ? "light" : "dark");
+  apply(stored() === "dark" ? "dark" : "light");
 
   document.addEventListener("DOMContentLoaded", () => {
-    const button = document.querySelector("[data-theme-toggle]");
-    const label = () => button.setAttribute("aria-label", `Switch to ${root.dataset.theme === "dark" ? "light" : "dark"} theme`);
-    label();
-    button.addEventListener("click", () => {
+    // A WAI-ARIA switch: its name stays "Dark theme" and aria-checked carries the state.
+    const toggle = document.querySelector("[data-theme-toggle]");
+    const sync = () => toggle.setAttribute("aria-checked", String(root.dataset.theme === "dark"));
+    sync();
+    toggle.addEventListener("click", () => {
       const next = root.dataset.theme === "dark" ? "light" : "dark";
       apply(next);
-      label();
+      sync();
       try { localStorage.setItem("theme", next); } catch { /* Private mode: the choice lasts for this page only. */ }
     });
   });

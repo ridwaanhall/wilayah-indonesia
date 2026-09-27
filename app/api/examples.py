@@ -74,7 +74,7 @@ STATS_EXAMPLE = _success(
     {
         "region": {**_PROVINCE, "has_children": True, "parent": None},
         "levels": {"province": 0, "regency": 35, "district": 576, "village": 8563},
-        "kinds": {"kabupaten": 29, "kota": 6, "desa": 7810, "kelurahan": 753, "desa_adat": 0},
+        "kinds": {"regency": 29, "city": 6, "rural_village": 7810, "urban_village": 753, "customary_village": 0},
         "children": [
             {
                 "region": {
@@ -87,7 +87,7 @@ STATS_EXAMPLE = _success(
                     "parent": None,
                 },
                 "levels": {"province": 0, "regency": 0, "district": 24, "village": 284},
-                "kinds": {"kabupaten": 0, "kota": 0, "desa": 269, "kelurahan": 15, "desa_adat": 0},
+                "kinds": {"regency": 0, "city": 0, "rural_village": 269, "urban_village": 15, "customary_village": 0},
             }
         ],
     }
@@ -104,9 +104,9 @@ _NOT_FOUND_EXAMPLE = _error(
 _VALIDATION_EXAMPLE = _error(
     "INVALID_REGION_CODE",
     "The region code format is invalid.",
-    "Parameter kode_kabupaten must be a 4-digit numeric code. Received: 1.",
+    "Parameter regency_code must be a 4-digit numeric code. Received: 1.",
     "Use 2 digits for a province, 4 for a regency, 6 for a district, or 10 for a village.",
-    [{"field": "kode_kabupaten", "value": 1, "rule": "digits:4", "message": "kode_kabupaten must contain exactly 4 digits."}],
+    [{"field": "regency_code", "value": 1, "rule": "digits:4", "message": "regency_code must contain exactly 4 digits."}],
 )
 
 
